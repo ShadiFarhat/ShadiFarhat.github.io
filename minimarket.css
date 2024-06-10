@@ -68,7 +68,8 @@ body {
 .container article .content {
 
     display: flex;
-    gap: 150px;
+    flex-direction: column;
+    gap: 30px 150px;
     align-items: flex-start;
     justify-content: space-between;
 
@@ -121,12 +122,15 @@ body {
 footer{
 
     display: flex;
+    flex-direction: column;
     margin-top: 50px;
     margin-top: 50px;
     margin-bottom: 20px;
     align-items: center;
-    justify-content: space-around
-
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
 }
 
 footer p{
@@ -134,4 +138,12 @@ footer p{
 color: #9b9696;
 font-weight: bold;
 
+}
+
+@media only screen and (min-width: 1100px) {
+    .container article .content {
+        flex-direction: row;
+    }
+
+ 
 }

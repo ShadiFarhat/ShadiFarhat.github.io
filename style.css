@@ -568,6 +568,7 @@ section article {
   display: flex;
   flex-direction: column;
   gap: 50px;
+  padding-block: 50px;
 
 }
 
