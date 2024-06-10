@@ -462,7 +462,6 @@ section article {
   display: flex;
   flex-wrap: wrap;
   gap: 150px;
-  overflow: visible;
 
 
 }
@@ -512,6 +511,7 @@ section article {
 
   width: 100%;
   max-width: 400px;
+  padding-top: 50px;
 }
 
 .myWork .myWork-left-text {
