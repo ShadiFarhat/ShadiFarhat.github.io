@@ -2,13 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 * {
-
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: "Montserrat", sans-serif;
-
 }
 
 .fade-left,
@@ -52,49 +50,173 @@
 
 
 body {
-
   overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  transition: filter 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+
+.blur {
+  filter: blur(5px);
+
+}
+
+.colorChanger {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000000000000000;
+  display: none;
+}
+
+body:has(.blur) .colorChanger {
+  display: flex;
+}
+
+.colorChanger .main {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 30px;
+}
+
+
+
+.colorChanger .main p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: var(--blackColor);
+  text-transform: uppercase;
+}
+
+.colorChanger.hidden {
+  display: none;
+}
+
+.colorChanger .close {
+  font-size: 1rem !important;
+  opacity: .5;
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.colorChanger .colors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.colorChanger .colors span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #333;
+  cursor: pointer;
+}
+
+.mode {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.mode .light {
+  text-decoration: none;
+  color: var(--WhiteColor);
+  padding: 10px;
+  background-color: var(--secondaryColor);
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.mode .dark {
+  text-decoration: none;
+  color: var(--WhiteColor);
+  padding: 10px;
+  background-color: var(--blackColor);
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 }
 
 .hidden {
   display: none;
 }
 
-
-
-
 :root {
-
-  --primaryColor: #fff;
-  --secondaryColor: #9D7BB8;
+  --WhiteColor: #fff;
+  --blackColor: #1a1a1a;
+  --textColor: 1a1a1a;
+  --secondaryColor: #9203ff;
   --thirdColor: #71CEE3;
   --maxWidth: 1200px;
+  --blackColor2: #191D21;
+  --darkpurple: #241d41;
+}
 
-  .circle.yel {
-    box-shadow: inset 0 0 30px 0 #fff, inset 20px 0 30px #ffd400, inset -20px 0 30px red, inset 20px 0 300px #ff40d6, inset -20px 0 300px #e3ff4b, 0 0 50px #fff, -10px 0 100px #fbff00, 10px 0 80px #f55;
+.circle.yel {
+  box-shadow: inset 0 0 30px 0 var(--WhiteColor), inset 20px 0 30px #ffd400, inset -20px 0 30px red, inset 20px 0 300px #ff40d6, inset -20px 0 300px #e3ff4b, 0 0 50px var(--WhiteColor), -10px 0 100px #fbff00, 10px 0 80px #f55;
+}
+
+.circle {
+  opacity: 1;
+  box-shadow: inset 0 0 30px var(--WhiteColor), inset 20px 0 30px #d7d938, inset -20px 0 30px #ff3407, inset 4px 7px 300px #ff0c00, inset -20px 0 300px #feff88, 0 0 50px var(--WhiteColor), -10px 0 80px #f0f, 10px 0 80px #0ff;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--WhiteColor);
+  animation: smoothMove 2s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes smoothMove {
+  0% {
+    transform: translateY(-50px);
   }
 
-  .circle {
-    opacity: 1;
-    box-shadow: inset 0 0 30px #fff, inset 20px 0 30px #d7d938, inset -20px 0 30px #ff3407, inset 4px 7px 300px #ff0c00, inset -20px 0 300px #feff88, 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
-    position: absolute;
-    top: 33%;
-    left: 52%;
-    transform: translate(-50%);
-    z-index: 1;
 
+  100% {
+    transform: translateY(100px);
   }
-
-  .circle {
-    width: 60px;
-    height: 60px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    background: #fff;
-  }
-
 }
 
 .fixed {
@@ -106,14 +228,14 @@ section {
 }
 
 section article {
-
+  min-height: 100vh;
   max-width: 1200px;
-  width: 100%;
   margin-inline: auto;
   display: flex;
   overflow: hidden;
   padding-inline: 20px;
-
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
@@ -124,14 +246,14 @@ section article {
   width: 100%;
   background-color: transparent;
   transition: background-color 0.3s, height 0.3s;
-  z-index: 1000;
+  z-index: 10000000000000000000;
   height: 100px;
 }
 
 
 
 .header.fixed {
-  background-color: #191D21;
+  background-color: var(--blackColor2);
   height: 70px;
 }
 
@@ -149,7 +271,7 @@ section article {
 
 .header-menu a {
 
-  color: white;
+  color: var(--WhiteColor);
   font-size: 1rem;
   text-decoration: none;
   transition: 0.4s;
@@ -158,7 +280,7 @@ section article {
 
 .header-menu a P {
 
-  color: white;
+  color: var(--WhiteColor);
   font-size: 0.8rem;
   text-decoration: none;
   transition: 0.4s;
@@ -167,7 +289,7 @@ section article {
 
 .header-menu a span {
 
-  color: white;
+  color: var(--WhiteColor);
   font-size: 1rem;
   text-decoration: none;
   transition: 0.4s;
@@ -176,9 +298,26 @@ section article {
 
 .header-menu a span:hover {
 
-  color: #0ff;
+  color: var(--secondaryColor);
   font-weight: bold;
 
+}
+
+.header article .header-menu .header-painter {
+  width: 35px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+}
+
+.header article .header-menu .header-painter svg {
+  fill: var(--WhiteColor);
+  transition: fill .3s ease-in-out;
+}
+
+.header article .header-menu .header-painter svg:hover {
+  fill: var(--secondaryColor);
 }
 
 .link {
@@ -192,7 +331,7 @@ section article {
 .link a {
 
   font-size: 1.2rem;
-  color: white;
+  color: var(--WhiteColor);
   text-decoration: none;
   transition: 0.4s;
   text-decoration: none;
@@ -237,52 +376,41 @@ section article {
 }
 
 .home {
-
-  background-image: linear-gradient(to right, #1C1D20, #191D21, #2E1A23, #241A20);
-  background-color: #1a191d;
   width: 100vw;
   min-height: 100vh;
-
+  z-index: 2;
 }
 
 .home article {
 
-  background-image: url(./IMGS/still-life-apple-fruit-creative-poster-cover-banner-wallpaper-background-design-art.jpg);
+  background-color: var(--blackColor);
   width: 100%;
   height: 100%;
   background-size: cover;
   max-width: 100%;
   background-position: bottom;
-
+  position: relative;
 }
 
-
-
+.main-content {
+  width: 100%;
+}
 
 .header-logo img:hover {
   opacity: 0.6;
 }
 
-
-
-
 .home-piece {
   transition: opacity 0.3s;
 }
 
-
-
 .header-menu p {
-
-
   display: flex;
   justify-content: flex-end;
   font-size: 0.8rem;
-
 }
 
 .home-name {
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -290,22 +418,123 @@ section article {
   width: 100%;
   z-index: 10;
   text-align: center;
+  position: absolute;
+  bottom: 100px;
+  background-color: var(--secondaryColor);
+  padding: 20px;
 }
 
-.home-name .name {
+.home article .home-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 100;
+}
 
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 3;
+  pointer-events: none;
+  width: 100%;
+  max-width: 800px;
+}
+
+.me {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+
+@keyframes smoothRotate {
+  0% {
+    transform: rotateZ(30deg);
+  }
+
+  100% {
+    transform: rotateZ(-30deg);
+  }
+}
+
+
+.alert {
+  position: absolute;
+  color: var(--WhiteColor);
+  z-index: 3;
   font-size: 4rem;
   font-weight: bold;
-  color: white;
-  text-transform: uppercase;
+  right: 150px;
+  top: 250px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
+  animation: glowPulse 2s infinite alternate, moveText 5s infinite alternate;
+  transform-origin: center;
+}
 
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+
+  100% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes moveText {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) scale(1.1) rotate(3deg);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes weirdStyle {
+  0% {
+    transform: rotate(0deg) scale(1) skew(0deg, 0deg);
+  }
+
+  25% {
+    transform: rotate(2deg) scale(1.05) skew(3deg, 2deg);
+  }
+
+  50% {
+    transform: rotate(-2deg) scale(1.1) skew(-3deg, -2deg);
+  }
+
+  75% {
+    transform: rotate(3deg) scale(1.05) skew(3deg, 0deg);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1) skew(0deg, 0deg);
+  }
+}
+
+
+.home-name .name {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--WhiteColor);
+  text-transform: uppercase;
 
 }
 
 .home-name .jobs {
 
   font-size: 1.5rem;
-  color: white;
+  color: var(--WhiteColor);
   text-transform: uppercase;
   font-family: "Roboto Mono", monospace;
   font-weight: 500;
@@ -314,19 +543,18 @@ section article {
 }
 
 .expertise article {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 50px;
   padding-block: 50px;
-
 }
 
 .expertise article h2 {
 
   font-size: 3rem;
+  color: var(--textColor);
 
 }
 
@@ -334,7 +562,7 @@ section article {
 
   display: grid;
   grid-template-columns: 1fr;
-  column-gap: 50px;
+  column-gap: 20px;
   border: 2px solid #1a191d;
   width: 100%;
   overflow: hidden;
@@ -343,7 +571,6 @@ section article {
 
 .expertise-card>div {
 
-  border-bottom: 2px solid #1a191d;
   padding: 40px 40px;
   padding-top: 40px;
 
@@ -387,7 +614,7 @@ section article {
   flex-direction: column;
   font-size: 26px;
   font-weight: bold;
-
+  color: var(--textColor);
 }
 
 .expertise .title>div p:first-child {
@@ -398,7 +625,6 @@ section article {
 }
 
 .expertise .title>div p:first-child::after {
-
   transition: all 0.1s ease-in-out;
   content: "";
   position: absolute;
@@ -406,7 +632,6 @@ section article {
   z-index: -1;
   height: 0.3em;
   width: 104%;
-
   left: -1%;
   background: linear-gradient(65deg, var(--c) 0%, var(--c) 100%, rgba(255, 209, 0, 0) 100%);
 }
@@ -416,7 +641,7 @@ section article {
   padding-left: 20px;
   margin-left: 20px;
   position: relative;
-  border-left: 2px solid #1a191d;
+  border-left: 2px solid var(--textColor);
 
 }
 
@@ -426,7 +651,7 @@ section article {
   position: absolute;
   top: -25px;
   left: -20px;
-
+  color: var(--textColor);
 }
 
 .expertise .content::after {
@@ -441,7 +666,7 @@ section article {
 .expertise .content p {
 
   font-family: "Roboto Mono", monospace;
-  color: #1a191d;
+  color: var(--textColor);
   font-weight: 400;
   line-height: 1.4em
 }
@@ -480,7 +705,7 @@ section article {
 
   font-size: 4rem;
   font-weight: bold;
-  color: #191D21;
+  color: var(--textColor);
   line-height: 60px;
 
 }
@@ -488,7 +713,7 @@ section article {
 .myWork .mywork-title p {
 
   font-family: "Roboto Mono", monospace;
-  color: #1a191d;
+  color: var(--textColor);
   font-weight: bold;
   line-height: 1.5rem;
   font-size: 1rem;
@@ -511,7 +736,7 @@ section article {
 
   width: 100%;
   max-width: 400px;
-  padding-top: 50px;
+  padding-top: 100px;
 }
 
 .myWork .myWork-left-text {
@@ -540,10 +765,10 @@ section article {
 
   text-decoration: none;
   padding: 15px;
-  background-color: #9203ff;
+  background-color: var(--secondaryColor);
   font-size: 1.1rem;
   width: fit-content;
-  color: #fff;
+  color: var(--WhiteColor);
   font-weight: bold;
   border-radius: 8px;
   transition: transform 0.4s;
@@ -558,7 +783,7 @@ section article {
 
 .project {
 
-  background-color: #191D21;
+  background-color: var(--blackColor2);
   padding-block: 50px;
 
 }
@@ -582,7 +807,7 @@ section article {
 .project .project-filter span,
 .project .project-filter button {
 
-  color: #fff;
+  color: var(--WhiteColor);
   font-weight: bold;
   font-size: 1rem;
 
@@ -593,7 +818,7 @@ section article {
   background-color: transparent;
   outline: none;
   border: none;
-  color: white;
+  color: var(--WhiteColor);
   display: flex;
   gap: 5px;
   cursor: pointer;
@@ -601,13 +826,10 @@ section article {
 }
 
 .project .project-filter button sup {
-
-
   position: relative;
   top: -16px;
   font-weight: 400;
-
-
+  color: var(--WhiteColor);
 }
 
 
@@ -635,7 +857,7 @@ section article {
   width: 100%;
   border-radius: 2px;
   overflow: hidden;
-  background-color: #191D21;
+  background-color: var(--blackColor);
   text-decoration: none;
   box-shadow: 0px 3px 5px #010202;
 
@@ -702,7 +924,7 @@ section article {
 
 .project-cards a .desc span {
 
-  color: white;
+  color: var(--WhiteColor);
   font-weight: bold;
   font-size: 1.6rem;
 
@@ -745,7 +967,7 @@ section article {
 
 .experience {
 
-  background-color: #191D21;
+  background-color: var(--blackColor2);
   padding-bottom: 70px;
 
 }
@@ -762,7 +984,7 @@ section article {
 
 .experience article h2 {
 
-  color: white;
+  color: var(--WhiteColor);
   text-align: center;
   font-size: 2.5rem;
 
@@ -794,9 +1016,9 @@ section article {
   display: flex;
   flex-direction: row;
   gap: 20px 100px;
-  color: white;
+  color: var(--WhiteColor);
   padding: 20px;
-  background-color: #9203ff;
+  background-color: var(--secondaryColor);
   border-radius: 2px;
   font-weight: bold;
   width: 100%;
@@ -827,7 +1049,7 @@ section article {
 
 .experience article .work-desc {
 
-  background-color: #241d41;
+  background-color: var(--darkpurple);
   padding: 20px;
   width: 100%;
   display: flex;
@@ -887,7 +1109,7 @@ section article {
 
 .experience .work-desc-parg p {
 
-  color: white;
+  color: var(--WhiteColor);
 
 
 }
@@ -927,7 +1149,7 @@ section article {
 
 .freelance {
 
-  background-color: #0a0e0e;
+  background-color: var(--blackColor);
   padding-bottom: 50px;
 }
 
@@ -963,7 +1185,7 @@ section article {
 
 .freelance article .left-title h2 {
 
-  color: white;
+  color: var(--WhiteColor);
   font-size: 2.5rem;
 
 }
@@ -971,7 +1193,7 @@ section article {
 .freelance article .left-title p {
 
 
-  color: white;
+  color: var(--WhiteColor);
   font-family: "Roboto Mono", monospace;
   font-size: 1.2rem;
 
@@ -1001,7 +1223,7 @@ section article {
 .freelance article .freelance-left .social .email span {
 
   text-decoration: none;
-  color: white;
+  color: var(--WhiteColor);
   font-weight: bold;
   font-family: "Roboto Mono", monospace;
   font-size: 1.2rem;
@@ -1037,7 +1259,7 @@ section article {
 .freelance article .freelance-left .social p a {
 
   text-decoration: none;
-  color: white;
+  color: var(--WhiteColor);
   font-weight: bold;
   font-family: "Roboto Mono", monospace;
   font-size: 1.4rem;
@@ -1063,7 +1285,7 @@ section article {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  background-color: #9203ff;
+  background-color: var(--secondaryColor);
   padding: 20px;
 
 
@@ -1103,13 +1325,13 @@ section article {
 
 .freelance article .first .text-p {
 
-  color: white;
+  color: var(--WhiteColor);
 
 }
 
 .freelance article .first .text-span {
 
-  color: white;
+  color: var(--WhiteColor);
   font-weight: bold;
 
 }
@@ -1139,7 +1361,7 @@ section article {
 
 .freelance article .text .text-title p {
 
-  color: white;
+  color: var(--WhiteColor);
 
 }
 
@@ -1176,7 +1398,7 @@ section article {
 
 .freelance article .text .text-title .text-footer span {
 
-  color: white;
+  color: var(--WhiteColor);
   font-weight: bold;
 
 }
@@ -1223,7 +1445,7 @@ section article {
 
   .myWork-title {
 
-    gap: 90px;
+    gap: 30px;
 
   }
 
@@ -1300,7 +1522,7 @@ section article {
   .expertise-card>div {
 
 
-    border-left: 2px solid #1a191d;
+    border-left: 2px solid var(--blackColor);
     border-top: none;
 
   }

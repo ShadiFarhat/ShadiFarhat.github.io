@@ -9,520 +9,570 @@
 
 <body>
 
-
-    <header class="header">
-        <article>
-            <a href="index.html">
-                <div class="header-logo fade-left">
-                    <img src="/Logos/SVG-01.svg" alt="logo image" />
-                </div>
-            </a>
-            <div class="header-menu fade-right">
-                <a href="index.html#home" class="home-piece">
-                    <div class="home-header-piece">
-                        <p>01</p>
-                        <span>// home</span>
-                    </div>
-                </a>
-                <a href="index.html#expertise" class="home-piece">
-                    <div class="home-header-piece">
-                        <p>02</p>
-                        <span>// expertise</span>
-                    </div>
-                </a>
-                <a href="index.html#myWork" class="home-piece">
-                    <div class="home-header-piece">
-                        <p>03</p><span>// work</span>
-                    </div>
-                </a>
-                <a href="index.html#project" class="home-piece">
-                    <div class="home-header-piece">
-                        <p>04</p><span>// experience</span>
-                    </div>
-                </a>
-                <a href="index.html#freelance" class="home-piece">
-                    <div class="home-header-piece">
-                        <p>05</p><span>// contact</span>
-                    </div>
-                </a>
-            </div>
-        </article>
-
-    </header>
-
-    <section id="home" class="home">
-        <article>
-            <div class="circle yel" id="circle-main"></div>
-            <div class="home-name">
-                <p class="name fadein">Shadi Farhat</p>
-                <p class="jobs fadein">Graphic Designer, Data Analysit & Junior Developer</p>
+    <div id="colorChangerPopup" class="colorChanger hidden">
+        <div class="main">
+            <p class="close" onclick="togglePopup()">x</p>
+            <p>Change your Theme!</p>
+            <div class="colors">
+                <span value="#9203ff"></span>
+                <span value="#8B0000"></span>
+                <span value="#8B4513"></span>
+                <span value="#2c2c54"></span>
+                <span value="#1b1b32"></span>
+                <span value="#0047ab"></span>
+                <span value="#005f6b"></span>
+                <span value="#006400"></span>
+                <span value="#2E8B57"></span>
             </div>
 
-        </article>
-    </section>
+            <div class="mode">
+                <a class="light" href="#" onclick="setLightMode()">Light Mode</a>
+                <a class="dark" href="#" onclick="setDarkMode()">Dark Mode</a>
+            </div>
+        </div>
+    </div>
 
-    <section id="expertise" class="expertise">
-        <article>
-            <h2 class="fade-left">My Expertise
-            </h2>
-            <div class="expertise-card fade-right">
-                <div class="expertise-card-content">
-                    <div class="title"><svg viewBox="0 -0.5 31.555 31.555" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M381.785 645.263a.944.944 0 0 1 .942.942v18.357a.943.943 0 0 1-.942.942h-25.672a.94.94 0 0 1-.941-.942v-18.357a.943.943 0 0 1 .941-.942zm0-2h-25.672a2.94 2.94 0 0 0-2.941 2.942v18.357a2.94 2.94 0 0 0 2.941 2.942h25.672a2.94 2.94 0 0 0 2.942-2.942v-18.357a2.94 2.94 0 0 0-2.942-2.942"
-                                transform="translate(-353.172 -643.263)" />
-                            <path d="M367.949 666.309h2v6.5h-2z" transform="translate(-353.172 -643.263)" />
-                            <path
-                                d="M376.373 673.809H362.79a1 1 0 0 1 0-2h13.583a1 1 0 0 1 0 2m7-10.725H354.79a1 1 0 0 1 0-2h28.583a1 1 0 0 1 0 2"
-                                transform="translate(-353.172 -643.263)" />
-                        </svg>
-                        <div>
-                            <p style="--c:#DF058D">Graphic</p>
-                            <p>Designer</p>
+    <div id="main-content" class="main-content">
+        <header class="header">
+            <article>
+                <a href="index.html">
+                    <div class="header-logo fade-left">
+                        <img src="/Logos/SVG-01.svg" alt="logo image" />
+                    </div>
+                </a>
+                <div class="header-menu fade-right">
+                    <a href="index.html#home" class="home-piece">
+                        <div class="home-header-piece">
+                            <p>01</p>
+                            <span>// home</span>
                         </div>
+                    </a>
+                    <a href="index.html#expertise" class="home-piece">
+                        <div class="home-header-piece">
+                            <p>02</p>
+                            <span>// expertise</span>
+                        </div>
+                    </a>
+                    <a href="index.html#myWork" class="home-piece">
+                        <div class="home-header-piece">
+                            <p>03</p><span>// work</span>
+                        </div>
+                    </a>
+                    <a href="index.html#project" class="home-piece">
+                        <div class="home-header-piece">
+                            <p>04</p><span>// experience</span>
+                        </div>
+                    </a>
+                    <a href="index.html#freelance" class="home-piece">
+                        <div class="home-header-piece">
+                            <p>05</p><span>// contact</span>
+                        </div>
+                    </a>
+                    <button class="header-painter" onclick="togglePopup()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.9 512" xml:space="preserve">
+                            <path
+                                d="M434.3 72.2C335.2-24 174.6-25.2 74.4 75.4 26.4 123.7-.1 187.8-.1 256c0 157.5 140.1 277.5 296.4 252.8 16.5-2.6 31.1-12.1 40.3-26 8.7-13.3 10.6-30.2 7.6-45.6-3.2-16-12.8-29.8-21.8-43-3.6-5.3-17.6-25.9-4.9-28.9 5.5-1.3 10.4-4.1 14.4-8.1 11.1-11.4 10.7-30-.7-41.5l-11.8-11.8c4.7 2.5 22.4 3 25.3 3.3 6.7.7 13 .5 19.6 2.6 6.5 2 12.2 5.6 19 6.6 7.8 1.2 15.9.2 23.7-.8 15.9-2.1 31.8-4.1 47.8-6.2 14.2-1.8 27.9-3.1 38.8-13.5 11.9-11.2 18.6-27 18.4-43.4-1-66.5-27.4-131.5-77.7-180.3M94.9 127.7c9.5-12 23.8-18.9 39.2-18.9 11.3 0 22.4 3.8 31.2 10.9 10.5 8.4 17.1 20.3 18.6 33.6s-2.2 26.4-10.6 36.9c-9.5 12-23.8 18.9-39.2 18.9-11.3 0-22.3-3.8-31.2-10.9-10.4-8.4-17-20.3-18.6-33.6-1.5-13.3 2.2-26.4 10.6-36.9m9.2 213.1c-23.6 0-43.7-16-48.9-39-3-13-.7-26.5 6.4-37.8s18.2-19.2 31.3-22.2c3.7-.9 7.5-1.3 11.2-1.3 23.6 0 43.7 16 48.9 39 3 13 .7 26.5-6.4 37.8s-18.2 19.2-31.3 22.2c-3.7.9-7.5 1.3-11.2 1.3m129.4 77.1c-8.3 17.3-26 28.4-45.2 28.4-7.5 0-14.8-1.7-21.7-5-24.9-12-35.4-42-23.4-66.9 8.3-17.3 26-28.4 45.2-28.4 7.5 0 14.8 1.7 21.7 5 12.1 5.8 21.2 16 25.6 28.6s3.6 26.2-2.2 38.3m22.3-267.3c-27.7 0-50.2-22.5-50.2-50.2s22.5-50.2 50.2-50.2S306 72.7 306 100.4c0 27.6-22.5 50.1-50.2 50.2m171.5 14c-1.5 13.3-8.1 25.2-18.6 33.6-8.8 7-19.9 10.9-31.2 10.9-15.3 0-29.6-6.9-39.2-18.9-8.3-10.5-12.1-23.6-10.6-36.9s8.1-25.2 18.6-33.6c8.8-7 19.9-10.9 31.2-10.9 15.3 0 29.6 6.9 39.2 18.9 8.3 10.5 12.1 23.6 10.6 36.9" />
+                        </svg>
+                    </button>
+                </div>
+
+            </article>
+        </header>
+
+
+        </article>
+
+        </header>
+
+        <section id="home" class="home">
+            <canvas id="c"></canvas>
+            <article>
+                <div class="circle yel" id="circle-main"></div>
+                <div class="home-content">
+                    <div class="image-wrapper">
+                        <img class="me" src="IMGS/Me.png" alt="">
                     </div>
-                    <div class="content">
-                        <p>I specialize in graphic design, creating visually stunning content for various platforms
-                            using Adobe Creative Suite.
-
-
-
+                    <div class="home-name">
+                        <p class="name fadein">Shadi Farhat</p>
+                        <p class="jobs fadein">Graphic Designer, 3D product Modeling, Data Analyst & Junior Developer
                         </p>
                     </div>
+                    <p class="alert">Do not Touch me!</p>
                 </div>
-                <div class="expertise-card-content">
-                    <div class="title"><svg viewBox="0 -0.5 31.555 31.555" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M381.785 645.263a.944.944 0 0 1 .942.942v18.357a.943.943 0 0 1-.942.942h-25.672a.94.94 0 0 1-.941-.942v-18.357a.943.943 0 0 1 .941-.942zm0-2h-25.672a2.94 2.94 0 0 0-2.941 2.942v18.357a2.94 2.94 0 0 0 2.941 2.942h25.672a2.94 2.94 0 0 0 2.942-2.942v-18.357a2.94 2.94 0 0 0-2.942-2.942"
-                                transform="translate(-353.172 -643.263)" />
-                            <path d="M367.949 666.309h2v6.5h-2z" transform="translate(-353.172 -643.263)" />
-                            <path
-                                d="M376.373 673.809H362.79a1 1 0 0 1 0-2h13.583a1 1 0 0 1 0 2m7-10.725H354.79a1 1 0 0 1 0-2h28.583a1 1 0 0 1 0 2"
-                                transform="translate(-353.172 -643.263)" />
-                        </svg>
-                        <div>
-                            <p style="--c:#71CEE3 ">Web</p>
-                            <p>Development</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p>I code and design websites as a junior web developer, using HTML, CSS, and JavaScript to
-                            bring ideas to life.
+            </article>
+        </section>
 
-                        </p>
-                    </div>
-                </div>
-                <div class="expertise-card-content">
-                    <div class="title"><svg viewBox="0 -0.5 31.555 31.555" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M381.785 645.263a.944.944 0 0 1 .942.942v18.357a.943.943 0 0 1-.942.942h-25.672a.94.94 0 0 1-.941-.942v-18.357a.943.943 0 0 1 .941-.942zm0-2h-25.672a2.94 2.94 0 0 0-2.941 2.942v18.357a2.94 2.94 0 0 0 2.941 2.942h25.672a2.94 2.94 0 0 0 2.942-2.942v-18.357a2.94 2.94 0 0 0-2.942-2.942"
-                                transform="translate(-353.172 -643.263)" />
-                            <path d="M367.949 666.309h2v6.5h-2z" transform="translate(-353.172 -643.263)" />
-                            <path
-                                d="M376.373 673.809H362.79a1 1 0 0 1 0-2h13.583a1 1 0 0 1 0 2m7-10.725H354.79a1 1 0 0 1 0-2h28.583a1 1 0 0 1 0 2"
-                                transform="translate(-353.172 -643.263)" />
-                        </svg>
-                        <div>
-                            <p style="--c:#FF6B2B ">Data</p>
-                            <p>Analyst</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p>As a data analyst, I analyze complex datasets to extract insights and drive informed
-                            decision-making.
-
-
-
-
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-            <img class="code-jpg fade-left" src="/Random files/sc.png" alt="code">
-        </article>
-    </section>
-
-    <section id="myWork" class="myWork">
-
-        <article>
-
-            <div>
-                <div class="mywork-title fade-left">
-                    <span>My <br>Work</span>
-                    <p>I blend accounting, graphic design, and computer science skills to create visually captivating
-                        content and streamline processes. With expertise in financial data management and Adobe Creative
-                        Suite, I'm currently exploring computer science for innovative solutions. My portfolio showcases
-                        a mix of analytical depth and creative flair.
-                    </p>
-                </div>
-            </div>
-
-            <div class="myWork-left fade-right">
-                <video autoplay loop>
-                    <source src="/Random files/testtt.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-
-                <div class="myWork-left-text">
-                    <img src="/Random files/ss1-01.png" alt="farhatmarket"><a href="UX2.html" target="_blank">View Project</a>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section id="project" class="project">
-        <article>
-
-            <div class="project-filter fade-right">
-
-                <span>Filter by</span>
-                <button data-filter="all">All<sup>20</sup></button>
-                <button data-filter="graphic-design">Graphic Design<sup>10</sup></button>
-                <button data-filter="data-analysis">Data Analysis<sup>8</sup></button>
-                <button data-filter="web-development">Web Development<sup>2</sup></button>
-            </div>
-
-            <div class="project-cards fade-left">
-                <a href="miniMarket.html" data-category="all graphic-design">
-                    <div class="img"><img src="/Projects/logo 4-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Mini Market Farhat</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-
-                <a href="tousfrais.html" data-category="all graphic-design">
-                    <div class="img"><img src="/Projects/tous frais-01.jpg" alt="tousfrais" /></div>
-                    <div class="desc"><span>Tous Frais</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a href="billboardMaliks.html" data-category="all graphic-design">
-                    <div class="img"><img src="/Projects/Unipol-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Billboard Design</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a href="Guitar.html" data-category="all graphic-design">
-                    <div class="img"><img src="/Projects/guitar.jpg" alt="" /></div>
-                    <div class="desc"><span>Guitar Center</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a href="soberty.html" data-category="all graphic-design">
-                    <div class="img"><img src="/Projects/soberty.jpg" alt="" /></div>
-                    <div class="desc"><span>Soberty</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="Calig.html">
-                    <div class="img"><img src="/Projects/Caligraphy-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Arabic Caligraphy</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="2d.html">
-                    <div class="img"><img src="/Projects/2D drawing-01.jpg" alt="" /></div>
-                    <div class="desc"><span>2D drawings</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="billboarddoc.html">
-                    <div class="img"><img src="/Projects/Billboards-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Billboards Design</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="SocialMedia.html">
-                    <div class="img"><img src="/Projects/Social Media Post-01-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Social Media Design</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="Presentation.html">
-                    <div class="img"><img src="/Projects/Presentation-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Presentation Design</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="Ux.html">
-                    <div class="img"><img src="/Projects/UI-UX-01.jpg" alt="" /></div>
-                    <div class="desc"><span>UI/UX Design</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all graphic-design" href="Mcdo.html">
-                    <div class="img"><img src="/Projects/Animation-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Animation Design</span>
-                        <p class="type">Graphic Design</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-
-
-                <a data-category="all data-analysis" href="salesman.html">
-                    <div class="img"><img src="/Projects/Data Analyt1-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Salesman Target</span>
-                        <p class="type">Data Analyst</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-                <a data-category="all data-analysis" href="order.html">
-                    <div class="img"><img src="/Projects/Outsoursing Track System-01.jpg" alt="" /></div>
-                    <div class="desc"><span>Order Outside Track</span>
-                        <p class="type">Data Analyst</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-
-                <a data-category="all web-development" href="https://malikstraining.github.io/" target="_blank">
-                    <div class="img"><img src="/Projects/Website MAliks.png" alt="" /></div>
-                    <div class="desc"><span>Maliks Training</span>
-                        <p class="type">Web Development</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-
-                <a data-category="all web-development" href="https://miramahmmoud.github.io" target="_blank">
-                    <div class="img"><img src="/Projects/Mira Website.png" alt="" /></div>
-                    <div class="desc"><span>Mira's Portfolio</span>
-                        <p class="type">Web Development</p>
-                        <p class="type">Show project</p>
-                    </div>
-                </a>
-
-
-
-            </div>
-
-
-        </article>
-    </section>
-
-    <section id="experience" class="experience">
-        <article>
-
-            <h2 class="experice-title fadein">Professional <br>
-                Experience</h2>
-
-            <div class="jobs">
-                <div class="work fade-right">
-                    <div class="work-title _open">
-                        <span>Graphic Designer @ Maliks Lebanon</span>
-                        <div>
-                            <p>2019-Presnet</p>
-                            <span class="min">+</span>
-                            <span class="plus">-</span>
-                        </div>
-                    </div>
-                    <div class="work-desc">
-                        <div class="work-desc-parg">
-                            <div class="location">
-                                <span><svg fill="#9203ff" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0a7.78 7.78 0 0 0 0 11.13L12 21.999l5.657-5.565a7.78 7.78 0 0 0 0-11.13M12 13.499c-.668 0-1.295-.26-1.768-.732a2.503 2.503 0 0 1 0-3.536c.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732a2.503 2.503 0 0 1 0 3.536c-.472.472-1.1.732-1.768.732" />
-                                    </svg>Lebanon, Beirut </span><span><svg fill="#9203ff" viewBox="0 0 512 512"
-                                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M256 0C114.615 0 0 114.615 0 256s114.615 256 256 256 256-114.615 256-256S397.385 0 256 0m162.275 146h-46.667c-5.365-22.513-12.324-43.213-20.587-61.514 15.786 8.776 30.449 19.797 43.572 32.921A198 198 0 0 1 418.275 146M452 256c0 17.108-2.191 33.877-6.414 50h-64.034c1.601-16.172 2.448-32.887 2.448-50s-.847-33.828-2.448-50h64.034c4.223 16.123 6.414 32.892 6.414 50M256 452c-5.2 0-21.048-10.221-36.844-41.813-6.543-13.087-12.158-27.994-16.752-44.187h107.191c-4.594 16.192-10.208 31.1-16.752 44.187C277.048 441.779 261.2 452 256 452m-65.187-146c-1.847-16.247-2.813-33.029-2.813-50s.966-33.753 2.813-50h130.374c1.847 16.247 2.813 33.029 2.813 50s-.966 33.753-2.813 50zM60 256c0-17.108 2.191-33.877 6.414-50h64.034c-1.601 16.172-2.448 32.887-2.448 50s.847 33.828 2.448 50H66.414C62.191 289.877 60 273.108 60 256M256 60c5.2 0 21.048 10.221 36.844 41.813 6.543 13.087 12.158 27.994 16.752 44.187H202.404c4.594-16.192 10.208-31.1 16.752-44.187C234.952 70.221 250.8 60 256 60m-95.021 24.486c-8.264 18.301-15.222 39-20.587 61.514H93.725a198 198 0 0 1 23.682-28.593c13.124-13.124 27.786-24.145 43.572-32.921M93.725 366h46.667c5.365 22.513 12.324 43.213 20.587 61.514-15.786-8.776-30.449-19.797-43.572-32.921A198 198 0 0 1 93.725 366m257.296 61.514c8.264-18.301 15.222-39 20.587-61.514h46.667a198 198 0 0 1-23.682 28.593c-13.124 13.124-27.786 24.145-43.572 32.921" />
-                                    </svg>www.maliks.com</span>
-                            </div>
-                            <p>Head of Graphic Designer, Supervising all graphic designers at Maliks & Doculand. <br>
-                                Implemnting the System, checklist contacting suppliers, conduct training inside and
-                                outside beirut.</p>
-
-                            <div class="buttons">
-                                <span>Ai</span>
-                                <span>PSD</span>
-                                <span>InDesign</span>
-                                <span>PremierPro</span>
-                                <span>AfterEffects</span>
-                                <span>Excel</span>
-                                <span>HTML</span>
-                                <span>CSS</span>
-                                <span>JS</span>
-
-                            </div>
-
-                        </div>
-
-                        <img src="/Logos/maliks logo-01.png" alt="">
-
-                    </div>
-                </div>
-
-                <div class="work fade-left">
-                    <div class="work-title">
-                        <span>Graphic Designer & Sales @ Euro Print</span>
-                        <div>
-                            <p>2015-2019</p><span class="min">+</span>
-                            <span class="plus">-</span>
-                        </div>
-                    </div>
-                    <div class="work-desc">
-                        <div class="work-desc-parg">
-                            <div class="location">
-                                <span><svg fill="#9203ff" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0a7.78 7.78 0 0 0 0 11.13L12 21.999l5.657-5.565a7.78 7.78 0 0 0 0-11.13M12 13.499c-.668 0-1.295-.26-1.768-.732a2.503 2.503 0 0 1 0-3.536c.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732a2.503 2.503 0 0 1 0 3.536c-.472.472-1.1.732-1.768.732" />
-                                    </svg>Lebanon, Beirut </span><span>
-                            </div>
-                            <p>Graphic Designer, Handling sales and comunicating with customers, machine operator</p>
-
-                            <div class="buttons">
-                                <span>Illustrator</span>
-                                <span>Photoshop</span>
-                                <span>Excel</span>
-
-                            </div>
-
-                        </div>
-
-                        <img src="/Logos/EURO PRINT-01-01.png" alt="">
-
-                    </div>
-
-
-                </div>
-                <div class="work fade-right">
-                    <div class="work-title">
-                        <span>Teller @ FransaBank</span>
-                        <div>
-                            <p>2018</p><span class="min">+</span>
-                            <span class="plus">-</span>
-                        </div>
-                    </div>
-                    <div class="work-desc">
-                        <div class="work-desc-parg">
-                            <div class="location">
-                                <span><svg fill="#9203ff" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0a7.78 7.78 0 0 0 0 11.13L12 21.999l5.657-5.565a7.78 7.78 0 0 0 0-11.13M12 13.499c-.668 0-1.295-.26-1.768-.732a2.503 2.503 0 0 1 0-3.536c.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732a2.503 2.503 0 0 1 0 3.536c-.472.472-1.1.732-1.768.732" />
-                                    </svg>Lebanon, Beirut </span><span><svg fill="#9203ff" viewBox="0 0 512 512"
-                                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M256 0C114.615 0 0 114.615 0 256s114.615 256 256 256 256-114.615 256-256S397.385 0 256 0m162.275 146h-46.667c-5.365-22.513-12.324-43.213-20.587-61.514 15.786 8.776 30.449 19.797 43.572 32.921A198 198 0 0 1 418.275 146M452 256c0 17.108-2.191 33.877-6.414 50h-64.034c1.601-16.172 2.448-32.887 2.448-50s-.847-33.828-2.448-50h64.034c4.223 16.123 6.414 32.892 6.414 50M256 452c-5.2 0-21.048-10.221-36.844-41.813-6.543-13.087-12.158-27.994-16.752-44.187h107.191c-4.594 16.192-10.208 31.1-16.752 44.187C277.048 441.779 261.2 452 256 452m-65.187-146c-1.847-16.247-2.813-33.029-2.813-50s.966-33.753 2.813-50h130.374c1.847 16.247 2.813 33.029 2.813 50s-.966 33.753-2.813 50zM60 256c0-17.108 2.191-33.877 6.414-50h64.034c-1.601 16.172-2.448 32.887-2.448 50s.847 33.828 2.448 50H66.414C62.191 289.877 60 273.108 60 256M256 60c5.2 0 21.048 10.221 36.844 41.813 6.543 13.087 12.158 27.994 16.752 44.187H202.404c4.594-16.192 10.208-31.1 16.752-44.187C234.952 70.221 250.8 60 256 60m-95.021 24.486c-8.264 18.301-15.222 39-20.587 61.514H93.725a198 198 0 0 1 23.682-28.593c13.124-13.124 27.786-24.145 43.572-32.921M93.725 366h46.667c5.365 22.513 12.324 43.213 20.587 61.514-15.786-8.776-30.449-19.797-43.572-32.921A198 198 0 0 1 93.725 366m257.296 61.514c8.264-18.301 15.222-39 20.587-61.514h46.667a198 198 0 0 1-23.682 28.593c-13.124 13.124-27.786 24.145-43.572 32.921" />
-                                    </svg>www.maliks.com</span>
-                            </div>
-                            <p>3 months Internship as a teller at FransaBank <br> Served customers by completing account
-                                transactions <br>Sells Cashier's checks, traveler's checks, and series bonds</p>
-
-                            <div class="buttons">
-                                <span>Excel</span>
-                                <span>FransBank System</span>
-                                <span>Customer Service</span>
-
-                            </div>
-
-                        </div>
-
-                        <img src="/Logos/fransabank-01.png" alt="">
-
-                    </div>
-
-
-                </div>
-            </div>
-
-        </article>
-    </section>
-
-    <section id="freelance" class="freelance fadein">
-        <article>
-
-            <div class="freelance-left">
-
-                <div class="left-title">
-                    <h2> Available for select <br> freelance <br> opportunities</h2>
-                    <p>Have an exciting project you need help with?
-                        Send me an email or contact me via instant message!</p>
-                </div>
-
-                <div class="social">
-
-                    <a class="email" href=""><span>shadifarhat98@gmail.com</span></a>
-                    <p><a target="_blank" href="https://wa.me/96176938653">Whatsapp</a>
-                        <a target="_blank" href="https://www.linkedin.com/in/shadi-farhat-61043a204/">LinkedIn</a>
-                        <a target="_blank" href="https://www.instagram.com/shadifarhat/?next=%2F">Instagram</a>
-                        <a target="_blank" href="https://github.com/ShadiFarhat">GitHub</a>
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="freelance-right">
-
-                <div class="first">
-                    <div class="first-title">
-                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, .75)"
-                                viewBox="0 0 98.829 98.829" xml:space="preserve">
+        <section id="expertise" class="expertise">
+            <article>
+                <h2 class="fade-left">My Expertise
+                </h2>
+                <div class="expertise-card fade-right">
+                    <div class="expertise-card-content">
+                        <div class="title"><svg viewBox="0 -0.5 31.555 31.555" xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                    d="M96.76 41.603C91.511 22.831 78.562 9.204 65.975 9.204c-1.011 0-2.021.088-3.005.262a2 2 0 0 0-1.581 2.507l2.591 9.268a2.02 2.02 0 0 0 2.01 1.459l.206-.004c4.668 0 13.199 6.996 17.548 22.545.172.617.335 1.248.492 1.906-4.882-2.416-10.706-2.975-15.98-1.506-11.898 3.329-18.868 15.715-15.542 27.611 2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.046-.834 7.846-2.193 13.745-8.707 16.611-18.338 2.587-8.689 2.522-19.204-.174-28.85M14.088 9.206c-1.009 0-2.02.086-3.003.26a2 2 0 0 0-1.581 2.507l2.592 9.268c.25.895 1.097 1.5 2.01 1.459l.204-.004c4.668 0 13.2 6.996 17.549 22.545.173.621.336 1.252.492 1.906-4.884-2.416-10.706-2.975-15.98-1.506C4.475 48.97-2.497 61.356.831 73.252c2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.047-.834 7.845-2.193 13.744-8.707 16.611-18.338 2.586-8.689 2.522-19.205-.175-28.852-5.252-18.77-18.199-32.395-30.789-32.395" />
-                            </svg>
-                        </div>
-                        <div class="img"><img src="/Random files/Raghid.jpg" alt=""></div>
-                    </div>
-                    <p class="text-p">I have the pleasure to work with Shadi in Maliks comapny. I would highly recommend
-                        him for the
-                        position of Head of graphic designers . I have worked with many bright , young professionals ,
-                        but Shadi ' s talent and problem solving skills stand out among his peers . I am impressed with
-                        his drive work ethic and ability to work creatively under pressure . His skills and
-                        understanding of our company's mission helped our team successfully . He assisted the launch of
-                        many branches . He is professional using excel , powerpoint , word and IT basics.</p>
-                    <div>
-                        <span class="text-span">Raghid Mokbel</span>
-                        <p class="text-p">Operation Manager @Maliks</p>
-
-
-                    </div>
-                </div>
-                <div class="text">
-
-                    <div class="text-title">
-                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, .75)"
-                                viewBox="0 0 98.829 98.829" xml:space="preserve">
+                                    d="M381.785 645.263a.944.944 0 0 1 .942.942v18.357a.943.943 0 0 1-.942.942h-25.672a.94.94 0 0 1-.941-.942v-18.357a.943.943 0 0 1 .941-.942zm0-2h-25.672a2.94 2.94 0 0 0-2.941 2.942v18.357a2.94 2.94 0 0 0 2.941 2.942h25.672a2.94 2.94 0 0 0 2.942-2.942v-18.357a2.94 2.94 0 0 0-2.942-2.942"
+                                    transform="translate(-353.172 -643.263)" />
+                                <path d="M367.949 666.309h2v6.5h-2z" transform="translate(-353.172 -643.263)" />
                                 <path
-                                    d="M96.76 41.603C91.511 22.831 78.562 9.204 65.975 9.204c-1.011 0-2.021.088-3.005.262a2 2 0 0 0-1.581 2.507l2.591 9.268a2.02 2.02 0 0 0 2.01 1.459l.206-.004c4.668 0 13.199 6.996 17.548 22.545.172.617.335 1.248.492 1.906-4.882-2.416-10.706-2.975-15.98-1.506-11.898 3.329-18.868 15.715-15.542 27.611 2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.046-.834 7.846-2.193 13.745-8.707 16.611-18.338 2.587-8.689 2.522-19.204-.174-28.85M14.088 9.206c-1.009 0-2.02.086-3.003.26a2 2 0 0 0-1.581 2.507l2.592 9.268c.25.895 1.097 1.5 2.01 1.459l.204-.004c4.668 0 13.2 6.996 17.549 22.545.173.621.336 1.252.492 1.906-4.884-2.416-10.706-2.975-15.98-1.506C4.475 48.97-2.497 61.356.831 73.252c2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.047-.834 7.845-2.193 13.744-8.707 16.611-18.338 2.586-8.689 2.522-19.205-.175-28.852-5.252-18.77-18.199-32.395-30.789-32.395" />
+                                    d="M376.373 673.809H362.79a1 1 0 0 1 0-2h13.583a1 1 0 0 1 0 2m7-10.725H354.79a1 1 0 0 1 0-2h28.583a1 1 0 0 1 0 2"
+                                    transform="translate(-353.172 -643.263)" />
                             </svg>
-                            <div class="img"><img src="/Random files/Maliks Logo.png" alt=""></div>
+                            <div>
+                                <p style="--c:#DF058D">Graphic</p>
+                                <p>Designer</p>
+                            </div>
                         </div>
-                        <p>I am delighted to have collaborated with Shadi at Malik's company and wholeheartedly endorse
-                            him for the Head of Graphic Designers role. Among the many talented young professionals I've
-                            encountered, Shadi's exceptional talent and problem-solving abilities are truly remarkable.
-                            His dedication, strong work ethic, and creativity under pressure have consistently impressed
-                            me. Shadi's skills and deep understanding of our company's mission have significantly
-                            contributed to our team's success, particularly in launching numerous branches. He is also
-                            highly proficient in Excel, PowerPoint, Word, and fundamental IT skills.
-                     </p>
-                        <div class="text-footer"> <span class="text-span">Maliks Lebanon</span>
-                            <p class="text-p">Head Office</p>
+                        <div class="content">
+                            <p>I specialize in graphic design, creating visually stunning content for various platforms
+                                using Adobe Creative Suite.
+
+
+
+                            </p>
                         </div>
                     </div>
+                    <div class="expertise-card-content">
+                        <div class="title"><svg viewBox="0 -0.5 31.555 31.555" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M381.785 645.263a.944.944 0 0 1 .942.942v18.357a.943.943 0 0 1-.942.942h-25.672a.94.94 0 0 1-.941-.942v-18.357a.943.943 0 0 1 .941-.942zm0-2h-25.672a2.94 2.94 0 0 0-2.941 2.942v18.357a2.94 2.94 0 0 0 2.941 2.942h25.672a2.94 2.94 0 0 0 2.942-2.942v-18.357a2.94 2.94 0 0 0-2.942-2.942"
+                                    transform="translate(-353.172 -643.263)" />
+                                <path d="M367.949 666.309h2v6.5h-2z" transform="translate(-353.172 -643.263)" />
+                                <path
+                                    d="M376.373 673.809H362.79a1 1 0 0 1 0-2h13.583a1 1 0 0 1 0 2m7-10.725H354.79a1 1 0 0 1 0-2h28.583a1 1 0 0 1 0 2"
+                                    transform="translate(-353.172 -643.263)" />
+                            </svg>
+                            <div>
+                                <p style="--c:#71CEE3 ">Web</p>
+                                <p>Development</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p>I code and design websites as a junior web developer, using HTML, CSS, and JavaScript to
+                                bring ideas to life.
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="expertise-card-content">
+                        <div class="title"><svg viewBox="0 -0.5 31.555 31.555" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M381.785 645.263a.944.944 0 0 1 .942.942v18.357a.943.943 0 0 1-.942.942h-25.672a.94.94 0 0 1-.941-.942v-18.357a.943.943 0 0 1 .941-.942zm0-2h-25.672a2.94 2.94 0 0 0-2.941 2.942v18.357a2.94 2.94 0 0 0 2.941 2.942h25.672a2.94 2.94 0 0 0 2.942-2.942v-18.357a2.94 2.94 0 0 0-2.942-2.942"
+                                    transform="translate(-353.172 -643.263)" />
+                                <path d="M367.949 666.309h2v6.5h-2z" transform="translate(-353.172 -643.263)" />
+                                <path
+                                    d="M376.373 673.809H362.79a1 1 0 0 1 0-2h13.583a1 1 0 0 1 0 2m7-10.725H354.79a1 1 0 0 1 0-2h28.583a1 1 0 0 1 0 2"
+                                    transform="translate(-353.172 -643.263)" />
+                            </svg>
+                            <div>
+                                <p style="--c:#FF6B2B ">Data</p>
+                                <p>Analyst</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p>As a data analyst, I analyze complex datasets to extract insights and drive informed
+                                decision-making.
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </article>
+        </section>
+
+        <section id="myWork" class="myWork">
+
+            <article>
+
+                <div>
+                    <div class="mywork-title fade-left">
+                        <span>My <br>Work</span>
+                        <p>I blend accounting, graphic design, and computer science skills to create visually
+                            captivating
+                            content and streamline processes. With expertise in financial data management and Adobe
+                            Creative
+                            Suite, I'm currently exploring computer science for innovative solutions. My portfolio
+                            showcases
+                            a mix of analytical depth and creative flair.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="myWork-left fade-right">
+                    <video autoplay loop muted>
+                        <source src="/Random files/testtt.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+
+                    <div class="myWork-left-text">
+                        <img src="/Random files/ss1-01.png" alt="farhatmarket"><a href="UX2.html" target="_blank">View
+                            Project</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="project" class="project">
+            <article>
+
+                <div class="project-filter fade-right">
+
+                    <span>Filter by</span>
+                    <button data-filter="all">All<sup>20</sup></button>
+                    <button data-filter="graphic-design">Graphic Design<sup>10</sup></button>
+                    <button data-filter="data-analysis">Data Analysis<sup>8</sup></button>
+                    <button data-filter="web-development">Web Development<sup>2</sup></button>
+                </div>
+
+                <div class="project-cards fade-left">
+                    <a href="miniMarket.html" data-category="all graphic-design">
+                        <div class="img"><img src="/Projects/logo 4-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Mini Market Farhat</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+
+                    <a href="tousfrais.html" data-category="all graphic-design">
+                        <div class="img"><img src="/Projects/tous frais-01.jpg" alt="tousfrais" /></div>
+                        <div class="desc"><span>Tous Frais</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a href="billboardMaliks.html" data-category="all graphic-design">
+                        <div class="img"><img src="/Projects/Unipol-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Billboard Design</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a href="Guitar.html" data-category="all graphic-design">
+                        <div class="img"><img src="/Projects/guitar.jpg" alt="" /></div>
+                        <div class="desc"><span>Guitar Center</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a href="soberty.html" data-category="all graphic-design">
+                        <div class="img"><img src="/Projects/soberty.jpg" alt="" /></div>
+                        <div class="desc"><span>Soberty</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="Calig.html">
+                        <div class="img"><img src="/Projects/Caligraphy-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Arabic Caligraphy</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="2d.html">
+                        <div class="img"><img src="/Projects/2D drawing-01.jpg" alt="" /></div>
+                        <div class="desc"><span>2D drawings</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="billboarddoc.html">
+                        <div class="img"><img src="/Projects/Billboards-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Billboards Design</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="SocialMedia.html">
+                        <div class="img"><img src="/Projects/Social Media Post-01-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Social Media Design</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="Presentation.html">
+                        <div class="img"><img src="/Projects/Presentation-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Presentation Design</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="Ux.html">
+                        <div class="img"><img src="/Projects/UI-UX-01.jpg" alt="" /></div>
+                        <div class="desc"><span>UI/UX Design</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all graphic-design" href="Mcdo.html">
+                        <div class="img"><img src="/Projects/Animation-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Animation Design</span>
+                            <p class="type">Graphic Design</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+
+
+                    <a data-category="all data-analysis" href="salesman.html">
+                        <div class="img"><img src="/Projects/Data Analyt1-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Salesman Target</span>
+                            <p class="type">Data Analyst</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+                    <a data-category="all data-analysis" href="order.html">
+                        <div class="img"><img src="/Projects/Outsoursing Track System-01.jpg" alt="" /></div>
+                        <div class="desc"><span>Order Outside Track</span>
+                            <p class="type">Data Analyst</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+
+                    <a data-category="all web-development" href="https://malikstraining.github.io/" target="_blank">
+                        <div class="img"><img src="/Projects/Website MAliks.png" alt="" /></div>
+                        <div class="desc"><span>Maliks Training</span>
+                            <p class="type">Web Development</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
+
+                    <a data-category="all web-development" href="https://miramahmmoud.github.io" target="_blank">
+                        <div class="img"><img src="/Projects/Mira Website.png" alt="" /></div>
+                        <div class="desc"><span>Mira's Portfolio</span>
+                            <p class="type">Web Development</p>
+                            <p class="type">Show project</p>
+                        </div>
+                    </a>
 
 
 
                 </div>
 
 
+            </article>
+        </section>
 
-            </div>
+        <section id="experience" class="experience">
+            <article>
 
-        </article>
-    </section>
+                <h2 class="experice-title fadein">Professional <br>
+                    Experience</h2>
+
+                <div class="jobs">
+                    <div class="work fade-right">
+                        <div class="work-title _open">
+                            <span>Graphic Designer @ Maliks Lebanon</span>
+                            <div>
+                                <p>2019-Presnet</p>
+                                <span class="min">+</span>
+                                <span class="plus">-</span>
+                            </div>
+                        </div>
+                        <div class="work-desc">
+                            <div class="work-desc-parg">
+                                <div class="location">
+                                    <span><svg fill="#9203ff" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0a7.78 7.78 0 0 0 0 11.13L12 21.999l5.657-5.565a7.78 7.78 0 0 0 0-11.13M12 13.499c-.668 0-1.295-.26-1.768-.732a2.503 2.503 0 0 1 0-3.536c.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732a2.503 2.503 0 0 1 0 3.536c-.472.472-1.1.732-1.768.732" />
+                                        </svg>Lebanon, Beirut </span><span><svg fill="#9203ff" viewBox="0 0 512 512"
+                                            xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M256 0C114.615 0 0 114.615 0 256s114.615 256 256 256 256-114.615 256-256S397.385 0 256 0m162.275 146h-46.667c-5.365-22.513-12.324-43.213-20.587-61.514 15.786 8.776 30.449 19.797 43.572 32.921A198 198 0 0 1 418.275 146M452 256c0 17.108-2.191 33.877-6.414 50h-64.034c1.601-16.172 2.448-32.887 2.448-50s-.847-33.828-2.448-50h64.034c4.223 16.123 6.414 32.892 6.414 50M256 452c-5.2 0-21.048-10.221-36.844-41.813-6.543-13.087-12.158-27.994-16.752-44.187h107.191c-4.594 16.192-10.208 31.1-16.752 44.187C277.048 441.779 261.2 452 256 452m-65.187-146c-1.847-16.247-2.813-33.029-2.813-50s.966-33.753 2.813-50h130.374c1.847 16.247 2.813 33.029 2.813 50s-.966 33.753-2.813 50zM60 256c0-17.108 2.191-33.877 6.414-50h64.034c-1.601 16.172-2.448 32.887-2.448 50s.847 33.828 2.448 50H66.414C62.191 289.877 60 273.108 60 256M256 60c5.2 0 21.048 10.221 36.844 41.813 6.543 13.087 12.158 27.994 16.752 44.187H202.404c4.594-16.192 10.208-31.1 16.752-44.187C234.952 70.221 250.8 60 256 60m-95.021 24.486c-8.264 18.301-15.222 39-20.587 61.514H93.725a198 198 0 0 1 23.682-28.593c13.124-13.124 27.786-24.145 43.572-32.921M93.725 366h46.667c5.365 22.513 12.324 43.213 20.587 61.514-15.786-8.776-30.449-19.797-43.572-32.921A198 198 0 0 1 93.725 366m257.296 61.514c8.264-18.301 15.222-39 20.587-61.514h46.667a198 198 0 0 1-23.682 28.593c-13.124 13.124-27.786 24.145-43.572 32.921" />
+                                        </svg>www.maliks.com</span>
+                                </div>
+                                <p>Head of Graphic Designer, Supervising all graphic designers at Maliks & Doculand.
+                                    <br>
+                                    Implemnting the System, checklist contacting suppliers, conduct training inside and
+                                    outside beirut.
+                                </p>
+
+                                <div class="buttons">
+                                    <span>Ai</span>
+                                    <span>PSD</span>
+                                    <span>InDesign</span>
+                                    <span>PremierPro</span>
+                                    <span>AfterEffects</span>
+                                    <span>Excel</span>
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JS</span>
+
+                                </div>
+
+                            </div>
+
+                            <img src="/Logos/maliks logo-01.png" alt="">
+
+                        </div>
+                    </div>
+
+                    <div class="work fade-left">
+                        <div class="work-title">
+                            <span>Graphic Designer & Sales @ Euro Print</span>
+                            <div>
+                                <p>2015-2019</p><span class="min">+</span>
+                                <span class="plus">-</span>
+                            </div>
+                        </div>
+                        <div class="work-desc">
+                            <div class="work-desc-parg">
+                                <div class="location">
+                                    <span><svg fill="#9203ff" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0a7.78 7.78 0 0 0 0 11.13L12 21.999l5.657-5.565a7.78 7.78 0 0 0 0-11.13M12 13.499c-.668 0-1.295-.26-1.768-.732a2.503 2.503 0 0 1 0-3.536c.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732a2.503 2.503 0 0 1 0 3.536c-.472.472-1.1.732-1.768.732" />
+                                        </svg>Lebanon, Beirut </span><span>
+                                </div>
+                                <p>Graphic Designer, Handling sales and comunicating with customers, machine operator
+                                </p>
+
+                                <div class="buttons">
+                                    <span>Illustrator</span>
+                                    <span>Photoshop</span>
+                                    <span>Excel</span>
+
+                                </div>
+
+                            </div>
+
+                            <img src="/Logos/EURO PRINT-01-01.png" alt="">
+
+                        </div>
+
+
+                    </div>
+                    <div class="work fade-right">
+                        <div class="work-title">
+                            <span>Teller @ FransaBank</span>
+                            <div>
+                                <p>2018</p><span class="min">+</span>
+                                <span class="plus">-</span>
+                            </div>
+                        </div>
+                        <div class="work-desc">
+                            <div class="work-desc-parg">
+                                <div class="location">
+                                    <span><svg fill="#9203ff" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M17.657 5.304c-3.124-3.073-8.189-3.073-11.313 0a7.78 7.78 0 0 0 0 11.13L12 21.999l5.657-5.565a7.78 7.78 0 0 0 0-11.13M12 13.499c-.668 0-1.295-.26-1.768-.732a2.503 2.503 0 0 1 0-3.536c.472-.472 1.1-.732 1.768-.732s1.296.26 1.768.732a2.503 2.503 0 0 1 0 3.536c-.472.472-1.1.732-1.768.732" />
+                                        </svg>Lebanon, Beirut </span><span><svg fill="#9203ff" viewBox="0 0 512 512"
+                                            xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M256 0C114.615 0 0 114.615 0 256s114.615 256 256 256 256-114.615 256-256S397.385 0 256 0m162.275 146h-46.667c-5.365-22.513-12.324-43.213-20.587-61.514 15.786 8.776 30.449 19.797 43.572 32.921A198 198 0 0 1 418.275 146M452 256c0 17.108-2.191 33.877-6.414 50h-64.034c1.601-16.172 2.448-32.887 2.448-50s-.847-33.828-2.448-50h64.034c4.223 16.123 6.414 32.892 6.414 50M256 452c-5.2 0-21.048-10.221-36.844-41.813-6.543-13.087-12.158-27.994-16.752-44.187h107.191c-4.594 16.192-10.208 31.1-16.752 44.187C277.048 441.779 261.2 452 256 452m-65.187-146c-1.847-16.247-2.813-33.029-2.813-50s.966-33.753 2.813-50h130.374c1.847 16.247 2.813 33.029 2.813 50s-.966 33.753-2.813 50zM60 256c0-17.108 2.191-33.877 6.414-50h64.034c-1.601 16.172-2.448 32.887-2.448 50s.847 33.828 2.448 50H66.414C62.191 289.877 60 273.108 60 256M256 60c5.2 0 21.048 10.221 36.844 41.813 6.543 13.087 12.158 27.994 16.752 44.187H202.404c4.594-16.192 10.208-31.1 16.752-44.187C234.952 70.221 250.8 60 256 60m-95.021 24.486c-8.264 18.301-15.222 39-20.587 61.514H93.725a198 198 0 0 1 23.682-28.593c13.124-13.124 27.786-24.145 43.572-32.921M93.725 366h46.667c5.365 22.513 12.324 43.213 20.587 61.514-15.786-8.776-30.449-19.797-43.572-32.921A198 198 0 0 1 93.725 366m257.296 61.514c8.264-18.301 15.222-39 20.587-61.514h46.667a198 198 0 0 1-23.682 28.593c-13.124 13.124-27.786 24.145-43.572 32.921" />
+                                        </svg>www.maliks.com</span>
+                                </div>
+                                <p>3 months Internship as a teller at FransaBank <br> Served customers by completing
+                                    account
+                                    transactions <br>Sells Cashier's checks, traveler's checks, and series bonds</p>
+
+                                <div class="buttons">
+                                    <span>Excel</span>
+                                    <span>FransBank System</span>
+                                    <span>Customer Service</span>
+
+                                </div>
+
+                            </div>
+
+                            <img src="/Logos/fransabank-01.png" alt="">
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </article>
+        </section>
+
+        <section id="freelance" class="freelance fadein">
+            <article>
+
+                <div class="freelance-left">
+
+                    <div class="left-title">
+                        <h2> Available for select <br> freelance <br> opportunities</h2>
+                        <p>Have an exciting project you need help with?
+                            Send me an email or contact me via instant message!</p>
+                    </div>
+
+                    <div class="social">
+
+                        <a class="email" href=""><span>shadifarhat98@gmail.com</span></a>
+                        <p><a target="_blank" href="https://wa.me/96176938653">Whatsapp</a>
+                            <a target="_blank" href="https://www.linkedin.com/in/shadi-farhat-61043a204/">LinkedIn</a>
+                            <a target="_blank" href="https://www.instagram.com/shadifarhat/?next=%2F">Instagram</a>
+                            <a target="_blank" href="https://github.com/ShadiFarhat">GitHub</a>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="freelance-right">
+
+                    <div class="first">
+                        <div class="first-title">
+                            <div><svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, .75)"
+                                    viewBox="0 0 98.829 98.829" xml:space="preserve">
+                                    <path
+                                        d="M96.76 41.603C91.511 22.831 78.562 9.204 65.975 9.204c-1.011 0-2.021.088-3.005.262a2 2 0 0 0-1.581 2.507l2.591 9.268a2.02 2.02 0 0 0 2.01 1.459l.206-.004c4.668 0 13.199 6.996 17.548 22.545.172.617.335 1.248.492 1.906-4.882-2.416-10.706-2.975-15.98-1.506-11.898 3.329-18.868 15.715-15.542 27.611 2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.046-.834 7.846-2.193 13.745-8.707 16.611-18.338 2.587-8.689 2.522-19.204-.174-28.85M14.088 9.206c-1.009 0-2.02.086-3.003.26a2 2 0 0 0-1.581 2.507l2.592 9.268c.25.895 1.097 1.5 2.01 1.459l.204-.004c4.668 0 13.2 6.996 17.549 22.545.173.621.336 1.252.492 1.906-4.884-2.416-10.706-2.975-15.98-1.506C4.475 48.97-2.497 61.356.831 73.252c2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.047-.834 7.845-2.193 13.744-8.707 16.611-18.338 2.586-8.689 2.522-19.205-.175-28.852-5.252-18.77-18.199-32.395-30.789-32.395" />
+                                </svg>
+                            </div>
+                            <div class="img"><img src="/Random files/Raghid.jpg" alt=""></div>
+                        </div>
+                        <p class="text-p">I have the pleasure to work with Shadi in Maliks comapny. I would highly
+                            recommend
+                            him for the
+                            position of Head of graphic designers . I have worked with many bright , young professionals
+                            ,
+                            but Shadi ' s talent and problem solving skills stand out among his peers . I am impressed
+                            with
+                            his drive work ethic and ability to work creatively under pressure . His skills and
+                            understanding of our company's mission helped our team successfully . He assisted the launch
+                            of
+                            many branches . He is professional using excel , powerpoint , word and IT basics.</p>
+                        <div>
+                            <span class="text-span">Raghid Mokbel</span>
+                            <p class="text-p">Operation Manager @Maliks</p>
+
+
+                        </div>
+                    </div>
+                    <div class="text">
+
+                        <div class="text-title">
+                            <div><svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, .75)"
+                                    viewBox="0 0 98.829 98.829" xml:space="preserve">
+                                    <path
+                                        d="M96.76 41.603C91.511 22.831 78.562 9.204 65.975 9.204c-1.011 0-2.021.088-3.005.262a2 2 0 0 0-1.581 2.507l2.591 9.268a2.02 2.02 0 0 0 2.01 1.459l.206-.004c4.668 0 13.199 6.996 17.548 22.545.172.617.335 1.248.492 1.906-4.882-2.416-10.706-2.975-15.98-1.506-11.898 3.329-18.868 15.715-15.542 27.611 2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.046-.834 7.846-2.193 13.745-8.707 16.611-18.338 2.587-8.689 2.522-19.204-.174-28.85M14.088 9.206c-1.009 0-2.02.086-3.003.26a2 2 0 0 0-1.581 2.507l2.592 9.268c.25.895 1.097 1.5 2.01 1.459l.204-.004c4.668 0 13.2 6.996 17.549 22.545.173.621.336 1.252.492 1.906-4.884-2.416-10.706-2.975-15.98-1.506C4.475 48.97-2.497 61.356.831 73.252c2.696 9.639 11.563 16.373 21.563 16.373 2.037 0 4.071-.281 6.047-.834 7.845-2.193 13.744-8.707 16.611-18.338 2.586-8.689 2.522-19.205-.175-28.852-5.252-18.77-18.199-32.395-30.789-32.395" />
+                                </svg>
+                                <div class="img"><img src="/Random files/Maliks Logo.png" alt=""></div>
+                            </div>
+                            <p>I am delighted to have collaborated with Shadi at Malik's company and wholeheartedly
+                                endorse
+                                him for the Head of Graphic Designers role. Among the many talented young professionals
+                                I've
+                                encountered, Shadi's exceptional talent and problem-solving abilities are truly
+                                remarkable.
+                                His dedication, strong work ethic, and creativity under pressure have consistently
+                                impressed
+                                me. Shadi's skills and deep understanding of our company's mission have significantly
+                                contributed to our team's success, particularly in launching numerous branches. He is
+                                also
+                                highly proficient in Excel, PowerPoint, Word, and fundamental IT skills.
+                            </p>
+                            <div class="text-footer"> <span class="text-span">Maliks Lebanon</span>
+                                <p class="text-p">Head Office</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </section>
+    </div>
     <script src="script.js"></script>
 </body>
 
