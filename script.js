@@ -397,240 +397,240 @@ Particle.prototype = (function (o) {
   },
 });
 
-(function () {
-  var BACKGROUND_COLOR = '#1a1a1a',
-    PARTICLE_RADIUS = 1,
-    G_POINT_RADIUS = 10,
-    G_POINT_RADIUS_LIMITS = 65;
+// (function () {
+//   var BACKGROUND_COLOR = '#1a1a1a',
+//     PARTICLE_RADIUS = 1,
+//     G_POINT_RADIUS = 10,
+//     G_POINT_RADIUS_LIMITS = 65;
 
-  var canvas,
-    context,
-    bufferCvs,
-    bufferCtx,
-    screenWidth,
-    screenHeight,
-    mouse = new Vector(),
-    gravities = [],
-    particles = [],
-    grad,
-    gui,
-    control;
+//   var canvas,
+//     context,
+//     bufferCvs,
+//     bufferCtx,
+//     screenWidth,
+//     screenHeight,
+//     mouse = new Vector(),
+//     gravities = [],
+//     particles = [],
+//     grad,
+//     gui,
+//     control;
 
-  function resize(e) {
-    screenWidth = canvas.width = window.innerWidth;
-    screenHeight = canvas.height = window.innerHeight;
-    bufferCvs.width = screenWidth;
-    bufferCvs.height = screenHeight;
-    context = canvas.getContext('2d');
-    bufferCtx = bufferCvs.getContext('2d');
+//   function resize(e) {
+//     screenWidth = canvas.width = window.innerWidth;
+//     screenHeight = canvas.height = window.innerHeight;
+//     bufferCvs.width = screenWidth;
+//     bufferCvs.height = screenHeight;
+//     context = canvas.getContext('2d');
+//     bufferCtx = bufferCvs.getContext('2d');
 
-    var cx = canvas.width * 0.5,
-      cy = canvas.height * 0.5;
+//     var cx = canvas.width * 0.5,
+//       cy = canvas.height * 0.5;
 
-    grad = context.createRadialGradient(
-      cx,
-      cy,
-      0,
-      cx,
-      cy,
-      Math.sqrt(cx * cx + cy * cy)
-    );
-    grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-    grad.addColorStop(1, 'rgba(0, 0, 0, 0.35)');
-  }
+//     grad = context.createRadialGradient(
+//       cx,
+//       cy,
+//       0,
+//       cx,
+//       cy,
+//       Math.sqrt(cx * cx + cy * cy)
+//     );
+//     grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+//     grad.addColorStop(1, 'rgba(0, 0, 0, 0.35)');
+//   }
 
-  function mouseMove(e) {
-    mouse.set(e.clientX, e.clientY);
+//   function mouseMove(e) {
+//     mouse.set(e.clientX, e.clientY);
 
-    var i,
-      g,
-      hit = false;
-    for (i = gravities.length - 1; i >= 0; i--) {
-      g = gravities[i];
-      if ((!hit && g.hitTest(mouse)) || g.dragging) g.isMouseOver = hit = true;
-      else g.isMouseOver = false;
-    }
+//     var i,
+//       g,
+//       hit = false;
+//     for (i = gravities.length - 1; i >= 0; i--) {
+//       g = gravities[i];
+//       if ((!hit && g.hitTest(mouse)) || g.dragging) g.isMouseOver = hit = true;
+//       else g.isMouseOver = false;
+//     }
 
-    canvas.style.cursor = hit ? 'pointer' : 'default';
-  }
+//     canvas.style.cursor = hit ? 'pointer' : 'default';
+//   }
 
-  function mouseDown(e) {
-    for (var i = gravities.length - 1; i >= 0; i--) {
-      if (gravities[i].isMouseOver) {
-        gravities[i].startDrag(mouse);
-        return;
-      }
-    }
-    gravities.push(
-      new GravityPoint(e.clientX, e.clientY, G_POINT_RADIUS, {
-        particles: particles,
-        gravities: gravities,
-      })
-    );
-  }
+//   function mouseDown(e) {
+//     for (var i = gravities.length - 1; i >= 0; i--) {
+//       if (gravities[i].isMouseOver) {
+//         gravities[i].startDrag(mouse);
+//         return;
+//       }
+//     }
+//     gravities.push(
+//       new GravityPoint(e.clientX, e.clientY, G_POINT_RADIUS, {
+//         particles: particles,
+//         gravities: gravities,
+//       })
+//     );
+//   }
 
-  function mouseUp(e) {
-    for (var i = 0, len = gravities.length; i < len; i++) {
-      if (gravities[i].dragging) {
-        gravities[i].endDrag();
-        break;
-      }
-    }
-  }
+//   function mouseUp(e) {
+//     for (var i = 0, len = gravities.length; i < len; i++) {
+//       if (gravities[i].dragging) {
+//         gravities[i].endDrag();
+//         break;
+//       }
+//     }
+//   }
 
-  function doubleClick(e) {
-    for (var i = gravities.length - 1; i >= 0; i--) {
-      if (gravities[i].isMouseOver) {
-        gravities[i].collapse();
-        break;
-      }
-    }
-  }
+//   function doubleClick(e) {
+//     for (var i = gravities.length - 1; i >= 0; i--) {
+//       if (gravities[i].isMouseOver) {
+//         gravities[i].collapse();
+//         break;
+//       }
+//     }
+//   }
 
-  function addParticle(num) {
-    var i, p;
-    for (i = 0; i < num; i++) {
-      p = new Particle(
-        Math.floor(Math.random() * screenWidth - PARTICLE_RADIUS * 2) +
-          1 +
-          PARTICLE_RADIUS,
-        Math.floor(Math.random() * screenHeight - PARTICLE_RADIUS * 2) +
-          1 +
-          PARTICLE_RADIUS,
-        PARTICLE_RADIUS
-      );
-      p.addSpeed(Vector.random());
-      particles.push(p);
-    }
-  }
+//   function addParticle(num) {
+//     var i, p;
+//     for (i = 0; i < num; i++) {
+//       p = new Particle(
+//         Math.floor(Math.random() * screenWidth - PARTICLE_RADIUS * 2) +
+//           1 +
+//           PARTICLE_RADIUS,
+//         Math.floor(Math.random() * screenHeight - PARTICLE_RADIUS * 2) +
+//           1 +
+//           PARTICLE_RADIUS,
+//         PARTICLE_RADIUS
+//       );
+//       p.addSpeed(Vector.random());
+//       particles.push(p);
+//     }
+//   }
 
-  function removeParticle(num) {
-    if (particles.length < num) num = particles.length;
-    for (var i = 0; i < num; i++) {
-      particles.pop();
-    }
-  }
+//   function removeParticle(num) {
+//     if (particles.length < num) num = particles.length;
+//     for (var i = 0; i < num; i++) {
+//       particles.pop();
+//     }
+//   }
 
-  control = {
-    particleNum: 800,
-  };
+//   control = {
+//     particleNum: 800,
+//   };
 
-  canvas = document.getElementById('c');
-  bufferCvs = document.createElement('canvas');
+//   canvas = document.getElementById('c');
+//   bufferCvs = document.createElement('canvas');
 
-  window.addEventListener('resize', resize, false);
-  resize(null);
+//   window.addEventListener('resize', resize, false);
+//   resize(null);
 
-  addParticle(control.particleNum);
+//   addParticle(control.particleNum);
 
-  canvas.addEventListener('mousemove', mouseMove, false);
-  canvas.addEventListener('mousedown', mouseDown, false);
-  canvas.addEventListener('mouseup', mouseUp, false);
-  canvas.addEventListener('dblclick', doubleClick, false);
+//   canvas.addEventListener('mousemove', mouseMove, false);
+//   canvas.addEventListener('mousedown', mouseDown, false);
+//   canvas.addEventListener('mouseup', mouseUp, false);
+//   canvas.addEventListener('dblclick', doubleClick, false);
 
-  var loop = function () {
-    var i, len, g, p;
+//   var loop = function () {
+//     var i, len, g, p;
 
-    context.save();
-    context.fillStyle = BACKGROUND_COLOR;
-    context.fillRect(0, 0, screenWidth, screenHeight);
-    context.fillStyle = grad;
-    context.fillRect(0, 0, screenWidth, screenHeight);
-    context.restore();
+//     context.save();
+//     context.fillStyle = BACKGROUND_COLOR;
+//     context.fillRect(0, 0, screenWidth, screenHeight);
+//     context.fillStyle = grad;
+//     context.fillRect(0, 0, screenWidth, screenHeight);
+//     context.restore();
 
-    for (i = 0, len = gravities.length; i < len; i++) {
-      g = gravities[i];
-      if (g.dragging) g.drag(mouse);
-      g.render(context);
-      if (g.destroyed) {
-        gravities.splice(i, 1);
-        len--;
-        i--;
-      }
-    }
+//     for (i = 0, len = gravities.length; i < len; i++) {
+//       g = gravities[i];
+//       if (g.dragging) g.drag(mouse);
+//       g.render(context);
+//       if (g.destroyed) {
+//         gravities.splice(i, 1);
+//         len--;
+//         i--;
+//       }
+//     }
 
-    bufferCtx.save();
-    bufferCtx.globalCompositeOperation = 'destination-out';
-    bufferCtx.globalAlpha = 0.35;
-    bufferCtx.fillRect(0, 0, screenWidth, screenHeight);
-    bufferCtx.restore();
+//     bufferCtx.save();
+//     bufferCtx.globalCompositeOperation = 'destination-out';
+//     bufferCtx.globalAlpha = 0.35;
+//     bufferCtx.fillRect(0, 0, screenWidth, screenHeight);
+//     bufferCtx.restore();
 
-    len = particles.length;
-    bufferCtx.save();
-    bufferCtx.fillStyle = bufferCtx.strokeStyle = '#fff';
-    bufferCtx.lineCap = bufferCtx.lineJoin = 'round';
-    bufferCtx.lineWidth = PARTICLE_RADIUS * 2;
-    bufferCtx.beginPath();
-    for (i = 0; i < len; i++) {
-      p = particles[i];
-      p.update();
-      bufferCtx.moveTo(p.x, p.y);
-      bufferCtx.lineTo(p._latest.x, p._latest.y);
-    }
-    bufferCtx.stroke();
-    bufferCtx.beginPath();
-    for (i = 0; i < len; i++) {
-      p = particles[i];
-      bufferCtx.moveTo(p.x, p.y);
-      bufferCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
-    }
-    bufferCtx.fill();
-    bufferCtx.restore();
+//     len = particles.length;
+//     bufferCtx.save();
+//     bufferCtx.fillStyle = bufferCtx.strokeStyle = '#fff';
+//     bufferCtx.lineCap = bufferCtx.lineJoin = 'round';
+//     bufferCtx.lineWidth = PARTICLE_RADIUS * 2;
+//     bufferCtx.beginPath();
+//     for (i = 0; i < len; i++) {
+//       p = particles[i];
+//       p.update();
+//       bufferCtx.moveTo(p.x, p.y);
+//       bufferCtx.lineTo(p._latest.x, p._latest.y);
+//     }
+//     bufferCtx.stroke();
+//     bufferCtx.beginPath();
+//     for (i = 0; i < len; i++) {
+//       p = particles[i];
+//       bufferCtx.moveTo(p.x, p.y);
+//       bufferCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+//     }
+//     bufferCtx.fill();
+//     bufferCtx.restore();
 
-    context.drawImage(bufferCvs, 0, 0);
+//     context.drawImage(bufferCvs, 0, 0);
 
-    requestAnimationFrame(loop);
-  };
-  loop();
-})();
+//     requestAnimationFrame(loop);
+//   };
+//   loop();
+// })();
 
-const canvas = document.getElementById('c');
-const alertMessage = document.querySelector('.alert');
-const image = document.querySelector('.me');
-const imageWrapper = document.querySelector('.image-wrapper');
+// const canvas = document.getElementById('c');
+// const alertMessage = document.querySelector('.alert');
+// const image = document.querySelector('.me');
+// const imageWrapper = document.querySelector('.image-wrapper');
 
-// Store the original image source and text
-const originalImageSrc = image.src;
-const originalAlertText = alertMessage.textContent;
+// // Store the original image source and text
+// const originalImageSrc = image.src;
+// const originalAlertText = alertMessage.textContent;
 
-// Get the dimensions of the image and canvas
-const imageRect = image.getBoundingClientRect();
-const canvasRect = canvas.getBoundingClientRect();
+// // Get the dimensions of the image and canvas
+// const imageRect = image.getBoundingClientRect();
+// const canvasRect = canvas.getBoundingClientRect();
 
-canvas.addEventListener('click', function (e) {
-  const x = e.clientX - canvasRect.left;
-  const y = e.clientY - canvasRect.top;
+// canvas.addEventListener('click', function (e) {
+//   const x = e.clientX - canvasRect.left;
+//   const y = e.clientY - canvasRect.top;
 
-  // Check if the click is within the image's bounding box
-  if (
-    x >= imageRect.left - canvasRect.left &&
-    x <= imageRect.right - canvasRect.left &&
-    y >= imageRect.top - canvasRect.top &&
-    y <= imageRect.bottom - canvasRect.top
-  ) {
-    alertMessage.textContent = 'Oh Noooo!!';
-    image.src = 'IMGS/me-sad.png'; // Change the image source
+//   // Check if the click is within the image's bounding box
+//   if (
+//     x >= imageRect.left - canvasRect.left &&
+//     x <= imageRect.right - canvasRect.left &&
+//     y >= imageRect.top - canvasRect.top &&
+//     y <= imageRect.bottom - canvasRect.top
+//   ) {
+//     alertMessage.textContent = 'Oh Noooo!!';
+//     image.src = 'IMGS/me-sad.png'; // Change the image source
 
-    // Set a timeout to revert the image and text back to original after 10 seconds
-    setTimeout(() => {
-      image.src = originalImageSrc;
-      alertMessage.textContent = originalAlertText;
-    }, 10000);
-  }
+//     // Set a timeout to revert the image and text back to original after 10 seconds
+//     setTimeout(() => {
+//       image.src = originalImageSrc;
+//       alertMessage.textContent = originalAlertText;
+//     }, 10000);
+//   }
 
-  // Update small pieces or perform any other canvas-related interactions
-  updatePieces(x, y);
-});
+//   // Update small pieces or perform any other canvas-related interactions
+//   updatePieces(x, y);
+// });
 
-function updatePieces(x, y) {
-  // Logic to update the position of small pieces
-  // This function will be specific to how you are managing your pieces
-}
+// function updatePieces(x, y) {
+//   // Logic to update the position of small pieces
+//   // This function will be specific to how you are managing your pieces
+// }
 
 function togglePopup() {
   const popup = document.getElementById('colorChangerPopup');
   const mainContent = document.getElementById('main-content');
-  const homeName = document.querySelector('.home-name'); // Select the home-name element
+  const homeName = document.querySelector('.home'); // Select the home-name element
 
   if (popup.classList.contains('hidden')) {
     popup.classList.remove('hidden');

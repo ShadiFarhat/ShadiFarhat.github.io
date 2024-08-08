@@ -9,6 +9,17 @@
   font-family: "Montserrat", sans-serif;
 }
 
+:root {
+  --WhiteColor: #fff;
+  --blackColor: #1a1a1a;
+  --textColor: 1a1a1a;
+  --secondaryColor: #9203ff;
+  --thirdColor: #71CEE3;
+  --maxWidth: 1200px;
+  --blackColor2: #191D21;
+  --darkpurple: #241d41;
+}
+
 .fade-left,
 .fade-right,
 .fadein,
@@ -93,7 +104,7 @@ body:has(.blur) .colorChanger {
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 30px;
+  gap: 10px;
 }
 
 
@@ -123,6 +134,30 @@ body:has(.blur) .colorChanger {
 
 .colorChanger .colors {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dark-colors {
+  display: flex;
+  gap: 10px;
+}
+
+.colorChanger .colors .dark {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.colorChanger .colors .light {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -135,6 +170,11 @@ body:has(.blur) .colorChanger {
   border-radius: 50%;
   background-color: #333;
   cursor: pointer;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
 }
 
 .mode {
@@ -179,16 +219,7 @@ canvas {
   display: none;
 }
 
-:root {
-  --WhiteColor: #fff;
-  --blackColor: #1a1a1a;
-  --textColor: 1a1a1a;
-  --secondaryColor: #9203ff;
-  --thirdColor: #71CEE3;
-  --maxWidth: 1200px;
-  --blackColor2: #191D21;
-  --darkpurple: #241d41;
-}
+
 
 .circle.yel {
   box-shadow: inset 0 0 30px 0 var(--WhiteColor), inset 20px 0 30px #ffd400, inset -20px 0 30px red, inset 20px 0 300px #ff40d6, inset -20px 0 300px #e3ff4b, 0 0 50px var(--WhiteColor), -10px 0 100px #fbff00, 10px 0 80px #f55;
@@ -345,6 +376,8 @@ section article {
 
 }
 
+
+
 .home-header-piece {
   display: flex;
   flex-direction: column;
@@ -382,7 +415,6 @@ section article {
 }
 
 .home article {
-
   background-color: var(--blackColor);
   width: 100%;
   height: 100%;
@@ -390,7 +422,120 @@ section article {
   max-width: 100%;
   background-position: bottom;
   position: relative;
+  display: flex;
+  gap: 100px;
 }
+
+.home article .home-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 550px;
+}
+
+.home article .home-left p {
+  font-size: 1.5rem;
+  color: var(--WhiteColor);
+  font-weight: bold;
+}
+
+.home article .home-left h1 {
+  font-size: 3.5rem;
+  color: var(--WhiteColor);
+  font-weight: bold;
+}
+
+.home article .home-left b {
+  font-weight: bold;
+  color: var(--secondaryColor);
+  font-size: 1.5rem;
+}
+
+.home article .home-left span {
+  color: var(--WhiteColor);
+}
+
+.home article .home-left .home-media {
+  display: flex;
+  gap: 10px;
+}
+
+.home article .home-left .home-media svg {
+  width: 100%;
+  max-width: 30px;
+  fill: var(--secondaryColor);
+  transition: .4s ease-in-out;
+  cursor: pointer;
+}
+
+.home article .home-left .home-media svg:hover {
+  transform: scale(1.1);
+}
+
+
+.home article .home-left .button-primary {
+  padding: 10px;
+  background-color: var(--secondaryColor);
+  color: var(--WhiteColor);
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 200px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 20px;
+  transition: .4s ease-in-out;
+  display: inline-block;
+  position: relative;
+}
+
+
+
+.home article .home-left .button-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-color: var(--secondaryColor);
+  opacity: 0.6;
+  filter: blur(10px);
+  z-index: -1;
+  border-radius: 5px;
+}
+
+
+.home article .home-left .button-primary:hover {
+  transform: scale(1.1);
+}
+
+.home article .home-right {
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.home article .home-right svg {
+  width: 100%;
+}
+
+.home article .home-right .--svg-fill {
+  fill: var(--secondaryColor);
+
+}
+
+.home article .home-right img {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(1.1);
+  top: 13px;
+}
+
+
 
 .main-content {
   width: 100%;
@@ -419,7 +564,7 @@ section article {
   z-index: 10;
   text-align: center;
   position: absolute;
-  bottom: 100px;
+  bottom: 120px;
   background-color: var(--secondaryColor);
   padding: 20px;
 }
@@ -440,7 +585,7 @@ section article {
   z-index: 3;
   pointer-events: none;
   width: 100%;
-  max-width: 800px;
+  max-width: 650px;
 }
 
 .me {
@@ -467,7 +612,7 @@ section article {
   position: absolute;
   color: var(--WhiteColor);
   z-index: 3;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
   right: 150px;
   top: 250px;
@@ -524,7 +669,7 @@ section article {
 
 
 .home-name .name {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
   color: var(--WhiteColor);
   text-transform: uppercase;
@@ -533,13 +678,11 @@ section article {
 
 .home-name .jobs {
 
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--WhiteColor);
   text-transform: uppercase;
   font-family: "Roboto Mono", monospace;
   font-weight: 500;
-  letter-spacing: 2.2px;
-
 }
 
 .expertise article {
@@ -633,20 +776,17 @@ section article {
   height: 0.3em;
   width: 104%;
   left: -1%;
-  background: linear-gradient(65deg, var(--c) 0%, var(--c) 100%, rgba(255, 209, 0, 0) 100%);
+  background: var(--secondaryColor);
 }
 
 .expertise .content {
-
   padding-left: 20px;
   margin-left: 20px;
   position: relative;
-  border-left: 2px solid var(--textColor);
-
+  border-left: 2px solid var(--blackColor2);
 }
 
 .expertise .content::before {
-
   content: "<h3>";
   position: absolute;
   top: -25px;
@@ -655,12 +795,10 @@ section article {
 }
 
 .expertise .content::after {
-
   content: "</h3>";
   position: absolute;
   bottom: -25px;
   left: -20px;
-
 }
 
 .expertise .content p {
@@ -789,12 +927,11 @@ section article {
 }
 
 .project article {
-
   display: flex;
   flex-direction: column;
   gap: 50px;
   padding-block: 50px;
-
+  min-height: auto !important;
 }
 
 .project .project-filter {
@@ -814,7 +951,6 @@ section article {
 }
 
 .project .project-filter button {
-
   background-color: transparent;
   outline: none;
   border: none;
@@ -822,7 +958,11 @@ section article {
   display: flex;
   gap: 5px;
   cursor: pointer;
+  transition: .4s ease-in-out;
+}
 
+.project .project-filter button:hover {
+  color: var(--secondaryColor);
 }
 
 .project .project-filter button sup {
@@ -841,13 +981,10 @@ section article {
 }
 
 .project-cards {
-
   display: flex;
-  grid-template-columns: 1fr 1fr 1fr;
   flex-wrap: wrap;
   gap: 30px;
   align-items: flex-start;
-
 }
 
 .project-cards a {
@@ -857,7 +994,7 @@ section article {
   width: 100%;
   border-radius: 2px;
   overflow: hidden;
-  background-color: var(--blackColor);
+  background-color: var(--s);
   text-decoration: none;
   box-shadow: 0px 3px 5px #010202;
 
@@ -1048,8 +1185,7 @@ section article {
 }
 
 .experience article .work-desc {
-
-  background-color: var(--darkpurple);
+  position: relative;
   padding: 20px;
   width: 100%;
   display: flex;
@@ -1057,7 +1193,20 @@ section article {
   transition: all .3s ease-in-out;
   display: none;
   flex-wrap: wrap;
+  z-index: 1;
+}
 
+.experience article .work-desc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--secondaryColor);
+  opacity: 0.2;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .experience article ._open div .min {
@@ -1101,10 +1250,8 @@ section article {
 }
 
 .experience .location span svg {
-
-
+  fill: var(--secondaryColor);
   width: 20px;
-
 }
 
 .experience .work-desc-parg p {
@@ -1127,7 +1274,7 @@ section article {
 
 .experience .work-desc-parg .buttons span {
 
-  background-color: #2c3599;
+  background-color: var(--secondaryColor);
   border-radius: 30px;
   padding: 10px;
   font-size: 0.8rem;
@@ -1161,6 +1308,7 @@ section article {
   gap: 40px 150px;
   flex-wrap: wrap;
   padding-inline: 0;
+  min-height: auto !important;
 }
 
 
@@ -1233,8 +1381,6 @@ section article {
 }
 
 .freelance article .freelance-left .social .email::before {
-
-
   transition: all 0.1s ease-in-out;
   content: "";
   position: absolute;
@@ -1243,7 +1389,7 @@ section article {
   width: 104%;
   left: -1%;
   z-index: 5;
-  background: linear-gradient(65deg, #df058d45 0%, #df058d45 100%, rgba(255, 209, 0, 0) 100%);
+  background: var(--secondaryColor);
 }
 
 
@@ -1480,7 +1626,7 @@ section article {
 
   .home-name .name {
 
-    font-size: 7rem;
+    font-size: 5rem;
 
   }
 

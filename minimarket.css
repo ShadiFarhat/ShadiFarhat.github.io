@@ -16,7 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 80px;
-
+    align-items: flex-start;
 }
 
 .container article .title {
@@ -28,23 +28,18 @@ body {
 }
 
 .container article .title .title-small {
-
     display: flex;
     align-items: center;
-
 }
 
 .container article .title .title-small p {
-
-    color: #9b9696;
+    color: white;
     font-weight: bold;
     font-size: 1.5rem;
-
 }
 
 .container article .title .title-small b {
-
-    color: aqua;
+    color: var(--secondaryColor);
     font-size: 1.5rem;
 
 }
@@ -58,32 +53,28 @@ body {
 }
 
 .container article .link p {
-
     font-weight: 700;
     color: #9b9696;
     font-size: 1.2rem;
-
 }
 
 .container article .content {
-
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px 150px;
     align-items: flex-start;
     justify-content: space-between;
-
 }
 
-.container article .content .content-parag {
 
+.container article .content .content-parag {
     color: #9b9696;
     font-size: 1.2rem;
     width: 100%;
     max-width: 500px;
     line-height: 25px;
     font-weight: bold;
-
 }
 
 .container article .content .content-right {
@@ -92,6 +83,21 @@ body {
     flex-direction: column;
     gap: 10px;
 
+}
+
+
+.content-imgs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.content-imgs img {
+    width: 80%;
 }
 
 .container article .content .content-right span {
@@ -104,7 +110,7 @@ body {
 
 }
 
-.container article .content .content-right p{
+.container article .content .content-right p {
 
     color: white;
     font-weight: bold;
@@ -112,15 +118,14 @@ body {
 
 }
 
-.container article .content .content-right b{
+.container article .content .content-right b {
 
     color: #9b9696;
     font-size: 1.2rem;
 
 }
 
-footer{
-
+footer {
     display: flex;
     flex-direction: column;
     margin-top: 50px;
@@ -133,10 +138,10 @@ footer{
     gap: 20px;
 }
 
-footer p{
+footer p {
 
-color: #9b9696;
-font-weight: bold;
+    color: #9b9696;
+    font-weight: bold;
 
 }
 
@@ -145,5 +150,5 @@ font-weight: bold;
         flex-direction: row;
     }
 
- 
+
 }
