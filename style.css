@@ -13,7 +13,7 @@
   --WhiteColor: #fff;
   --blackColor: #1a1a1a;
   --textColor: 1a1a1a;
-  --secondaryColor: #9203ff;
+  --secondaryColor: #87CEEB;
   --thirdColor: #71CEE3;
   --maxWidth: 1200px;
   --blackColor2: #191D21;
@@ -279,6 +279,7 @@ section article {
   transition: background-color 0.3s, height 0.3s;
   z-index: 10000000000000000000;
   height: 100px;
+  background-color: var(--blackColor);
 }
 
 
@@ -385,13 +386,14 @@ section article {
 
 
 
-.header-logo img {
+.header-logo svg {
   width: 100%;
   max-width: 200px;
   transition: opacity 0.4s;
   position: relative;
   z-index: 1;
   transition: opacity 0.4s;
+  fill: var(--secondaryColor);
 }
 
 .header-menu {
@@ -417,13 +419,14 @@ section article {
 .home article {
   background-color: var(--blackColor);
   width: 100%;
-  height: 100%;
   background-size: cover;
   max-width: 100%;
   background-position: bottom;
   position: relative;
   display: flex;
+  flex-direction: column;
   gap: 100px;
+  margin-top: 50px;
 }
 
 .home article .home-left {
@@ -702,37 +705,37 @@ section article {
 }
 
 .expertise-card {
-
-  display: grid;
-  grid-template-columns: 1fr;
-  column-gap: 20px;
-  border: 2px solid #1a191d;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 2px solid var(--blackColor2);
   width: 100%;
   overflow: hidden;
+}
 
+.expertise-card .expertise-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  gap: 10px;
+  width: 100%;
 }
 
 .expertise-card>div {
-
-  padding: 40px 40px;
-  padding-top: 40px;
-
-
+  padding: 20px 20px;
+  padding-top: 20px;
 }
 
 .expertise-card>div:first-child {
-
   border-top: none;
-
 }
 
 .expertise-card-content {
-
   display: flex;
   width: 100%;
   flex-direction: column;
   gap: 40px;
-
 }
 
 .expertise .title {
@@ -783,29 +786,28 @@ section article {
   padding-left: 20px;
   margin-left: 20px;
   position: relative;
-  border-left: 2px solid var(--blackColor2);
 }
 
+/* 
 .expertise .content::before {
   content: "<h3>";
   position: absolute;
   top: -25px;
   left: -20px;
   color: var(--textColor);
-}
+} */
 
-.expertise .content::after {
+/* .expertise .content::after {
   content: "</h3>";
   position: absolute;
   bottom: -25px;
   left: -20px;
-}
+} */
 
 .expertise .content p {
 
-  font-family: "Roboto Mono", monospace;
   color: var(--textColor);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.4em
 }
 
@@ -824,7 +826,7 @@ section article {
 
   display: flex;
   flex-wrap: wrap;
-  gap: 150px;
+  gap: 50px;
 
 
 }
@@ -850,11 +852,12 @@ section article {
 
 .myWork .mywork-title p {
 
-  font-family: "Roboto Mono", monospace;
   color: var(--textColor);
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1.5rem;
   font-size: 1rem;
+  width: 100%;
+  max-width: 350px;
 
 }
 
@@ -873,8 +876,8 @@ section article {
 .myWork .myWork-Left video {
 
   width: 100%;
-  max-width: 400px;
-  padding-top: 100px;
+  max-width: 350px;
+  padding-top: 150px;
 }
 
 .myWork .myWork-left-text {
@@ -895,7 +898,7 @@ section article {
 .myWork .myWork-left-text img {
 
   width: 100%;
-  max-width: 200px;
+  max-width: 150px;
 
 }
 
@@ -985,6 +988,7 @@ section article {
   flex-wrap: wrap;
   gap: 30px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .project-cards a {
@@ -1585,7 +1589,7 @@ section article {
 
   .expertise-card {
 
-    padding-inline: 60px;
+    padding-inline: 20px;
 
   }
 
@@ -1603,13 +1607,13 @@ section article {
 
   .myWork .mywork-title span {
 
-    font-size: 7rem;
-    line-height: 120px;
+    font-size: 6rem;
+    line-height: 95px;
 
   }
 
   .myWork .mywork-title p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 
   }
 
@@ -1638,7 +1642,8 @@ section article {
 
 
   .expertise-card {
-    grid-template-columns: 1fr 1fr 1fr;
+    flex-direction: row;
+    gap: 20px;
   }
 
   .myWork article {
@@ -1684,5 +1689,15 @@ section article {
     flex-direction: row;
   }
 
+  .home article {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  .expertise-card .expertise-card-content {
+    align-items: center;
+    height: 300px;
+  }
 
 }
