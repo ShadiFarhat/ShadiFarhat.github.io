@@ -426,7 +426,7 @@ section article {
   display: flex;
   flex-direction: column;
   gap: 100px;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .home article .home-left {
@@ -870,7 +870,7 @@ section article {
   position: relative;
   top: -100px;
   align-items: end;
-
+  gap: 30px;
 }
 
 .myWork .myWork-Left video {
@@ -935,6 +935,7 @@ section article {
   gap: 50px;
   padding-block: 50px;
   min-height: auto !important;
+  align-items: flex-start;
 }
 
 .project .project-filter {
@@ -1693,11 +1694,16 @@ section article {
     display: flex;
     flex-direction: row;
     height: 100%;
+    margin-top: 50px;
   }
 
   .expertise-card .expertise-card-content {
     align-items: center;
     height: 300px;
+  }
+
+  .myWork .myWork-Left {
+    gap: 0px;
   }
 
 }
