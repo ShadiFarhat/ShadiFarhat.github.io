@@ -1088,28 +1088,23 @@ function initProjectModal() {
     // 3D BLENDER WORK DATA & HANDLERS
     // ============================================
     const blenderData = {
-        '3d-project-1': {
-            category: 'Character',
-            title: '3D Character Design',
-            description: 'High-quality 3D character model created in Blender. Showcasing the full process from skeleton/wireframe to final render with textures and lighting.',
-            software: 'Blender',
-            year: '2024',
-            images: [
-                'assets/3d-work/project-1/skeleton.webp',
-                'assets/3d-work/project-1/final.webp'
-            ]
-        },
-        '3d-project-2': {
-            category: 'Environment',
-            title: '3D Environment',
-            description: '3D environment scene created in Blender. Demonstrating the modeling process from wireframe structure to fully rendered scene.',
-            software: 'Blender',
-            year: '2024',
-            images: [
-                'assets/3d-work/project-2/skeleton.webp',
-                'assets/3d-work/project-2/final.webp'
-            ]
-        }
+        'almaza': { category: 'Product', title: 'Almaza', description: '3D product visualization of Almaza beer bottle. Photorealistic render created in Blender with studio lighting.', software: 'Blender', year: '2024', images: ['assets/3d-work/almaza/final.webp'] },
+        'black-opium': { category: 'Product', title: 'Black Opium', description: '3D render of YSL Black Opium perfume bottle. High-end product visualization with dramatic lighting.', software: 'Blender', year: '2024', images: ['assets/3d-work/black-opium/final.webp'] },
+        'la-vie-est-belle': { category: 'Product', title: 'La Vie Est Belle', description: '3D visualization of Lancome La Vie Est Belle perfume. Elegant product render with soft lighting.', software: 'Blender', year: '2024', images: ['assets/3d-work/la-vie-est-belle/final.webp'] },
+        'valentino': { category: 'Product', title: 'Valentino', description: '3D render of Valentino fragrance bottle. Luxury product visualization with studio setup.', software: 'Blender', year: '2024', images: ['assets/3d-work/valentino/final.webp'] },
+        'spice-bomb': { category: 'Product', title: 'Spice Bomb', description: '3D visualization of Viktor & Rolf Spice Bomb perfume. Bold product render with explosive theme.', software: 'Blender', year: '2024', images: ['assets/3d-work/spice-bomb/final.webp'] },
+        'la-nuit-de-lhomme': { category: 'Product', title: "La Nuit De L'Homme", description: "3D render of YSL La Nuit de L'Homme fragrance. Sophisticated product visualization.", software: 'Blender', year: '2024', images: ['assets/3d-work/la-nuit-de-lhomme/final.webp'] },
+        'lhomme-prada': { category: 'Product', title: "L'Homme Prada", description: '3D visualization of Prada fragrance bottle. Minimalist luxury product render.', software: 'Blender', year: '2024', images: ['assets/3d-work/lhomme-prada/final.webp'] },
+        'redbull': { category: 'Product', title: 'Redbull', description: '3D render of Red Bull energy drink can. Dynamic product visualization with energetic mood.', software: 'Blender', year: '2024', images: ['assets/3d-work/redbull/final.webp'] },
+        'freeze': { category: 'Product', title: 'Freeze', description: '3D product visualization with cool, refreshing aesthetic. Professional studio render.', software: 'Blender', year: '2024', images: ['assets/3d-work/freeze/final.webp'] },
+        'kitkat': { category: 'Product', title: 'KitKat', description: '3D render of KitKat chocolate bar. Appetizing product visualization with realistic textures.', software: 'Blender', year: '2024', images: ['assets/3d-work/kitkat/final.webp'] },
+        'pringles': { category: 'Product', title: 'Pringles', description: '3D visualization of Pringles can. Fun and playful product render.', software: 'Blender', year: '2024', images: ['assets/3d-work/pringles/final.webp'] },
+        'prill': { category: 'Product', title: 'Prill', description: '3D render of Prill cleaning product. Clean and professional product visualization.', software: 'Blender', year: '2024', images: ['assets/3d-work/prill/final.webp'] },
+        'lysedia-jar': { category: 'Product', title: 'Lysedia Jar', description: '3D visualization of cosmetic jar. Elegant beauty product render with soft lighting.', software: 'Blender', year: '2024', images: ['assets/3d-work/lysedia-jar/final.webp'] },
+        'sport-bottle': { category: 'Product', title: 'Sport Bottle', description: '3D render of sports water bottle. Active lifestyle product visualization.', software: 'Blender', year: '2024', images: ['assets/3d-work/sport-bottle/final.webp'] },
+        'chess': { category: 'Product', title: 'Chess', description: '3D visualization of chess pieces. Artistic render with dramatic lighting.', software: 'Blender', year: '2024', images: ['assets/3d-work/chess/final.webp'] },
+        'white-mugs': { category: 'Product', title: 'White Mugs', description: '3D render of ceramic mugs. Clean and minimalist product visualization.', software: 'Blender', year: '2024', images: ['assets/3d-work/white-mugs/final.webp'] },
+        'badges': { category: 'Product', title: 'Badges', description: '3D visualization of promotional badges. Detailed product render with realistic materials.', software: 'Blender', year: '2024', images: ['assets/3d-work/badges/final.webp'] }
     };
 
     // 3D Work card click handlers
@@ -1168,26 +1163,19 @@ function initProjectModal() {
     // DESIGN WORK DATA & HANDLERS
     // ============================================
     const designData = {
-        'design-project-1': {
-            category: 'UI/UX',
-            title: 'App Interface Design',
-            description: 'Modern user interface design showcasing clean layouts, intuitive navigation, and attention to user experience.',
-            software: 'Figma',
-            year: '2024',
-            images: [
-                'assets/design/project-1/mockup.webp'
-            ]
-        },
-        'design-project-2': {
-            category: 'Graphic Design',
-            title: 'Brand Identity',
-            description: 'Complete brand identity design including logo, color palette, typography, and visual guidelines.',
-            software: 'Adobe Illustrator',
-            year: '2024',
-            images: [
-                'assets/design/project-2/mockup.webp'
-            ]
-        }
+        'billboards': { category: 'Graphic', title: 'Billboards', description: 'Large-format billboard designs for outdoor advertising. Eye-catching visuals optimized for maximum impact.', software: 'Adobe Photoshop', year: '2024', images: ['assets/design/billboards/mockup.webp'] },
+        'farhat-market': { category: 'Branding', title: 'Farhat Market', description: 'Complete brand identity for Farhat Market. Logo design, color scheme, and marketing materials.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/farhat-market/mockup.webp'] },
+        'netflix': { category: 'UI/UX', title: 'Netflix', description: 'UI/UX concept design inspired by Netflix. Modern interface with focus on user experience.', software: 'Figma', year: '2024', images: ['assets/design/netflix/mockup.webp'] },
+        'posters': { category: 'Graphic', title: 'Posters', description: 'Creative poster designs for various purposes. Bold typography and striking visuals.', software: 'Adobe Photoshop', year: '2024', images: ['assets/design/posters/mockup.webp'] },
+        'social-media-post': { category: 'Social Media', title: 'Social Media Post', description: 'Engaging social media content designs. Optimized for Instagram, Facebook, and other platforms.', software: 'Adobe Photoshop', year: '2024', images: ['assets/design/social-media-post/mockup.webp'] },
+        'guitar-center': { category: 'Branding', title: 'Guitar Center', description: 'Brand identity design for Guitar Center. Music-inspired visuals with modern aesthetics.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/guitar-center/mockup.webp'] },
+        'cleaning-service': { category: 'Branding', title: 'Cleaning Service', description: 'Professional branding for cleaning service business. Clean and trustworthy visual identity.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/cleaning-service/mockup.webp'] },
+        'laundry': { category: 'Branding', title: 'Laundry', description: 'Brand identity for laundry service. Fresh and clean design approach.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/laundry/mockup.webp'] },
+        'hassan-sabea-project': { category: 'Branding', title: 'Hassan Sabea Project', description: 'Custom branding project. Professional visual identity and marketing materials.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/hassan-sabea-project/mockup.webp'] },
+        'nabil-ghiath': { category: 'Branding', title: 'Nabil Ghiath', description: 'Personal branding design. Sophisticated and professional visual identity.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/nabil-ghiath/mockup.webp'] },
+        'soberty': { category: 'Branding', title: 'Soberty', description: 'Brand identity design for Soberty. Modern and memorable visual language.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/soberty/mockup.webp'] },
+        'tous-frais': { category: 'Branding', title: 'Tous Frais', description: 'Fresh brand identity for Tous Frais. Clean design with emphasis on freshness.', software: 'Adobe Illustrator', year: '2024', images: ['assets/design/tous-frais/mockup.webp'] },
+        'powerpoint': { category: 'Presentation', title: 'PowerPoint', description: 'Professional PowerPoint presentation designs. Clean layouts with impactful visuals.', software: 'PowerPoint', year: '2024', images: ['assets/design/powerpoint/mockup.webp'] }
     };
 
     // Design card click handlers
