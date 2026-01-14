@@ -1724,7 +1724,14 @@ img, video {
 
     .blender-image,
     .design-image {
-        height: 200px;
+        aspect-ratio: 16/9;
+    }
+
+    .blender-image img,
+    .design-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .blender-info,
@@ -1764,7 +1771,7 @@ img, video {
 
     .blender-image,
     .design-image {
-        height: 180px;
+        aspect-ratio: 4/3;
     }
 }
 
