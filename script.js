@@ -243,7 +243,7 @@ function initScrollVideo() {
     const ctx = canvas.getContext('2d');
 
     // Configuration
-    const FRAME_COUNT = 78;  // Total frames (000-077)
+    const FRAME_COUNT = 86;  // Total frames (000-085)
     const FRAME_PATH = 'assets/frames/freepik_opening-pure-black-screen-with-a-single-spotlight-_veo3_1_1080p_16-9_24fps_36215_';
     const FRAME_EXT = '.webp';  // WebP for faster loading
 
