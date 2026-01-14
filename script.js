@@ -265,7 +265,8 @@ function initScrollVideo() {
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
 
-        ctx.scale(dpr, dpr);
+        // Reset transform before scaling (fixes cumulative scale bug on mobile)
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         // Redraw current frame after resize
         if (isLoaded && frames[Math.floor(currentFrame)]) {
