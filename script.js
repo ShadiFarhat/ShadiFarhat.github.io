@@ -318,18 +318,14 @@ function initScrollVideo() {
                         drawFrame(0);
                     }
 
-                    // Show page after first 5 frames (don't wait for all 78)
+                    // Show page after first 5 frames (don't wait for all 86)
                     if (loadedCount === 5) {
                         isLoaded = true; // Enable animation
+                        if (heroLoading) heroLoading.classList.add('hidden'); // Hide loading text
                         if (window.hidePreloader) {
                             window.hidePreloader();
                         }
                         startAnimation();
-                    }
-
-                    // All frames loaded
-                    if (loadedCount === FRAME_COUNT) {
-                        if (heroLoading) heroLoading.classList.add('hidden');
                     }
                 };
 
