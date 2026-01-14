@@ -37,6 +37,37 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance Optimizations */
+.hero-canvas,
+.hero-layers,
+#particleCanvas {
+    will-change: transform;
+}
+
+.services,
+.projects,
+.blender-work,
+.design-work,
+.contact,
+footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
+
+/* Reduced motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 /* Smooth scrolling for scroll-jacking sections */

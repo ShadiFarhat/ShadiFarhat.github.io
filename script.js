@@ -32,8 +32,8 @@ function initPreloader() {
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
-        // Fewer particles on mobile for better performance
-        const particleCount = window.innerWidth < 768 ? 30 : 80;
+        // Reduced particles for faster performance
+        const particleCount = window.innerWidth < 768 ? 15 : 35;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -73,8 +73,8 @@ function initPreloader() {
             particles.push(new Particle());
         }
 
-        // Draw connections (optimized)
-        const connectionDistance = window.innerWidth < 768 ? 80 : 120;
+        // Draw connections (optimized - reduced distance for performance)
+        const connectionDistance = window.innerWidth < 768 ? 60 : 80;
         function drawConnections() {
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
@@ -142,7 +142,7 @@ function initPreloader() {
 
     // ========== HIDE PRELOADER ==========
     window.hidePreloader = function() {
-        const minDisplayTime = 3500;
+        const minDisplayTime = 1200; // Reduced from 3500ms for faster load
         const elapsed = performance.now();
         const delay = Math.max(0, minDisplayTime - elapsed);
 
@@ -176,8 +176,9 @@ function initNavigation() {
     const heroWrapper = document.getElementById('heroWrapper');
 
     let lastScroll = 0;
+    let ticking = false;
 
-    window.addEventListener('scroll', () => {
+    function updateNav() {
         const currentScroll = window.pageYOffset;
         const heroHeight = heroWrapper ? heroWrapper.offsetHeight : window.innerHeight;
 
@@ -200,7 +201,15 @@ function initNavigation() {
         }
 
         lastScroll = currentScroll;
-    });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateNav);
+            ticking = true;
+        }
+    }, { passive: true });
 
     // Mobile menu
     if (navToggle) {
