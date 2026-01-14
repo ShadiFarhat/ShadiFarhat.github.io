@@ -245,7 +245,7 @@ function initScrollVideo() {
     // Configuration
     const FRAME_COUNT = 78;  // Total frames (000-077)
     const FRAME_PATH = 'assets/frames/freepik_opening-pure-black-screen-with-a-single-spotlight-_veo3_1_1080p_16-9_24fps_36215_';
-    const FRAME_EXT = '.jpg';  // Extension
+    const FRAME_EXT = '.webp';  // WebP for faster loading
 
     // State
     const frames = [];
@@ -309,7 +309,7 @@ function initScrollVideo() {
                     // Update preloader progress
                     const percent = (loadedCount / FRAME_COUNT) * 100;
                     if (window.updateLoadingProgress) {
-                        window.updateLoadingProgress(percent, `Loading frames (${loadedCount}/${FRAME_COUNT})`);
+                        window.updateLoadingProgress(percent, `Loading (${loadedCount}/${FRAME_COUNT})`);
                     }
 
                     // Draw first frame immediately
@@ -318,15 +318,18 @@ function initScrollVideo() {
                         drawFrame(0);
                     }
 
-                    // All frames loaded
-                    if (loadedCount === FRAME_COUNT) {
-                        isLoaded = true;
-                        if (heroLoading) heroLoading.classList.add('hidden');
-
+                    // Show page after first 5 frames (don't wait for all 78)
+                    if (loadedCount === 5 && !isLoaded) {
                         if (window.hidePreloader) {
                             window.hidePreloader();
                         }
                         startAnimation();
+                    }
+
+                    // All frames loaded
+                    if (loadedCount === FRAME_COUNT) {
+                        isLoaded = true;
+                        if (heroLoading) heroLoading.classList.add('hidden');
                     }
                 };
 
