@@ -319,7 +319,8 @@ function initScrollVideo() {
                     }
 
                     // Show page after first 5 frames (don't wait for all 78)
-                    if (loadedCount === 5 && !isLoaded) {
+                    if (loadedCount === 5) {
+                        isLoaded = true; // Enable animation
                         if (window.hidePreloader) {
                             window.hidePreloader();
                         }
@@ -328,7 +329,6 @@ function initScrollVideo() {
 
                     // All frames loaded
                     if (loadedCount === FRAME_COUNT) {
-                        isLoaded = true;
                         if (heroLoading) heroLoading.classList.add('hidden');
                     }
                 };
