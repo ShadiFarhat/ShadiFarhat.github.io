@@ -1026,6 +1026,23 @@ img, video {
         padding: 0.875rem 1.5rem;
         font-size: 0.875rem;
     }
+
+    /* Hero canvas mobile fix */
+    .hero-canvas-container {
+        touch-action: pan-y;
+    }
+
+    #heroCanvas {
+        touch-action: pan-y;
+    }
+
+    .hero-layer {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .hero-content {
+        padding: 0 var(--spacing-sm);
+    }
 }
 
 /* Tablets */
@@ -1684,9 +1701,70 @@ img, video {
 
 /* Responsive: 3D & Design Sections */
 @media (max-width: 767px) {
+    .blender-work,
+    .design-work {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .blender-container,
+    .design-container {
+        padding: 0 var(--spacing-sm);
+    }
+
     .blender-grid,
     .design-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .blender-card,
+    .design-card {
+        border-radius: 16px;
+    }
+
+    .blender-image,
+    .design-image {
+        height: 200px;
+    }
+
+    .blender-info,
+    .design-info {
+        padding: var(--spacing-sm);
+    }
+
+    .blender-title,
+    .design-title {
+        font-size: 1.1rem;
+    }
+
+    .blender-category,
+    .design-category {
+        font-size: 0.7rem;
+    }
+
+    .section-header {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-label {
+        font-size: 0.7rem;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+    .blender-container,
+    .design-container {
+        padding: 0 0.75rem;
+    }
+
+    .blender-image,
+    .design-image {
+        height: 180px;
     }
 }
 
@@ -1800,16 +1878,37 @@ img, video {
    ============================================ */
 
 @media (max-width: 767px) {
+    /* Global container padding reduction */
+    .services-container,
+    .featured-container,
+    .contact-container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    /* Reduce section padding */
+    .services,
+    .featured,
+    .contact {
+        padding: var(--spacing-lg) 0;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
     }
 
     .service-card {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
+        border-radius: 16px;
     }
 
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .project-card {
+        border-radius: 16px;
     }
 
     .project-card-large {
@@ -1818,6 +1917,10 @@ img, video {
 
     .project-card-large .project-image-placeholder {
         min-height: 200px;
+    }
+
+    .project-info {
+        padding: var(--spacing-sm);
     }
 
     .contact-socials {
@@ -1833,6 +1936,15 @@ img, video {
         flex-direction: column;
         gap: var(--spacing-sm);
         text-align: center;
+    }
+}
+
+/* Extra small phones - even tighter */
+@media (max-width: 400px) {
+    .services-container,
+    .featured-container,
+    .contact-container {
+        padding: 0 0.75rem;
     }
 }
 

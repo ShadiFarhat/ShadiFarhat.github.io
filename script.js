@@ -440,10 +440,20 @@ function initScrollVideo() {
     window.addEventListener('scroll', updateTargetFrame, { passive: true });
     window.addEventListener('resize', resizeCanvas);
 
+    // Mobile touch support - update on touchmove for smoother mobile experience
+    window.addEventListener('touchmove', updateTargetFrame, { passive: true });
+    window.addEventListener('touchend', updateTargetFrame, { passive: true });
+
     // Initialize
     resizeCanvas();
     loadFrames();
     updateTargetFrame();
+
+    // Force initial update after short delay (helps mobile)
+    setTimeout(() => {
+        resizeCanvas();
+        updateTargetFrame();
+    }, 100);
 }
 
 /* ============================================
