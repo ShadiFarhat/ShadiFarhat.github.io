@@ -1,0 +1,5 @@
+.claude/
+tmpclaude-*
+.DS_Store
+Thumbs.db
+compress_images.py

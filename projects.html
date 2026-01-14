@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects | Shadi Farhat</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preload" href="assets/logo.svg" as="image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oi&display=swap" rel="stylesheet">
+    <style>
+        /* Projects Page Specific Styles */
+        .projects-page {
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+
+        .projects-hero {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .projects-hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .projects-hero p {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xs);
+            flex-wrap: wrap;
+            padding: 0 var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            background: transparent;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+
+        .all-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-md);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md) var(--spacing-xl);
+        }
+
+        .all-projects-grid .project-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .all-projects-grid .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .all-projects-grid .project-card:nth-child(2) { animation-delay: 0.15s; }
+        .all-projects-grid .project-card:nth-child(3) { animation-delay: 0.2s; }
+        .all-projects-grid .project-card:nth-child(4) { animation-delay: 0.25s; }
+        .all-projects-grid .project-card:nth-child(5) { animation-delay: 0.3s; }
+        .all-projects-grid .project-card:nth-child(6) { animation-delay: 0.35s; }
+        .all-projects-grid .project-card:nth-child(7) { animation-delay: 0.4s; }
+        .all-projects-grid .project-card:nth-child(8) { animation-delay: 0.45s; }
+        .all-projects-grid .project-card:nth-child(9) { animation-delay: 0.5s; }
+        .all-projects-grid .project-card:nth-child(10) { animation-delay: 0.55s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-home {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(41, 151, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-home:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(41, 151, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .all-projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-page {
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav scrolled" id="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">SF</a>
+            <div class="nav-menu">
+                <a href="index.html#work" class="nav-link">Services</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="index.html#contact" class="nav-link nav-link-cta">Let's Talk</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="index.html#work" class="mobile-link">Services</a>
+            <a href="projects.html" class="mobile-link">Projects</a>
+            <a href="index.html#contact" class="mobile-link">Let's Talk</a>
+        </div>
+    </div>
+
+    <!-- Projects Page -->
+    <main class="projects-page">
+        <!-- Hero -->
+        <div class="projects-hero">
+            <h1>All <span class="text-gradient">Projects</span></h1>
+            <p>A collection of work spanning enterprise systems, web development, mobile apps, and AI solutions.</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="enterprise">Enterprise</button>
+            <button class="filter-btn" data-filter="web">Web Dev</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+            <button class="filter-btn" data-filter="ai">AI</button>
+        </div>
+
+        <!-- All Projects Grid -->
+        <div class="all-projects-grid">
+
+            <!-- Maliks Pulse HR System -->
+            <div class="project-card" data-category="enterprise" data-project="pulse-dashboard">
+                <div class="project-image">
+                    <img src="assets/projects/pulse-dashboard/mockup.jpg" alt="Maliks Pulse HR" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <span class="project-badge private">Private</span>
+                    <h3 class="project-title">Maliks Pulse - HR System</h3>
+                    <p class="project-desc">Complete HR system with AI reports, KPIs tracking, vacations, and performance management.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Pulse Mobile App -->
+            <div class="project-card" data-category="mobile" data-project="pulse-mobile">
+                <div class="project-image">
+                    <img src="assets/projects/pulse-mobile/mockup.jpg" alt="Maliks Pulse Mobile" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Mobile App</span>
+                    <span class="project-badge private">Private</span>
+                    <h3 class="project-title">Maliks Pulse Mobile</h3>
+                    <p class="project-desc">Cross-platform mobile app for managers to monitor sales and receive real-time notifications.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Valentine Game -->
+            <div class="project-card" data-category="ai" data-project="ai-system">
+                <div class="project-image">
+                    <img src="assets/projects/ai-system/mockup.jpg" alt="Valentine Game" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">AI Game</span>
+                    <span class="project-badge private">Private</span>
+                    <h3 class="project-title">Maliks Valentine Game</h3>
+                    <p class="project-desc">Draw a perfect heart to win AI-generated photos using Nano Banana Pro.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Maliks Deliveries Tracking -->
+            <div class="project-card" data-category="enterprise" data-project="tracking">
+                <div class="project-image">
+                    <img src="assets/projects/tracking/mockup.jpg" alt="Maliks Deliveries" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Mobile + Web</span>
+                    <span class="project-badge private">Private</span>
+                    <h3 class="project-title">Maliks Deliveries Tracking</h3>
+                    <p class="project-desc">Driver tracking app with GPS, movement reports, and live dashboard monitoring.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Maliks Warehouse System -->
+            <div class="project-card" data-category="enterprise" data-project="warehouse">
+                <div class="project-image">
+                    <img src="assets/projects/warehouse/mockup.jpg" alt="Maliks Warehouse" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Enterprise System</span>
+                    <span class="project-badge private">Private</span>
+                    <h3 class="project-title">Maliks Warehouse Management</h3>
+                    <p class="project-desc">Payroll, attendance, stock control, barcode scanning, and inventory management.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- As3arna -->
+            <div class="project-card" data-category="web" data-project="as3arna">
+                <div class="project-image">
+                    <img src="assets/projects/as3arna/mockup.jpg" alt="As3arna" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">E-Commerce</span>
+                    <span class="project-badge private">Private</span>
+                    <h3 class="project-title">As3arna - Price Platform</h3>
+                    <p class="project-desc">Price comparison platform for Lebanese market with alerts and deal tracking.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Filali Engineers -->
+            <div class="project-card" data-category="web" data-project="filali">
+                <div class="project-image">
+                    <img src="assets/projects/filali/mockup.jpg" alt="Filali Engineers" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <h3 class="project-title">Filali Engineers</h3>
+                    <p class="project-desc">Professional website for engineering firm with project showcase and services.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Hostify -->
+            <div class="project-card" data-category="web" data-project="mediahub">
+                <div class="project-image">
+                    <img src="assets/projects/mediahub/mockup.jpg" alt="Hostify" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Platform</span>
+                    <h3 class="project-title">Hostify</h3>
+                    <p class="project-desc">Airbnb-style rental platform with bookings, payments, and messaging.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Codesign -->
+            <div class="project-card" data-category="web" data-project="codesign">
+                <div class="project-image">
+                    <img src="assets/projects/codesign/mockup.jpg" alt="Codesign LB" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <h3 class="project-title">Codesign LB</h3>
+                    <p class="project-desc">Design agency website with portfolio gallery and smooth animations.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Wedding Invitation -->
+            <div class="project-card" data-category="web" data-project="bakhoss">
+                <div class="project-image">
+                    <img src="assets/projects/bakhoss/mockup.jpg" alt="Wedding Invitation" loading="lazy">
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Digital Invitation</span>
+                    <h3 class="project-title">Bakhos & Souzana Wedding</h3>
+                    <p class="project-desc">Elegant digital wedding invitation with RSVP and beautiful animations.</p>
+                    <span class="project-link">
+                        View Details
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home" title="Back to Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+    </a>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-category" id="modalCategory">Category</span>
+                    <h2 class="modal-title" id="modalTitle">Project Title</h2>
+                </div>
+
+                <div class="modal-gallery" id="modalGallery">
+                    <div class="modal-image-main">
+                        <img id="modalMainImage" src="" alt="Project">
+                    </div>
+                </div>
+
+                <div class="modal-details">
+                    <div class="modal-description">
+                        <h3>About the Project</h3>
+                        <p id="modalDescription">Description</p>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-item">
+                            <span class="modal-info-label">Role</span>
+                            <span class="modal-info-value" id="modalRole">Role</span>
+                        </div>
+                        <div class="modal-info-item">
+                            <span class="modal-info-label">Year</span>
+                            <span class="modal-info-value" id="modalYear">Year</span>
+                        </div>
+                        <div class="modal-info-item">
+                            <span class="modal-info-label">Tech Stack</span>
+                            <div class="modal-tags" id="modalTags"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-cta">
+                    <a href="#" class="btn-primary" id="modalLink" target="_blank">
+                        Visit Live Site
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2024 Shadi Farhat. All rights reserved.</p>
+            <p class="footer-location">Beirut, Lebanon</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+        }
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.all-projects-grid .project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'none';
+                        card.offsetHeight; // Trigger reflow
+                        card.style.animation = 'fadeInUp 0.6s ease forwards';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Modal
+        const modal = document.getElementById('projectModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalBackdrop = modal.querySelector('.modal-backdrop');
+
+        const projectsData = {
+            'pulse-dashboard': {
+                category: 'Web Development',
+                title: 'Maliks Pulse - HR System',
+                description: 'Complete HR management system integrated with Nano Banana AI to generate professional reports and employee images. Features KPIs tracking, vacation management, performance monitoring, attendance system, and customized reporting dashboards.',
+                role: 'Full Stack Developer & Project Lead',
+                year: '2024',
+                tags: ['Laravel', 'React', 'MySQL', 'Nano Banana AI', 'WebSockets'],
+                link: '#',
+                image: 'assets/projects/pulse-dashboard/mockup.jpg'
+            },
+            'pulse-mobile': {
+                category: 'Mobile App',
+                title: 'Maliks Pulse Mobile',
+                description: 'Cross-platform mobile application for Maliks Pulse system. Enables managers to monitor sales, approve requests, and receive real-time notifications.',
+                role: 'Mobile Developer',
+                year: '2024',
+                tags: ['React Native', 'Redux', 'Push Notifications'],
+                link: '#',
+                image: 'assets/projects/pulse-mobile/mockup.jpg'
+            },
+            'ai-system': {
+                category: 'AI Game',
+                title: 'Maliks Valentine Game',
+                description: 'Interactive Valentine\'s Day game where customers can win a free AI-generated photo. Users draw a heart shape on screen - if they draw a perfect heart, they win a professionally generated image using Nano Banana Pro AI.',
+                role: 'Full Stack Developer & AI Engineer',
+                year: '2024',
+                tags: ['JavaScript', 'Canvas API', 'Nano Banana AI', 'Laravel'],
+                link: '#',
+                image: 'assets/projects/ai-system/mockup.jpg'
+            },
+            'tracking': {
+                category: 'Mobile + Web',
+                title: 'Maliks Deliveries Tracking',
+                description: 'Complete delivery tracking system with mobile app for drivers. Real-time GPS location tracking, detailed movement reports (daily, weekly, monthly), delivery status updates, and route history.',
+                role: 'Full Stack Developer',
+                year: '2023',
+                tags: ['Laravel', 'React Native', 'Google Maps API', 'Firebase', 'MySQL'],
+                link: '#',
+                image: 'assets/projects/tracking/mockup.jpg'
+            },
+            'warehouse': {
+                category: 'Enterprise System',
+                title: 'Maliks Warehouse Management',
+                description: 'Complete warehouse management system with payroll and attendance tracking for employees. Features stock control, inventory management, barcode scanning, automated reordering, multi-location sync, and comprehensive reporting.',
+                role: 'Full Stack Developer',
+                year: '2023',
+                tags: ['Laravel', 'React', 'Barcode API', 'MySQL', 'Payroll System'],
+                link: '#',
+                image: 'assets/projects/warehouse/mockup.jpg'
+            },
+            'as3arna': {
+                category: 'E-Commerce',
+                title: 'As3arna - Price Platform',
+                description: 'Price comparison and tracking platform for Lebanese market. Users can compare prices across stores, set alerts, and find best deals.',
+                role: 'Full Stack Developer',
+                year: '2023',
+                tags: ['Laravel', 'Vue.js', 'Web Scraping', 'MySQL'],
+                link: 'https://as3arna.net',
+                image: 'assets/projects/as3arna/mockup.jpg'
+            },
+            'filali': {
+                category: 'Web Development',
+                title: 'Filali Engineers',
+                description: 'Professional website for Filali Engineering firm. Showcases projects, services, and company portfolio with modern design.',
+                role: 'Web Developer & Designer',
+                year: '2023',
+                tags: ['HTML/CSS', 'JavaScript', 'PHP'],
+                link: 'http://filaliengineers.com',
+                image: 'assets/projects/filali/mockup.jpg'
+            },
+            'mediahub': {
+                category: 'Web Platform',
+                title: 'Hostify',
+                description: 'Airbnb-style rental platform for Lebanon. Users can list properties, browse available rentals, book stays, and manage reservations. Features user authentication, payment integration, reviews, and messaging system.',
+                role: 'Full Stack Developer',
+                year: '2023',
+                tags: ['Laravel', 'Vue.js', 'MySQL', 'Stripe', 'Google Maps'],
+                link: 'https://themediahublb.com',
+                image: 'assets/projects/mediahub/mockup.jpg'
+            },
+            'codesign': {
+                category: 'Web Development',
+                title: 'Codesign LB',
+                description: 'Design agency website with portfolio gallery, team section, and service showcase.',
+                role: 'Web Developer & Designer',
+                year: '2022',
+                tags: ['HTML/CSS', 'JavaScript', 'GSAP'],
+                link: 'https://codesignlb.com',
+                image: 'assets/projects/codesign/mockup.jpg'
+            },
+            'bakhoss': {
+                category: 'Digital Invitation',
+                title: 'Bakhos & Souzana Wedding',
+                description: 'Elegant digital wedding invitation with RSVP functionality. Features beautiful animations, event details, location map, photo gallery, and guest confirmation system.',
+                role: 'Web Developer & Designer',
+                year: '2022',
+                tags: ['HTML/CSS', 'JavaScript', 'GSAP', 'Google Maps'],
+                link: 'http://bakhossouzana.com',
+                image: 'assets/projects/bakhoss/mockup.jpg'
+            }
+        };
+
+        // Open modal
+        projectCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const projectId = card.dataset.project;
+                const project = projectsData[projectId];
+
+                if (project) {
+                    document.getElementById('modalCategory').textContent = project.category;
+                    document.getElementById('modalTitle').textContent = project.title;
+                    document.getElementById('modalDescription').textContent = project.description;
+                    document.getElementById('modalRole').textContent = project.role;
+                    document.getElementById('modalYear').textContent = project.year;
+                    document.getElementById('modalLink').href = project.link;
+                    document.getElementById('modalMainImage').src = project.image;
+
+                    const tagsContainer = document.getElementById('modalTags');
+                    tagsContainer.innerHTML = project.tags.map(tag => `<span>${tag}</span>`).join('');
+
+                    // Hide link button for private projects
+                    const linkBtn = document.getElementById('modalLink');
+                    if (project.link === '#') {
+                        linkBtn.style.display = 'none';
+                    } else {
+                        linkBtn.style.display = 'inline-flex';
+                    }
+
+                    modal.classList.add('active');
+                    document.body.classList.add('modal-open');
+                }
+            });
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

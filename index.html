@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadi Farhat | Creative Developer</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/logo.svg" as="image">
+    <link rel="preload" href="assets/frames/freepik_opening-pure-black-screen-with-a-single-spotlight-_veo3_1_1080p_16-9_24fps_36215_000.jpg" as="image">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- DNS prefetch for fonts -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oi&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <!-- Particle Canvas Background -->
+        <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+        <!-- Scan Lines Overlay -->
+        <div class="scanlines"></div>
+
+        <div class="preloader-inner">
+            <!-- Big Animated Logo -->
+            <div class="logo-container">
+                <!-- Custom SVG Logo -->
+                <div class="logo-svg-wrapper">
+                    <img src="assets/logo.svg" alt="SF" class="logo-main-svg">
+                    <img src="assets/logo.svg" alt="" class="logo-glitch-1">
+                    <img src="assets/logo.svg" alt="" class="logo-glitch-2">
+                </div>
+                <!-- Rotating ring -->
+                <div class="logo-ring">
+                    <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="90" class="ring-bg"/>
+                        <circle cx="100" cy="100" r="90" class="ring-progress" id="ringProgress"/>
+                        <circle cx="100" cy="100" r="80" class="ring-inner"/>
+                    </svg>
+                </div>
+                <!-- Orbiting dots -->
+                <div class="orbit">
+                    <div class="orbit-dot"></div>
+                </div>
+                <div class="orbit orbit-2">
+                    <div class="orbit-dot"></div>
+                </div>
+            </div>
+
+            <!-- Name with typing effect -->
+            <div class="preloader-name">
+                <span class="name-line" id="nameLine"></span>
+                <span class="cursor">|</span>
+            </div>
+
+            <!-- Loading stats -->
+            <div class="loading-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="progressPercent">0</span>
+                    <span class="stat-unit">%</span>
+                </div>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="preloader-progress">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar"></div>
+                    <div class="progress-glow"></div>
+                </div>
+                <span class="progress-label" id="progressText">Initializing</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">SF</a>
+            <div class="nav-menu">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link nav-link-cta">Let's Talk</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="#work" class="mobile-link">Work</a>
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#contact" class="mobile-link">Let's Talk</a>
+        </div>
+    </div>
+
+    <!-- Hero Section - Scroll Controlled -->
+    <section class="hero-wrapper" id="heroWrapper">
+
+        <!-- Sticky Container -->
+        <div class="hero-sticky">
+            <!-- Canvas for Image Sequence (Apple Style) -->
+            <div class="hero-canvas-container">
+                <canvas id="heroCanvas"></canvas>
+                <div class="hero-video-overlay"></div>
+            </div>
+
+            <!-- Loading indicator -->
+            <div class="hero-loading" id="heroLoading">
+                <div class="hero-loading-bar"></div>
+                <span>Loading frames...</span>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="scroll-progress">
+                <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+            </div>
+
+            <!-- Text Layers - Each appears at different scroll positions -->
+
+            <!-- Layer 1: Introduction -->
+            <div class="hero-content hero-layer" data-layer="1">
+                <div class="hero-tag">
+                    <span class="hero-tag-dot"></span>
+                    <span class="hero-tag-text">Available for Projects</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-line">I Craft</span>
+                    <span class="hero-title-line"><span class="text-gradient">Digital</span></span>
+                    <span class="hero-title-line">Experiences</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span>Developer</span>
+                    <span class="dot"></span>
+                    <span>Designer</span>
+                    <span class="dot"></span>
+                    <span>AI Engineer</span>
+                </p>
+            </div>
+
+            <!-- Layer 2: Who I Am -->
+            <div class="hero-content hero-layer" data-layer="2">
+                <p class="hero-eyebrow">Meet</p>
+                <h2 class="hero-title-lg">
+                    <span class="hero-title-line">Shadi</span>
+                    <span class="hero-title-line"><span class="text-gradient">Farhat</span></span>
+                </h2>
+                <p class="hero-desc">
+                    IT Manager at Maliks Lebanon<br>
+                    <span class="text-muted">Turning ideas into digital reality</span>
+                </p>
+            </div>
+
+            <!-- Layer 3: Experience -->
+            <div class="hero-content hero-layer" data-layer="3">
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">8+</span>
+                        <span class="hero-stat-label">Years Design</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">3+</span>
+                        <span class="hero-stat-label">Years Development</span>
+                    </div>
+                </div>
+                <h2 class="hero-title-md">
+                    <span class="text-gradient">Experience</span> that<br>speaks for itself
+                </h2>
+            </div>
+
+            <!-- Layer 4: Call to Action -->
+            <div class="hero-content hero-layer" data-layer="4">
+                <p class="hero-eyebrow">Ready to create?</p>
+                <h2 class="hero-title-lg">
+                    <span class="hero-title-line">Let's Build</span>
+                    <span class="hero-title-line"><span class="text-gradient">Together</span></span>
+                </h2>
+                <a href="#work" class="hero-cta">
+                    <span>View My Work</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Scroll Hint (first layer only) -->
+            <div class="hero-scroll" id="heroScroll">
+                <div class="hero-scroll-line"></div>
+                <span>Scroll to explore</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- What I Do Section -->
+    <section class="services" id="work">
+        <div class="services-container">
+
+            <!-- Section Header -->
+            <div class="section-header" data-animate>
+                <span class="section-label">What I Do</span>
+                <h2 class="section-title">
+                    Crafting digital products<br>
+                    <span class="text-gradient">that make an impact.</span>
+                </h2>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+
+                <!-- Service 1 -->
+                <div class="service-card" data-animate>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Web Development</h3>
+                    <p class="service-desc">Building fast, responsive websites and web applications using modern technologies like React, Laravel, and Node.js.</p>
+                    <div class="service-tags">
+                        <span>React</span>
+                        <span>Laravel</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card" data-animate>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">UI/UX Design</h3>
+                    <p class="service-desc">Creating intuitive interfaces and seamless user experiences that convert visitors into customers.</p>
+                    <div class="service-tags">
+                        <span>Figma</span>
+                        <span>Photoshop</span>
+                        <span>Illustrator</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card" data-animate>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">AI Engineering</h3>
+                    <p class="service-desc">Building intelligent solutions with AI and machine learning. Chatbots, automation, and smart workflows.</p>
+                    <div class="service-tags">
+                        <span>OpenAI</span>
+                        <span>Python</span>
+                        <span>LangChain</span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card" data-animate>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                            <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">3D Modeling</h3>
+                    <p class="service-desc">Bringing products to life with photorealistic 3D models and animations for marketing and visualization.</p>
+                    <div class="service-tags">
+                        <span>Blender</span>
+                        <span>3D Design</span>
+                        <span>Animation</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work Section -->
+    <section class="featured" id="featured">
+        <div class="featured-container">
+
+            <div class="section-header" data-animate>
+                <span class="section-label">Selected Work</span>
+                <h2 class="section-title">
+                    Projects that<br>
+                    <span class="text-gradient">speak volumes.</span>
+                </h2>
+            </div>
+
+            <!-- Project Cards -->
+            <div class="projects-grid">
+
+                <!-- Maliks Pulse HR System - FEATURED -->
+                <div class="project-card project-card-large" data-animate data-parallax data-project="pulse-dashboard">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/pulse-dashboard/mockup.webp" alt="Maliks Pulse HR System" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Development</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Pulse - HR System</h3>
+                        <p class="project-desc">Complete HR system with AI-powered reports, KPIs tracking, vacations, and performance management.</p>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Pulse Mobile App -->
+                <div class="project-card" data-animate data-parallax data-project="pulse-mobile">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/pulse-mobile/mockup.webp" alt="Maliks Pulse Mobile" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Mobile App</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Pulse Mobile</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Valentine Game -->
+                <div class="project-card" data-animate data-parallax data-project="ai-system">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/ai-system/mockup.webp" alt="Valentine Game" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">AI Game</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Valentine Game</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Maliks Deliveries Tracking -->
+                <div class="project-card" data-animate data-parallax data-project="tracking">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/tracking/mockup.webp" alt="Maliks Deliveries" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Mobile + Web</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Deliveries Tracking</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Maliks Warehouse System -->
+                <div class="project-card" data-animate data-parallax data-project="warehouse">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/warehouse/mockup.webp" alt="Maliks Warehouse" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Enterprise System</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Warehouse Management</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- As3arna -->
+                <div class="project-card" data-animate data-parallax data-project="as3arna">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/as3arna/mockup.webp" alt="As3arna" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">E-Commerce</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">As3arna - Price Platform</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Filali Engineers -->
+                <div class="project-card" data-animate data-parallax data-project="filali">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/filali/mockup.webp" alt="Filali Engineers" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Filali Engineers</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Hostify -->
+                <div class="project-card" data-animate data-parallax data-project="mediahub">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/mediahub/mockup.webp" alt="Hostify" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Platform</span>
+                        <h3 class="project-title">Hostify</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Codesign -->
+                <div class="project-card" data-animate data-parallax data-project="codesign">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/codesign/mockup.webp" alt="Codesign LB" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Codesign LB</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Wedding Invitation -->
+                <div class="project-card" data-animate data-parallax data-project="bakhoss">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/bakhoss/mockup.webp" alt="Wedding Invitation" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Digital Invitation</span>
+                        <h3 class="project-title">Bakhos & Souzana Wedding</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Golden Coast -->
+                <div class="project-card" data-animate data-parallax data-project="golden-coast">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/golden-coast/mockup.webp" alt="Golden Coast" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Portfolio</span>
+                        <h3 class="project-title">Golden Coast</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Mini Market ERP -->
+                <div class="project-card" data-animate data-parallax data-project="mini-market">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/mini-market/mockup.webp" alt="Mini Market ERP" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">ERP System</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Mini Market ERP</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Pulse Old Version -->
+                <div class="project-card" data-animate data-parallax data-project="pulse-old">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/pulse-old/mockup.webp" alt="Pulse Old Version" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Legacy System</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Pulse (Legacy)</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View All Link -->
+            <div class="featured-cta" data-animate>
+                <a href="projects.html" class="btn-outline">
+                    View All Projects
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+
+            <div class="contact-content" data-animate>
+                <span class="section-label">Get in Touch</span>
+                <h2 class="contact-title">
+                    Let's create<br>
+                    <span class="text-gradient">something great.</span>
+                </h2>
+                <p class="contact-desc">
+                    Have a project in mind? Let's talk about how we can work together.
+                </p>
+                <a href="mailto:shadifarhat98@gmail.com" class="contact-email">
+                    shadifarhat98@gmail.com
+                </a>
+
+                <div class="contact-socials">
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <span class="modal-category" id="modalCategory">Web Development</span>
+                    <h2 class="modal-title" id="modalTitle">Project Title</h2>
+                </div>
+
+                <!-- Modal Image Slideshow -->
+                <div class="modal-slideshow" id="modalSlideshow">
+                    <div class="slideshow-container" id="slideshowContainer">
+                    </div>
+                    <button class="slideshow-btn slideshow-prev" id="slideshowPrev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <button class="slideshow-btn slideshow-next" id="slideshowNext">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                    <div class="slideshow-dots" id="slideshowDots"></div>
+                    <div class="slideshow-counter" id="slideshowCounter">1 / 1</div>
+                </div>
+
+                <!-- Modal Details -->
+                <div class="modal-details">
+                    <div class="modal-description">
+                        <h3>About the Project</h3>
+                        <p id="modalDescription">Project description goes here...</p>
+                    </div>
+
+                    <div class="modal-info">
+                        <div class="modal-info-item">
+                            <span class="modal-info-label">Role</span>
+                            <span class="modal-info-value" id="modalRole">Full Stack Developer</span>
+                        </div>
+                        <div class="modal-info-item">
+                            <span class="modal-info-label">Year</span>
+                            <span class="modal-info-value" id="modalYear">2024</span>
+                        </div>
+                        <div class="modal-info-item">
+                            <span class="modal-info-label">Tech Stack</span>
+                            <div class="modal-tags" id="modalTags">
+                                <span>React</span>
+                                <span>Laravel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal CTA -->
+                <div class="modal-cta">
+                    <a href="#" class="btn-primary" id="modalLink" target="_blank">
+                        Visit Live Site
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2024 Shadi Farhat. All rights reserved.</p>
+            <p class="footer-location">Beirut, Lebanon</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
