@@ -1083,4 +1083,162 @@ function initProjectModal() {
             closeModal();
         }
     });
+
+    // ============================================
+    // 3D BLENDER WORK DATA & HANDLERS
+    // ============================================
+    const blenderData = {
+        '3d-project-1': {
+            category: 'Character',
+            title: '3D Character Design',
+            description: 'High-quality 3D character model created in Blender. Showcasing the full process from skeleton/wireframe to final render with textures and lighting.',
+            software: 'Blender',
+            year: '2024',
+            images: [
+                'assets/3d-work/project-1/skeleton.webp',
+                'assets/3d-work/project-1/final.webp'
+            ]
+        },
+        '3d-project-2': {
+            category: 'Environment',
+            title: '3D Environment',
+            description: '3D environment scene created in Blender. Demonstrating the modeling process from wireframe structure to fully rendered scene.',
+            software: 'Blender',
+            year: '2024',
+            images: [
+                'assets/3d-work/project-2/skeleton.webp',
+                'assets/3d-work/project-2/final.webp'
+            ]
+        }
+    };
+
+    // 3D Work card click handlers
+    const blenderCards = document.querySelectorAll('[data-blender]');
+    blenderCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            const blenderId = card.dataset.blender;
+            const blender = blenderData[blenderId];
+
+            if (blender) {
+                document.getElementById('modalCategory').textContent = blender.category;
+                document.getElementById('modalTitle').textContent = blender.title;
+                document.getElementById('modalDescription').textContent = blender.description;
+                document.getElementById('modalRole').textContent = blender.software;
+                document.getElementById('modalYear').textContent = blender.year;
+
+                const tagsContainer = document.getElementById('modalTags');
+                tagsContainer.innerHTML = `<span>Blender</span><span>3D Art</span>`;
+
+                const images = blender.images || [];
+                currentSlide = 0;
+                createSlideshow(images);
+
+                slideshowDots.innerHTML = images.map((_, i) =>
+                    `<div class="slideshow-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
+                ).join('');
+
+                slideshowDots.querySelectorAll('.slideshow-dot').forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = parseInt(dot.dataset.index);
+                        updateSlideshow();
+                    });
+                });
+
+                if (images.length <= 1) {
+                    slideshowPrev.style.display = 'none';
+                    slideshowNext.style.display = 'none';
+                    slideshowDots.style.display = 'none';
+                } else {
+                    slideshowPrev.style.display = 'flex';
+                    slideshowNext.style.display = 'flex';
+                    slideshowDots.style.display = 'flex';
+                }
+
+                document.getElementById('modalLink').style.display = 'none';
+
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+            }
+        });
+    });
+
+    // ============================================
+    // DESIGN WORK DATA & HANDLERS
+    // ============================================
+    const designData = {
+        'design-project-1': {
+            category: 'UI/UX',
+            title: 'App Interface Design',
+            description: 'Modern user interface design showcasing clean layouts, intuitive navigation, and attention to user experience.',
+            software: 'Figma',
+            year: '2024',
+            images: [
+                'assets/design/project-1/mockup.webp'
+            ]
+        },
+        'design-project-2': {
+            category: 'Graphic Design',
+            title: 'Brand Identity',
+            description: 'Complete brand identity design including logo, color palette, typography, and visual guidelines.',
+            software: 'Adobe Illustrator',
+            year: '2024',
+            images: [
+                'assets/design/project-2/mockup.webp'
+            ]
+        }
+    };
+
+    // Design card click handlers
+    const designCards = document.querySelectorAll('[data-design]');
+    designCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            const designId = card.dataset.design;
+            const design = designData[designId];
+
+            if (design) {
+                document.getElementById('modalCategory').textContent = design.category;
+                document.getElementById('modalTitle').textContent = design.title;
+                document.getElementById('modalDescription').textContent = design.description;
+                document.getElementById('modalRole').textContent = design.software;
+                document.getElementById('modalYear').textContent = design.year;
+
+                const tagsContainer = document.getElementById('modalTags');
+                tagsContainer.innerHTML = `<span>${design.category}</span><span>Design</span>`;
+
+                const images = design.images || [];
+                currentSlide = 0;
+                createSlideshow(images);
+
+                slideshowDots.innerHTML = images.map((_, i) =>
+                    `<div class="slideshow-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
+                ).join('');
+
+                slideshowDots.querySelectorAll('.slideshow-dot').forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = parseInt(dot.dataset.index);
+                        updateSlideshow();
+                    });
+                });
+
+                if (images.length <= 1) {
+                    slideshowPrev.style.display = 'none';
+                    slideshowNext.style.display = 'none';
+                    slideshowDots.style.display = 'none';
+                } else {
+                    slideshowPrev.style.display = 'flex';
+                    slideshowNext.style.display = 'flex';
+                    slideshowDots.style.display = 'flex';
+                }
+
+                document.getElementById('modalLink').style.display = 'none';
+
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+            }
+        });
+    });
 }

@@ -1460,6 +1460,206 @@ img, video {
 }
 
 /* ============================================
+   3D BLENDER WORK SECTION
+   ============================================ */
+
+.blender-work {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-bg);
+    position: relative;
+}
+
+.blender-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.blender-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.blender-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s var(--ease-out-expo);
+    cursor: pointer;
+}
+
+.blender-card:hover {
+    border-color: rgba(41, 151, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.blender-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+}
+
+.blender-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-expo);
+}
+
+.blender-card:hover .blender-image img {
+    transform: scale(1.05);
+}
+
+.blender-info {
+    padding: var(--spacing-md);
+}
+
+.blender-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-xs);
+}
+
+.blender-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+}
+
+.blender-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.blender-card:hover .blender-link {
+    color: var(--color-accent);
+}
+
+.blender-link svg {
+    transition: transform 0.3s ease;
+}
+
+.blender-card:hover .blender-link svg {
+    transform: translate(3px, -3px);
+}
+
+/* ============================================
+   DESIGN WORK SECTION
+   ============================================ */
+
+.design-work {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-bg-secondary);
+    position: relative;
+}
+
+.design-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.design-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.design-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s var(--ease-out-expo);
+    cursor: pointer;
+}
+
+.design-card:hover {
+    border-color: rgba(41, 151, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.design-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+}
+
+.design-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-expo);
+}
+
+.design-card:hover .design-image img {
+    transform: scale(1.05);
+}
+
+.design-info {
+    padding: var(--spacing-md);
+}
+
+.design-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-xs);
+}
+
+.design-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+}
+
+.design-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.design-card:hover .design-link {
+    color: var(--color-accent);
+}
+
+.design-link svg {
+    transition: transform 0.3s ease;
+}
+
+.design-card:hover .design-link svg {
+    transform: translate(3px, -3px);
+}
+
+/* Responsive: 3D & Design Sections */
+@media (max-width: 767px) {
+    .blender-grid,
+    .design-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
    CONTACT SECTION
    ============================================ */
 
