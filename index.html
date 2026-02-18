@@ -19,65 +19,30 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Preloader -->
     <div class="preloader" id="preloader">
-        <!-- Particle Canvas Background -->
-        <canvas id="particleCanvas" class="particle-canvas"></canvas>
+        <!-- Gradient Background -->
+        <div class="pre-bg"></div>
 
-        <!-- Scan Lines Overlay -->
-        <div class="scanlines"></div>
+        <!-- Center Content -->
+        <div class="pre-center">
+            <!-- Animated Ring -->
+            <div class="pre-ring"></div>
 
-        <div class="preloader-inner">
-            <!-- Big Animated Logo -->
-            <div class="logo-container">
-                <!-- Custom SVG Logo -->
-                <div class="logo-svg-wrapper">
-                    <img src="assets/logo.svg" alt="SF" class="logo-main-svg">
-                    <img src="assets/logo.svg" alt="" class="logo-glitch-1">
-                    <img src="assets/logo.svg" alt="" class="logo-glitch-2">
-                </div>
-                <!-- Rotating ring -->
-                <div class="logo-ring">
-                    <svg viewBox="0 0 200 200">
-                        <circle cx="100" cy="100" r="90" class="ring-bg"/>
-                        <circle cx="100" cy="100" r="90" class="ring-progress" id="ringProgress"/>
-                        <circle cx="100" cy="100" r="80" class="ring-inner"/>
-                    </svg>
-                </div>
-                <!-- Orbiting dots -->
-                <div class="orbit">
-                    <div class="orbit-dot"></div>
-                </div>
-                <div class="orbit orbit-2">
-                    <div class="orbit-dot"></div>
-                </div>
+            <!-- Logo -->
+            <div class="pre-logo" id="preLogo">
+                <span class="pre-s">S</span>
+                <span class="pre-f">F</span>
             </div>
+        </div>
 
-            <!-- Name with typing effect -->
-            <div class="preloader-name">
-                <span class="name-line" id="nameLine"></span>
-                <span class="cursor">|</span>
-            </div>
-
-            <!-- Loading stats -->
-            <div class="loading-stats">
-                <div class="stat-item">
-                    <span class="stat-value" id="progressPercent">0</span>
-                    <span class="stat-unit">%</span>
-                </div>
-            </div>
-
-            <!-- Progress bar -->
-            <div class="preloader-progress">
-                <div class="progress-track">
-                    <div class="progress-fill" id="progressBar"></div>
-                    <div class="progress-glow"></div>
-                </div>
-                <span class="progress-label" id="progressText">Initializing</span>
-            </div>
+        <!-- Bottom Text -->
+        <div class="pre-bottom">
+            <span class="pre-name">SHADI FARHAT</span>
+            <span class="pre-title">Creative Developer</span>
         </div>
     </div>
 
@@ -117,6 +82,10 @@
             <div class="hero-canvas-container">
                 <canvas id="heroCanvas"></canvas>
                 <div class="hero-video-overlay"></div>
+                <!-- Noise texture overlay -->
+                <div class="hero-noise"></div>
+                <!-- Vignette effect -->
+                <div class="hero-vignette"></div>
             </div>
 
             <!-- Loading indicator -->
@@ -125,9 +94,25 @@
                 <span>Loading frames...</span>
             </div>
 
-            <!-- Progress Indicator -->
+            <!-- Progress Indicator - Enhanced -->
             <div class="scroll-progress">
-                <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+                <div class="scroll-progress-track">
+                    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+                </div>
+                <div class="scroll-progress-labels">
+                    <span class="progress-label" data-layer="1">01</span>
+                    <span class="progress-label" data-layer="2">02</span>
+                    <span class="progress-label" data-layer="3">03</span>
+                    <span class="progress-label" data-layer="4">04</span>
+                </div>
+            </div>
+
+            <!-- Floating elements for depth -->
+            <div class="hero-floating-elements">
+                <div class="floating-circle floating-circle-1"></div>
+                <div class="floating-circle floating-circle-2"></div>
+                <div class="floating-line floating-line-1"></div>
+                <div class="floating-line floating-line-2"></div>
             </div>
 
             <!-- Text Layers - Each appears at different scroll positions -->
@@ -139,29 +124,40 @@
                     <span class="hero-tag-text">Available for Projects</span>
                 </div>
                 <h1 class="hero-title">
-                    <span class="hero-title-line">I Craft</span>
-                    <span class="hero-title-line"><span class="text-gradient">Digital</span></span>
-                    <span class="hero-title-line">Experiences</span>
+                    <span class="hero-title-line hero-title-line-1">
+                        <span class="char-wrapper">I</span>
+                        <span class="char-wrapper">Craft</span>
+                    </span>
+                    <span class="hero-title-line hero-title-line-2">
+                        <span class="text-gradient-animated">Digital</span>
+                    </span>
+                    <span class="hero-title-line hero-title-line-3">
+                        <span class="char-wrapper">Experiences</span>
+                    </span>
                 </h1>
                 <p class="hero-subtitle">
-                    <span>Developer</span>
-                    <span class="dot"></span>
-                    <span>Designer</span>
-                    <span class="dot"></span>
-                    <span>AI Engineer</span>
+                    <span class="subtitle-item">Developer</span>
+                    <span class="subtitle-divider"></span>
+                    <span class="subtitle-item">Designer</span>
+                    <span class="subtitle-divider"></span>
+                    <span class="subtitle-item">AI Engineer</span>
                 </p>
             </div>
 
             <!-- Layer 2: Who I Am -->
             <div class="hero-content hero-layer" data-layer="2">
-                <p class="hero-eyebrow">Meet</p>
+                <p class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>Meet</span>
+                    <span class="eyebrow-line"></span>
+                </p>
                 <h2 class="hero-title-lg">
-                    <span class="hero-title-line">Shadi</span>
-                    <span class="hero-title-line"><span class="text-gradient">Farhat</span></span>
+                    <span class="hero-title-line hero-name-first">Shadi</span>
+                    <span class="hero-title-line hero-name-last"><span class="text-gradient-animated">Farhat</span></span>
                 </h2>
                 <p class="hero-desc">
-                    IT Manager at Maliks Lebanon<br>
-                    <span class="text-muted">Turning ideas into digital reality</span>
+                    <span class="desc-role">IT Manager at Maliks Lebanon</span>
+                    <span class="desc-tagline">Turning ideas into digital reality</span>
                 </p>
             </div>
 
@@ -169,39 +165,67 @@
             <div class="hero-content hero-layer" data-layer="3">
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <span class="hero-stat-number">8+</span>
+                        <span class="hero-stat-number" data-value="8">
+                            <span class="stat-num">8</span>
+                            <span class="stat-plus">+</span>
+                        </span>
                         <span class="hero-stat-label">Years Design</span>
+                        <div class="stat-bar"></div>
                     </div>
+                    <div class="hero-stat-divider"></div>
                     <div class="hero-stat">
-                        <span class="hero-stat-number">3+</span>
+                        <span class="hero-stat-number" data-value="3">
+                            <span class="stat-num">3</span>
+                            <span class="stat-plus">+</span>
+                        </span>
                         <span class="hero-stat-label">Years Development</span>
+                        <div class="stat-bar"></div>
                     </div>
                 </div>
                 <h2 class="hero-title-md">
-                    <span class="text-gradient">Experience</span> that<br>speaks for itself
+                    <span class="text-gradient-animated">Experience</span> that<br>
+                    <span class="title-emphasis">speaks for itself</span>
                 </h2>
             </div>
 
             <!-- Layer 4: Call to Action -->
             <div class="hero-content hero-layer" data-layer="4">
-                <p class="hero-eyebrow">Ready to create?</p>
+                <p class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>Ready to create?</span>
+                    <span class="eyebrow-line"></span>
+                </p>
                 <h2 class="hero-title-lg">
                     <span class="hero-title-line">Let's Build</span>
-                    <span class="hero-title-line"><span class="text-gradient">Together</span></span>
+                    <span class="hero-title-line"><span class="text-gradient-animated">Together</span></span>
                 </h2>
                 <a href="#work" class="hero-cta">
-                    <span>View My Work</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
+                    <span class="cta-text">View My Work</span>
+                    <span class="cta-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                    <span class="cta-bg"></span>
                 </a>
             </div>
 
             <!-- Scroll Hint (first layer only) -->
             <div class="hero-scroll" id="heroScroll">
-                <div class="hero-scroll-line"></div>
+                <div class="hero-scroll-mouse">
+                    <div class="mouse-wheel"></div>
+                </div>
                 <span>Scroll to explore</span>
+                <div class="hero-scroll-arrows">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </div>
             </div>
+
+            <!-- Corner decorations -->
+            <div class="hero-corner hero-corner-tl"></div>
+            <div class="hero-corner hero-corner-br"></div>
 
         </div>
     </section>
@@ -219,71 +243,129 @@
                 </h2>
             </div>
 
-            <!-- Services Grid -->
-            <div class="services-grid">
+            <!-- Services Grid - Bento Style -->
+            <div class="services-bento">
 
-                <!-- Service 1 -->
-                <div class="service-card" data-animate>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Web Development</h3>
-                    <p class="service-desc">Building fast, responsive websites and web applications using modern technologies like React, Laravel, and Node.js.</p>
-                    <div class="service-tags">
-                        <span>React</span>
-                        <span>Laravel</span>
-                        <span>JavaScript</span>
+                <!-- Service 1 - Web Development (Large) -->
+                <div class="bento-card bento-large" data-animate data-service="web">
+                    <div class="bento-glow"></div>
+                    <div class="bento-content">
+                        <div class="bento-header">
+                            <span class="bento-number">01</span>
+                            <div class="bento-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="bento-title">Web Development</h3>
+                        <p class="bento-desc">Building fast, responsive websites and web applications using modern technologies like React, Laravel, and Node.js.</p>
+                        <div class="bento-tags">
+                            <span>React</span>
+                            <span>Laravel</span>
+                            <span>Node.js</span>
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="bento-visual code-visual">
+                            <div class="code-window">
+                                <div class="code-dots"><span></span><span></span><span></span></div>
+                                <div class="code-lines">
+                                    <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">app</span> = <span class="code-func">createApp</span>();</div>
+                                    <div class="code-line"><span class="code-keyword">await</span> app.<span class="code-func">launch</span>();</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Service 2 -->
-                <div class="service-card" data-animate>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">UI/UX Design</h3>
-                    <p class="service-desc">Creating intuitive interfaces and seamless user experiences that convert visitors into customers.</p>
-                    <div class="service-tags">
-                        <span>Figma</span>
-                        <span>Photoshop</span>
-                        <span>Illustrator</span>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="service-card" data-animate>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">AI Engineering</h3>
-                    <p class="service-desc">Building intelligent solutions with AI and machine learning. Chatbots, automation, and smart workflows.</p>
-                    <div class="service-tags">
-                        <span>OpenAI</span>
-                        <span>Python</span>
-                        <span>LangChain</span>
+                <!-- Service 2 - UI/UX Design -->
+                <div class="bento-card bento-medium" data-animate data-service="design">
+                    <div class="bento-glow"></div>
+                    <div class="bento-content">
+                        <div class="bento-header">
+                            <span class="bento-number">02</span>
+                            <div class="bento-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="bento-title">UI/UX Design</h3>
+                        <p class="bento-desc">Creating intuitive interfaces and seamless user experiences.</p>
+                        <div class="bento-tags">
+                            <span>Figma</span>
+                            <span>Photoshop</span>
+                        </div>
+                        <div class="bento-visual design-visual">
+                            <div class="design-shapes">
+                                <div class="shape shape-1"></div>
+                                <div class="shape shape-2"></div>
+                                <div class="shape shape-3"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Service 4 -->
-                <div class="service-card" data-animate>
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                            <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
-                        </svg>
+                <!-- Service 3 - AI Engineering -->
+                <div class="bento-card bento-medium" data-animate data-service="ai">
+                    <div class="bento-glow"></div>
+                    <div class="bento-content">
+                        <div class="bento-header">
+                            <span class="bento-number">03</span>
+                            <div class="bento-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="bento-title">AI Engineering</h3>
+                        <p class="bento-desc">Building intelligent solutions with AI and machine learning.</p>
+                        <div class="bento-tags">
+                            <span>OpenAI</span>
+                            <span>Python</span>
+                        </div>
+                        <div class="bento-visual ai-visual">
+                            <div class="neural-network">
+                                <div class="node node-1"></div>
+                                <div class="node node-2"></div>
+                                <div class="node node-3"></div>
+                                <div class="node node-4"></div>
+                                <div class="connection"></div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="service-title">3D Modeling</h3>
-                    <p class="service-desc">Bringing products to life with photorealistic 3D models and animations for marketing and visualization.</p>
-                    <div class="service-tags">
-                        <span>Blender</span>
-                        <span>3D Design</span>
-                        <span>Animation</span>
+                </div>
+
+                <!-- Service 4 - 3D Modeling -->
+                <div class="bento-card bento-wide" data-animate data-service="3d">
+                    <div class="bento-glow"></div>
+                    <div class="bento-content">
+                        <div class="bento-header">
+                            <span class="bento-number">04</span>
+                            <div class="bento-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                                    <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="bento-title">3D Modeling & Animation</h3>
+                        <p class="bento-desc">Bringing products to life with photorealistic 3D models and animations for marketing and visualization.</p>
+                        <div class="bento-tags">
+                            <span>Blender</span>
+                            <span>3D Design</span>
+                            <span>Animation</span>
+                        </div>
+                        <div class="bento-visual cube-visual">
+                            <div class="cube-3d">
+                                <div class="cube-face front"></div>
+                                <div class="cube-face back"></div>
+                                <div class="cube-face right"></div>
+                                <div class="cube-face left"></div>
+                                <div class="cube-face top"></div>
+                                <div class="cube-face bottom"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -830,17 +912,17 @@
                 </a>
 
                 <div class="contact-socials">
-                    <a href="#" class="social-link" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/shadi-farhat-61043a204/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>
                     </a>
-                    <a href="#" class="social-link" aria-label="GitHub">
+                    <a href="https://github.com/ShadiFarhat" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </a>
-                    <a href="#" class="social-link" aria-label="WhatsApp">
+                    <a href="https://wa.me/96176938653" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                         </svg>
@@ -851,75 +933,104 @@
         </div>
     </section>
 
-    <!-- Project Modal -->
+    <!-- Project Modal - Redesigned -->
     <div class="modal" id="projectModal">
         <div class="modal-backdrop"></div>
         <div class="modal-container">
+            <!-- Close Button -->
             <button class="modal-close" id="modalClose">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12"/>
                 </svg>
             </button>
 
             <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <span class="modal-category" id="modalCategory">Web Development</span>
-                    <h2 class="modal-title" id="modalTitle">Project Title</h2>
-                </div>
-
-                <!-- Modal Image Slideshow -->
-                <div class="modal-slideshow" id="modalSlideshow">
-                    <div class="slideshow-container" id="slideshowContainer">
-                    </div>
-                    <button class="slideshow-btn slideshow-prev" id="slideshowPrev">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 18l-6-6 6-6"/>
-                        </svg>
-                    </button>
-                    <button class="slideshow-btn slideshow-next" id="slideshowNext">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                    <div class="slideshow-dots" id="slideshowDots"></div>
-                    <div class="slideshow-counter" id="slideshowCounter">1 / 1</div>
-                </div>
-
-                <!-- Modal Details -->
-                <div class="modal-details">
-                    <div class="modal-description">
-                        <h3>About the Project</h3>
-                        <p id="modalDescription">Project description goes here...</p>
+                <!-- Modal Layout: Two Columns -->
+                <div class="modal-grid">
+                    <!-- Left: Image Slideshow -->
+                    <div class="modal-media">
+                        <div class="modal-slideshow" id="modalSlideshow">
+                            <div class="slideshow-container" id="slideshowContainer">
+                            </div>
+                            <button class="slideshow-btn slideshow-prev" id="slideshowPrev">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            <button class="slideshow-btn slideshow-next" id="slideshowNext">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                            <div class="slideshow-progress">
+                                <div class="slideshow-dots" id="slideshowDots"></div>
+                                <div class="slideshow-counter" id="slideshowCounter">1 / 1</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="modal-info">
-                        <div class="modal-info-item">
-                            <span class="modal-info-label">Role</span>
-                            <span class="modal-info-value" id="modalRole">Full Stack Developer</span>
+                    <!-- Right: Project Info -->
+                    <div class="modal-info-panel">
+                        <!-- Header -->
+                        <div class="modal-header">
+                            <span class="modal-category" id="modalCategory">Web Development</span>
+                            <h2 class="modal-title" id="modalTitle">Project Title</h2>
                         </div>
-                        <div class="modal-info-item">
-                            <span class="modal-info-label">Year</span>
-                            <span class="modal-info-value" id="modalYear">2024</span>
+
+                        <!-- Description -->
+                        <div class="modal-description">
+                            <p id="modalDescription">Project description goes here...</p>
                         </div>
-                        <div class="modal-info-item">
-                            <span class="modal-info-label">Tech Stack</span>
+
+                        <!-- Meta Info -->
+                        <div class="modal-meta">
+                            <div class="modal-meta-item">
+                                <span class="modal-meta-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </span>
+                                <div class="modal-meta-content">
+                                    <span class="modal-meta-label">Role</span>
+                                    <span class="modal-meta-value" id="modalRole">Full Stack Developer</span>
+                                </div>
+                            </div>
+                            <div class="modal-meta-item">
+                                <span class="modal-meta-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                </span>
+                                <div class="modal-meta-content">
+                                    <span class="modal-meta-label">Year</span>
+                                    <span class="modal-meta-value" id="modalYear">2024</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack -->
+                        <div class="modal-tech">
+                            <span class="modal-tech-label">Tech Stack</span>
                             <div class="modal-tags" id="modalTags">
                                 <span>React</span>
                                 <span>Laravel</span>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Modal CTA -->
-                <div class="modal-cta">
-                    <a href="#" class="btn-primary" id="modalLink" target="_blank">
-                        Visit Live Site
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                        </svg>
-                    </a>
+                        <!-- CTA Button -->
+                        <div class="modal-cta">
+                            <a href="#" class="modal-btn-primary" id="modalLink" target="_blank">
+                                <span>Visit Live Site</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,138 +15,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================
-   PRELOADER - Ultra Modern with Effects
+   PRELOADER
    ============================================ */
 function initPreloader() {
     const preloader = document.getElementById('preloader');
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
-    const progressPercent = document.getElementById('progressPercent');
-    const ringProgress = document.getElementById('ringProgress');
-    const nameLine = document.getElementById('nameLine');
-    const canvas = document.getElementById('particleCanvas');
+    const preLogo = document.getElementById('preLogo');
+
+    if (!preloader) return;
 
     document.body.classList.add('loading');
 
-    // ========== PARTICLE SYSTEM ==========
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        // Reduced particles for faster performance
-        const particleCount = window.innerWidth < 768 ? 15 : 35;
+    let colorIndex = 0;
+    let colorTimer = null;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.1;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(41, 151, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        // Create particles
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        // Draw connections (optimized - reduced distance for performance)
-        const connectionDistance = window.innerWidth < 768 ? 60 : 80;
-        function drawConnections() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distSq = dx * dx + dy * dy;
-                    // Use squared distance to avoid sqrt (faster)
-                    if (distSq < connectionDistance * connectionDistance) {
-                        const dist = Math.sqrt(distSq);
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(41, 151, 255, ${0.1 * (1 - dist / connectionDistance)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        // Animation loop
-        function animateParticles() {
-            if (preloader.classList.contains('loaded')) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            drawConnections();
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
+    // Change color
+    function changeColor() {
+        colorIndex = (colorIndex + 1) % 6;
+        preloader.setAttribute('data-c', colorIndex.toString());
     }
 
-    // ========== TYPING EFFECT ==========
-    const textToType = "SHADI FARHAT";
-    let charIndex = 0;
+    // Start animations after entrance
+    setTimeout(() => {
+        // Add breathing animation to letters
+        if (preLogo) preLogo.classList.add('breathing');
 
-    function typeText() {
-        if (nameLine && charIndex <= textToType.length) {
-            nameLine.textContent = textToType.substring(0, charIndex);
-            charIndex++;
-            setTimeout(typeText, 100);
-        }
-    }
-    setTimeout(typeText, 800);
+        // Start color cycling
+        colorTimer = setInterval(changeColor, 700);
+    }, 700);
 
-    // ========== UPDATE PROGRESS ==========
-    window.updateLoadingProgress = function(percent, text) {
-        if (progressBar) {
-            progressBar.style.width = percent + '%';
-        }
-        if (ringProgress) {
-            // Circle circumference = 2 * PI * 90 = 565
-            const offset = 565 - (565 * percent / 100);
-            ringProgress.style.strokeDashoffset = offset;
-        }
-        if (progressPercent) {
-            progressPercent.textContent = Math.round(percent);
-        }
-        if (progressText && text) {
-            progressText.textContent = text;
-        }
-    };
-
-    // ========== HIDE PRELOADER ==========
+    // Hide preloader
     window.hidePreloader = function() {
-        const minDisplayTime = 1200; // Reduced from 3500ms for faster load
+        const minTime = 2500;
         const elapsed = performance.now();
-        const delay = Math.max(0, minDisplayTime - elapsed);
+        const delay = Math.max(0, minTime - elapsed);
 
         setTimeout(() => {
+            clearInterval(colorTimer);
+
             preloader.classList.add('loaded');
             document.body.classList.remove('loading');
 
@@ -157,12 +62,12 @@ function initPreloader() {
         }, delay);
     };
 
-    // Fallback timeout
+    // Fallback
     setTimeout(() => {
         if (!preloader.classList.contains('loaded')) {
             window.hidePreloader();
         }
-    }, 15000);
+    }, 5000);
 }
 
 /* ============================================
@@ -458,12 +363,13 @@ function initScrollVideo() {
 }
 
 /* ============================================
-   HERO TEXT LAYERS
+   HERO TEXT LAYERS - ENHANCED
    ============================================ */
 function initHeroLayers() {
     const heroWrapper = document.getElementById('heroWrapper');
     const layers = document.querySelectorAll('.hero-layer');
     const heroScroll = document.getElementById('heroScroll');
+    const progressLabels = document.querySelectorAll('.progress-label');
 
     if (!heroWrapper || layers.length === 0) return;
 
@@ -497,6 +403,16 @@ function initHeroLayers() {
                     layer.classList.add('active');
                 } else if (layerNum < newLayer) {
                     layer.classList.add('exit-up');
+                }
+            });
+
+            // Update progress labels
+            progressLabels.forEach((label, index) => {
+                const labelNum = index + 1;
+                if (labelNum === newLayer) {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
                 }
             });
 
@@ -970,6 +886,9 @@ function initProjectModal() {
             slideshowContainer.appendChild(img);
             slideshowImages.push(img);
         });
+
+        // Update counter immediately with new image count
+        slideshowCounter.textContent = `1 / ${images.length}`;
 
         // Load first image immediately with loader
         if (images.length > 0) {
