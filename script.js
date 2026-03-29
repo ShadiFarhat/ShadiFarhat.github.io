@@ -651,13 +651,13 @@ function initProjectModal() {
             link: '#',
             isPrivate: true,
             images: [
-                'assets/projects/pulse-mobile/mockup.webp',
-                'assets/projects/pulse-mobile/1.webp',
-                'assets/projects/pulse-mobile/2.webp',
-                'assets/projects/pulse-mobile/3.webp',
-                'assets/projects/pulse-mobile/4.webp',
-                'assets/projects/pulse-mobile/5.webp',
-                'assets/projects/pulse-mobile/6.webp'
+                'assets/projects/pulse-mobile/mockup.jpg',
+                'assets/projects/pulse-mobile/1.png',
+                'assets/projects/pulse-mobile/2.png',
+                'assets/projects/pulse-mobile/3.png',
+                'assets/projects/pulse-mobile/4.png',
+                'assets/projects/pulse-mobile/5.png',
+                'assets/projects/pulse-mobile/6.png'
             ]
         },
         'ai-system': {
