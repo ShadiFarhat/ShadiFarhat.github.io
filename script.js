@@ -405,6 +405,8 @@ function initHeroLayers() {
     const totalLayers = layers.length;
     let currentLayer = 1;
 
+    const lastLayer = layers[layers.length - 1];
+
     function updateLayers() {
         const wrapperRect = heroWrapper.getBoundingClientRect();
         const wrapperHeight = heroWrapper.offsetHeight;
@@ -446,6 +448,20 @@ function initHeroLayers() {
             });
 
             currentLayer = newLayer;
+        }
+
+        // Zoom effect on last layer ("Let's Build Together")
+        // Kicks in during the last 15% of hero scroll
+        const zoomStart = 0.85;
+        if (progress > zoomStart && lastLayer) {
+            const zoomProgress = (progress - zoomStart) / (1 - zoomStart); // 0 to 1
+            const scale = 1 + zoomProgress * 4;         // 1x → 5x
+            const opacity = 1 - zoomProgress;            // fade out as it zooms
+            lastLayer.style.transform = `scale(${scale})`;
+            lastLayer.style.opacity = opacity;
+        } else if (lastLayer) {
+            lastLayer.style.transform = '';
+            lastLayer.style.opacity = '';
         }
 
         // Hide scroll hint after first section
