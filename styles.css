@@ -3889,11 +3889,13 @@ img, video {
 .modal-content {
     max-height: 90vh;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.12) transparent;
 }
 
-/* Custom scrollbar for modal */
 .modal-content::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 
 .modal-content::-webkit-scrollbar-track {
@@ -3901,15 +3903,18 @@ img, video {
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
 }
 
-/* Modal Layout - Stacked for Landscape Images */
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* Modal Layout */
 .modal-grid {
     display: flex;
     flex-direction: column;
-    max-height: 85vh;
 }
 
 /* Top: Media Section */
@@ -4021,14 +4026,11 @@ img, video {
 
 /* Bottom: Info Panel */
 .modal-info-panel {
-    padding: 28px 36px 24px;
+    padding: 28px 36px 28px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     background: #ffffff;
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
 }
 
 .modal-header {
