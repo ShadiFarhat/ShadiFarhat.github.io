@@ -620,10 +620,10 @@ function initFanCards() {
             // Ease out cubic
             const ease = 1 - Math.pow(1 - t, 3);
 
-            // Final position: fanned out, each card offset right and slightly down
-            const finalX = i * 120;
-            const finalY = i * 18;
-            const finalRot = (i - 1) * 6;
+            // Final position: spread wide so every card is fully visible
+            const finalX = i * 310;
+            const finalY = i * 12;
+            const finalRot = (i - 1) * 3;
 
             // Start position: off-screen right, stacked
             const startX = window.innerWidth;
