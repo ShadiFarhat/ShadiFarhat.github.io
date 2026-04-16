@@ -9,11 +9,11 @@ let lenis;
 
 function initLenis() {
     lenis = new Lenis({
-        duration: 1.4,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 0.8,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
         smoothWheel: true,
-        wheelMultiplier: 0.9,
-        touchMultiplier: 1.5,
+        wheelMultiplier: 1.2,
+        touchMultiplier: 2,
         infinite: false,
     });
 
@@ -523,8 +523,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target && lenis) {
             lenis.scrollTo(target, {
                 offset: -100,
-                duration: 1.8,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                duration: 1,
             });
         }
     });
