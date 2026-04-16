@@ -558,72 +558,83 @@ if (window.innerWidth > 1024 && !('ontouchstart' in window)) {
    HORIZONTAL SCROLL SECTIONS
    ============================================ */
 function initHorizontalScroll() {
-    const isMobile = window.innerWidth <= 767;
-    if (isMobile) return;
+    if (window.innerWidth <= 767) return;
 
     const sections = [
-        { el: document.querySelector('.featured'), grid: document.querySelector('.projects-grid'), direction: 1 },        // left to right
-        { el: document.querySelector('.blender-work'), grid: document.querySelector('.blender-grid'), direction: -1 },     // right to left
-        { el: document.querySelector('.design-work'), grid: document.querySelector('.design-grid'), direction: 1 },        // left to right
+        { el: document.querySelector('.featured'), grid: document.querySelector('.projects-grid'), direction: 1 },
+        { el: document.querySelector('.blender-work'), grid: document.querySelector('.blender-grid'), direction: -1 },
+        { el: document.querySelector('.design-work'), grid: document.querySelector('.design-grid'), direction: 1 },
     ];
 
-    sections.forEach(({ el, grid, direction }) => {
-        if (!el || !grid) return;
+    // Measure and set section heights
+    function measure() {
+        sections.forEach((s) => {
+            if (!s.el || !s.grid) return;
 
-        // Calculate how wide the content is
-        const gridWidth = grid.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        const scrollDistance = gridWidth - viewportWidth + 200;
+            // Temporarily remove transform so scrollWidth is accurate
+            s.grid.style.transform = 'none';
 
-        // Set section height to create scroll space
-        el.style.height = (scrollDistance + window.innerHeight) + 'px';
+            const gridW = s.grid.scrollWidth;
+            const vpW = window.innerWidth;
+            const travel = Math.max(0, gridW - vpW + 100);
 
-        // For right-to-left: start cards off-screen right
-        if (direction === -1) {
-            grid.style.transform = `translateX(-${scrollDistance}px)`;
-        }
-    });
+            s.travel = travel;
 
-    function updateHorizontalScroll() {
-        sections.forEach(({ el, grid, direction }) => {
-            if (!el || !grid) return;
-
-            const rect = el.getBoundingClientRect();
-            const gridWidth = grid.scrollWidth;
-            const viewportWidth = window.innerWidth;
-            const scrollDistance = gridWidth - viewportWidth + 200;
-            const sectionHeight = el.offsetHeight;
-
-            // How far we've scrolled into this section
-            const scrolled = -rect.top;
-            const progress = Math.max(0, Math.min(1, scrolled / (sectionHeight - window.innerHeight)));
-
-            if (direction === 1) {
-                // Left to right: start at 0, slide left
-                const translateX = -progress * scrollDistance;
-                grid.style.transform = `translateX(${translateX}px)`;
-            } else {
-                // Right to left: start fully left, slide right
-                const translateX = -(1 - progress) * scrollDistance;
-                grid.style.transform = `translateX(${translateX}px)`;
+            // The outer section must be tall enough: 100vh for the pinned view + travel distance
+            if (travel > 0) {
+                s.el.style.height = (travel + window.innerHeight) + 'px';
             }
         });
     }
 
-    window.addEventListener('scroll', updateHorizontalScroll, { passive: true });
-    updateHorizontalScroll();
+    // Animate on every scroll tick
+    function onScroll() {
+        sections.forEach((s) => {
+            if (!s.el || !s.grid || !s.travel) return;
+
+            const rect = s.el.getBoundingClientRect();
+            const sectionH = s.el.offsetHeight;
+            const scrolled = -rect.top;
+            const scrollable = sectionH - window.innerHeight;
+
+            if (scrollable <= 0) return;
+
+            const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+
+            let tx;
+            if (s.direction === 1) {
+                // Left-to-right: cards start in view, slide left
+                tx = -progress * s.travel;
+            } else {
+                // Right-to-left: cards start off-screen left, slide right into view
+                tx = -s.travel + progress * s.travel;
+            }
+
+            s.grid.style.transform = `translateX(${tx}px)`;
+        });
+    }
+
+    // Initial measure + kick off
+    measure();
+    onScroll();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // Recalculate on resize
+    let resizeTimer;
     window.addEventListener('resize', () => {
-        if (window.innerWidth <= 767) return;
-        sections.forEach(({ el, grid }) => {
-            if (!el || !grid) return;
-            const gridWidth = grid.scrollWidth;
-            const viewportWidth = window.innerWidth;
-            const scrollDistance = gridWidth - viewportWidth + 200;
-            el.style.height = (scrollDistance + window.innerHeight) + 'px';
-        });
-        updateHorizontalScroll();
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth <= 767) return;
+            measure();
+            onScroll();
+        }, 200);
+    });
+
+    // Re-measure after fonts & images settle (scrollWidth can change)
+    window.addEventListener('load', () => {
+        measure();
+        onScroll();
     });
 }
 

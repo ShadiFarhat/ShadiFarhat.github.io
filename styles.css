@@ -56,8 +56,6 @@ html {
 
 .services,
 .projects,
-.blender-work,
-.design-work,
 .contact,
 footer {
     content-visibility: auto;
@@ -3033,7 +3031,7 @@ img, video {
 .blender-work {
     background: var(--color-bg);
     position: relative;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .blender-work::before {
@@ -3228,8 +3226,8 @@ img, video {
     transition: all 0.5s var(--ease-out-expo);
     cursor: pointer;
     position: relative;
-    min-width: 420px;
-    max-width: 420px;
+    min-width: 550px;
+    max-width: 550px;
     flex-shrink: 0;
 }
 
@@ -3677,6 +3675,11 @@ img, video {
     .blender-container,
     .design-container {
         padding-top: var(--spacing-lg);
+    }
+
+    /* Hide CTA inside horizontal scroll — all cards are visible */
+    .featured-cta {
+        display: none;
     }
 }
 
