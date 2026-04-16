@@ -54,7 +54,6 @@ html {
     will-change: transform;
 }
 
-.services,
 .projects,
 .contact,
 footer {
@@ -2118,7 +2117,7 @@ img, video {
 .services {
     background: #ffffff;
     position: relative;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .services::before {
@@ -2165,9 +2164,8 @@ img, video {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
     transition: box-shadow 0.4s ease;
     will-change: transform;
-    transform-origin: bottom center;
-    /* Start stacked */
-    left: 50%;
+    transform-origin: top left;
+    left: 0;
     top: 0;
 }
 

@@ -604,12 +604,6 @@ function initFanCards() {
     // Enough scroll room for all cards to animate in
     section.style.height = (window.innerHeight + total * 300) + 'px';
 
-    // Final resting positions for each card (fanned out, left to right)
-    const gap = 280;
-    const totalWidth = (total - 1) * gap;
-    const containerW = container.offsetWidth;
-    const startX = (containerW - totalWidth) / 2 - 160; // center the fan
-
     function update() {
         const rect = section.getBoundingClientRect();
         const sectionH = section.offsetHeight;
@@ -620,29 +614,30 @@ function initFanCards() {
         const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
         cards.forEach((card, i) => {
-            // Each card has its own timing window — they arrive one by one
-            const cardStart = i / (total + 1);
-            const cardEnd = (i + 2) / (total + 1);
+            // Each card has its own timing — they cascade one after another
+            const cardStart = i / (total + 0.5);
+            const cardEnd = (i + 1.5) / (total + 0.5);
             const cardProgress = Math.max(0, Math.min(1, (progress - cardStart) / (cardEnd - cardStart)));
 
             // Ease out expo
             const ease = cardProgress === 1 ? 1 : 1 - Math.pow(2, -10 * cardProgress);
 
-            // Start: stacked off-screen right, slightly rotated
-            // End: fanned out in position with slight rotation
-            const finalX = startX + i * gap;
-            const startXPos = containerW + 100;  // off-screen right
-            const currentX = startXPos + (finalX - startXPos) * ease;
+            // Start: all stacked at top-left (card 01 position)
+            // End: fanned out diagonally — top-left to bottom-right
+            const finalX = i * 200;          // spread right
+            const finalY = i * 30;           // spread down
+            const finalRotation = i * 5;     // increasing rotation
 
-            const finalRotation = (i - (total - 1) / 2) * 4;
-            const startRotation = 12;
+            const startX = 0;               // all start at left
+            const startY = -20;              // slightly above
+            const startRotation = 0;
+
+            const currentX = startX + (finalX - startX) * ease;
+            const currentY = startY + (finalY - startY) * ease;
             const currentRotation = startRotation + (finalRotation - startRotation) * ease;
 
-            const finalY = Math.abs(i - (total - 1) / 2) * 10;
-            const currentY = 40 + (finalY - 40) * ease;
-
             card.style.transform = `translateX(${currentX}px) translateY(${currentY}px) rotate(${currentRotation}deg)`;
-            card.style.zIndex = i + 1;
+            card.style.zIndex = total - i; // first card on top initially, last on top when spread
         });
     }
 
