@@ -2118,20 +2118,20 @@ img, video {
 .services {
     padding: var(--spacing-xl) 0;
     padding-top: calc(var(--spacing-xl) + 60px);
-    background: var(--color-bg);
+    background: #ffffff;
     position: relative;
     overflow: hidden;
 }
 
-/* White-to-dark gradient that continues the white flash from hero */
+/* Seamless continuation of the white flash from hero */
 .services::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 200px;
-    background: linear-gradient(to bottom, #ffffff, transparent);
+    height: 1px;
+    background: transparent;
     pointer-events: none;
     z-index: 1;
 }
@@ -2149,8 +2149,8 @@ img, video {
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 24px;
     padding: var(--spacing-lg);
     transition: all 0.5s var(--ease-out-expo);
@@ -2180,9 +2180,9 @@ img, video {
 }
 
 .service-card:hover {
-    border-color: rgba(41, 151, 255, 0.2);
+    border-color: rgba(41, 151, 255, 0.3);
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 60px rgba(41, 151, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 60px rgba(41, 151, 255, 0.06);
 }
 
 .service-card:hover::before {
@@ -2239,10 +2239,10 @@ img, video {
     font-size: 0.7rem;
     font-weight: 500;
     padding: 0.4rem 0.85rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 100px;
-    color: var(--color-text-muted);
+    color: #555;
     transition: all 0.3s ease;
 }
 
@@ -2258,7 +2258,7 @@ img, video {
     font-family: var(--font-heading);
     font-size: 4rem;
     font-weight: 900;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), transparent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2285,8 +2285,8 @@ img, video {
 
 .bento-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 28px;
     overflow: hidden;
     transition: all 0.6s var(--ease-out-expo);
@@ -2318,9 +2318,8 @@ img, video {
     border-color: rgba(41, 151, 255, 0.3);
     transform: translateY(-8px) scale(1.02);
     box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.4),
-        0 0 100px rgba(41, 151, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 30px 60px rgba(0, 0, 0, 0.08),
+        0 0 60px rgba(41, 151, 255, 0.06);
 }
 
 .bento-card:hover::before {
@@ -2437,10 +2436,10 @@ img, video {
     font-weight: 600;
     letter-spacing: 0.05em;
     padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 100px;
-    color: var(--color-text-muted);
+    color: #555;
     transition: all 0.3s ease;
 }
 
@@ -2474,11 +2473,10 @@ img, video {
 }
 
 .code-window {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1e1e2e;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     padding: 12px 16px;
-    backdrop-filter: blur(10px);
 }
 
 .code-dots {
@@ -2543,8 +2541,8 @@ img, video {
 .shape-2 {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(41, 151, 255, 0.08);
+    border: 2px solid rgba(41, 151, 255, 0.2);
     bottom: 10px;
     left: 10px;
     animation: shapeFloat2 5s ease-in-out infinite;
@@ -2792,7 +2790,7 @@ img, video {
    ============================================ */
 
 .featured {
-    background: var(--color-bg-secondary);
+    background: #f2f3f5;
     position: relative;
 }
 
@@ -2803,7 +2801,7 @@ img, video {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
 }
 
 .featured-container {
@@ -2824,8 +2822,8 @@ img, video {
 }
 
 .project-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 24px;
     overflow: hidden;
     transition: all 0.5s var(--ease-out-expo);
@@ -2853,9 +2851,9 @@ img, video {
 }
 
 .project-card:hover {
-    border-color: rgba(41, 151, 255, 0.2);
+    border-color: rgba(41, 151, 255, 0.3);
     transform: translateY(-10px) scale(1.01);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 80px rgba(41, 151, 255, 0.08);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1), 0 0 40px rgba(41, 151, 255, 0.06);
     z-index: 10;
 }
 
@@ -3004,13 +3002,13 @@ img, video {
     align-items: center;
     gap: var(--spacing-sm);
     padding: 1.1rem 2.5rem;
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(0, 0, 0, 0.15);
     border-radius: 100px;
     font-family: var(--font-display);
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.03em;
-    color: var(--color-text);
+    color: #1a1a2e;
     transition: all 0.4s var(--ease-out-expo);
     position: relative;
     overflow: hidden;
@@ -3020,7 +3018,7 @@ img, video {
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--color-text);
+    background: #1a1a2e;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s var(--ease-out-expo);
@@ -3049,7 +3047,7 @@ img, video {
    ============================================ */
 
 .blender-work {
-    background: var(--color-bg);
+    background: #ffffff;
     position: relative;
     overflow: clip;
 }
@@ -3061,7 +3059,7 @@ img, video {
     left: -200px;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(41, 151, 255, 0.05), transparent 70%);
+    background: radial-gradient(circle, rgba(41, 151, 255, 0.04), transparent 70%);
     pointer-events: none;
 }
 
@@ -3095,8 +3093,8 @@ img, video {
 }
 
 .blender-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 24px;
     overflow: hidden;
     transition: all 0.5s var(--ease-out-expo);
@@ -3122,9 +3120,9 @@ img, video {
 }
 
 .blender-card:hover {
-    border-color: rgba(41, 151, 255, 0.25);
+    border-color: rgba(41, 151, 255, 0.3);
     transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 60px rgba(41, 151, 255, 0.08);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), 0 0 40px rgba(41, 151, 255, 0.06);
 }
 
 .blender-card:hover::before {
@@ -3207,7 +3205,7 @@ img, video {
    ============================================ */
 
 .design-work {
-    background: var(--color-bg-secondary);
+    background: #f2f3f5;
     position: relative;
 }
 
@@ -3218,7 +3216,7 @@ img, video {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
 }
 
 .design-container {
@@ -3239,8 +3237,8 @@ img, video {
 }
 
 .design-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 24px;
     overflow: hidden;
     transition: all 0.5s var(--ease-out-expo);
@@ -3263,9 +3261,9 @@ img, video {
 }
 
 .design-card:hover {
-    border-color: rgba(41, 151, 255, 0.25);
+    border-color: rgba(41, 151, 255, 0.3);
     transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 60px rgba(41, 151, 255, 0.08);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), 0 0 40px rgba(41, 151, 255, 0.06);
 }
 
 .design-card:hover::before {
@@ -3416,7 +3414,7 @@ img, video {
 
 .contact {
     padding: var(--spacing-xl) 0;
-    background: var(--color-bg);
+    background: #ffffff;
     min-height: 80vh;
     display: flex;
     align-items: center;
@@ -3432,7 +3430,7 @@ img, video {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(41, 151, 255, 0.05), transparent 70%);
+    background: radial-gradient(circle, rgba(41, 151, 255, 0.06), transparent 70%);
     pointer-events: none;
 }
 
@@ -3443,7 +3441,7 @@ img, video {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
 }
 
 .contact-container {
@@ -3521,9 +3519,9 @@ img, video {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 50%;
-    color: var(--color-text-muted);
+    color: #555;
     transition: all 0.4s var(--ease-out-expo);
     position: relative;
     overflow: hidden;
@@ -3547,10 +3545,10 @@ img, video {
 }
 
 .social-link:hover {
-    color: var(--color-bg);
-    border-color: var(--color-text);
+    color: #ffffff;
+    border-color: var(--color-accent);
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(41, 151, 255, 0.15);
 }
 
 .social-link:hover::before {
@@ -3567,8 +3565,8 @@ img, video {
 
 .footer {
     padding: var(--spacing-lg) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    background: #f2f3f5;
 }
 
 .footer-container {
@@ -4491,4 +4489,94 @@ body.modal-open {
     .slideshow-next {
         right: 10px;
     }
+}
+
+/* ============================================
+   LIGHT THEME - NON-HERO SECTIONS
+   All sections after the hero use white backgrounds
+   with dark text. Hero/preloader/modal stay dark.
+   ============================================ */
+
+/* Section text colors */
+.services,
+.featured,
+.blender-work,
+.design-work,
+.contact,
+.footer {
+    color: #1a1a2e;
+}
+
+/* Section titles & headings */
+.services .section-title,
+.featured .section-title,
+.blender-work .section-title,
+.design-work .section-title {
+    color: #1a1a2e;
+}
+
+/* Muted text in light sections */
+.service-desc,
+.bento-desc,
+.project-desc,
+.contact-desc,
+.footer p {
+    color: #555;
+}
+
+.service-title,
+.bento-title,
+.project-title,
+.blender-title,
+.design-title,
+.contact-title {
+    color: #1a1a2e;
+}
+
+.blender-link,
+.design-link,
+.project-link {
+    color: #555;
+}
+
+.contact-email {
+    color: #1a1a2e;
+}
+
+.contact-email:hover {
+    color: var(--color-accent);
+}
+
+/* Nav adapts to light sections */
+.nav.scrolled {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav.scrolled .nav-logo {
+    color: #1a1a2e;
+}
+
+.nav.scrolled .nav-link {
+    color: #555;
+}
+
+.nav.scrolled .nav-link:hover {
+    color: #1a1a2e;
+}
+
+.nav.scrolled .nav-link-cta {
+    background: #1a1a2e;
+    color: #ffffff !important;
+}
+
+.nav.scrolled .nav-toggle span {
+    background: #1a1a2e;
+}
+
+/* Social link fill on hover for light bg */
+.social-link::before {
+    background: var(--color-accent);
 }
