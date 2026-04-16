@@ -2774,7 +2774,6 @@ img, video {
    ============================================ */
 
 .featured {
-    padding: var(--spacing-xl) 0;
     background: var(--color-bg-secondary);
     position: relative;
 }
@@ -2790,15 +2789,20 @@ img, video {
 }
 
 .featured-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
     padding: 0 var(--spacing-md);
 }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: var(--spacing-md);
+    will-change: transform;
 }
 
 .project-card {
@@ -2810,6 +2814,9 @@ img, video {
     cursor: pointer;
     position: relative;
     z-index: 1;
+    min-width: 400px;
+    max-width: 400px;
+    flex-shrink: 0;
 }
 
 .project-card::before {
@@ -2835,9 +2842,8 @@ img, video {
 }
 
 .project-card-large {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    min-width: 550px;
+    max-width: 550px;
 }
 
 .project-image {
@@ -3025,7 +3031,6 @@ img, video {
    ============================================ */
 
 .blender-work {
-    padding: var(--spacing-xl) 0;
     background: var(--color-bg);
     position: relative;
     overflow: hidden;
@@ -3054,17 +3059,21 @@ img, video {
 }
 
 .blender-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
     padding: 0 var(--spacing-md);
-    position: relative;
     z-index: 1;
 }
 
 .blender-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: var(--spacing-md);
+    will-change: transform;
 }
 
 .blender-card {
@@ -3075,6 +3084,9 @@ img, video {
     transition: all 0.5s var(--ease-out-expo);
     cursor: pointer;
     position: relative;
+    min-width: 380px;
+    max-width: 380px;
+    flex-shrink: 0;
 }
 
 .blender-card::before {
@@ -3177,7 +3189,6 @@ img, video {
    ============================================ */
 
 .design-work {
-    padding: var(--spacing-xl) 0;
     background: var(--color-bg-secondary);
     position: relative;
 }
@@ -3193,15 +3204,20 @@ img, video {
 }
 
 .design-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
     padding: 0 var(--spacing-md);
 }
 
 .design-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: var(--spacing-md);
+    will-change: transform;
 }
 
 .design-card {
@@ -3212,6 +3228,9 @@ img, video {
     transition: all 0.5s var(--ease-out-expo);
     cursor: pointer;
     position: relative;
+    min-width: 420px;
+    max-width: 420px;
+    flex-shrink: 0;
 }
 
 .design-card::before {
@@ -3313,19 +3332,27 @@ img, video {
         padding: var(--spacing-lg) 0;
     }
 
+    .featured-container,
     .blender-container,
     .design-container {
+        position: relative;
+        height: auto;
         padding: 0 var(--spacing-sm);
     }
 
+    .projects-grid,
     .blender-grid,
     .design-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: var(--spacing-sm);
     }
 
+    .project-card,
+    .project-card-large,
     .blender-card,
     .design-card {
+        min-width: unset;
+        max-width: unset;
         border-radius: 16px;
     }
 
@@ -3578,7 +3605,7 @@ img, video {
     }
 
     .projects-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: var(--spacing-sm);
     }
 
@@ -3586,8 +3613,9 @@ img, video {
         border-radius: 16px;
     }
 
-    .project-card-large {
-        grid-template-columns: 1fr;
+    .project-card-large .project-image-placeholder,
+    .project-card-large .project-image {
+        /* stack vertically on mobile */
     }
 
     .project-card-large .project-image-placeholder {
@@ -3630,6 +3658,25 @@ img, video {
 
     .service-card {
         padding: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   HORIZONTAL SCROLL SECTION OVERRIDES
+   ============================================ */
+
+@media (min-width: 768px) {
+    .featured-container .section-header,
+    .blender-container .section-header,
+    .design-container .section-header {
+        margin-bottom: var(--spacing-md);
+        flex-shrink: 0;
+    }
+
+    .featured-container,
+    .blender-container,
+    .design-container {
+        padding-top: var(--spacing-lg);
     }
 }
 

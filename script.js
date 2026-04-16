@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initScrollVideo();
     initHeroLayers();
+    initHorizontalScroll();
     initScrollAnimations();
     initParallax();
     initProjectModal();
@@ -550,6 +551,79 @@ if (window.innerWidth > 1024 && !('ontouchstart' in window)) {
     hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+}
+
+/* ============================================
+   HORIZONTAL SCROLL SECTIONS
+   ============================================ */
+function initHorizontalScroll() {
+    const isMobile = window.innerWidth <= 767;
+    if (isMobile) return;
+
+    const sections = [
+        { el: document.querySelector('.featured'), grid: document.querySelector('.projects-grid'), direction: 1 },        // left to right
+        { el: document.querySelector('.blender-work'), grid: document.querySelector('.blender-grid'), direction: -1 },     // right to left
+        { el: document.querySelector('.design-work'), grid: document.querySelector('.design-grid'), direction: 1 },        // left to right
+    ];
+
+    sections.forEach(({ el, grid, direction }) => {
+        if (!el || !grid) return;
+
+        // Calculate how wide the content is
+        const gridWidth = grid.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        const scrollDistance = gridWidth - viewportWidth + 200;
+
+        // Set section height to create scroll space
+        el.style.height = (scrollDistance + window.innerHeight) + 'px';
+
+        // For right-to-left: start cards off-screen right
+        if (direction === -1) {
+            grid.style.transform = `translateX(-${scrollDistance}px)`;
+        }
+    });
+
+    function updateHorizontalScroll() {
+        sections.forEach(({ el, grid, direction }) => {
+            if (!el || !grid) return;
+
+            const rect = el.getBoundingClientRect();
+            const gridWidth = grid.scrollWidth;
+            const viewportWidth = window.innerWidth;
+            const scrollDistance = gridWidth - viewportWidth + 200;
+            const sectionHeight = el.offsetHeight;
+
+            // How far we've scrolled into this section
+            const scrolled = -rect.top;
+            const progress = Math.max(0, Math.min(1, scrolled / (sectionHeight - window.innerHeight)));
+
+            if (direction === 1) {
+                // Left to right: start at 0, slide left
+                const translateX = -progress * scrollDistance;
+                grid.style.transform = `translateX(${translateX}px)`;
+            } else {
+                // Right to left: start fully left, slide right
+                const translateX = -(1 - progress) * scrollDistance;
+                grid.style.transform = `translateX(${translateX}px)`;
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateHorizontalScroll, { passive: true });
+    updateHorizontalScroll();
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 767) return;
+        sections.forEach(({ el, grid }) => {
+            if (!el || !grid) return;
+            const gridWidth = grid.scrollWidth;
+            const viewportWidth = window.innerWidth;
+            const scrollDistance = gridWidth - viewportWidth + 200;
+            el.style.height = (scrollDistance + window.innerHeight) + 'px';
+        });
+        updateHorizontalScroll();
     });
 }
 
