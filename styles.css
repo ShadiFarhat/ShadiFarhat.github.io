@@ -2116,14 +2116,11 @@ img, video {
    ============================================ */
 
 .services {
-    padding: var(--spacing-xl) 0;
-    padding-top: calc(var(--spacing-xl) + 60px);
     background: #ffffff;
     position: relative;
     overflow: hidden;
 }
 
-/* Seamless continuation of the white flash from hero */
 .services::before {
     content: '';
     position: absolute;
@@ -2137,15 +2134,93 @@ img, video {
 }
 
 .services-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
     padding: 0 var(--spacing-md);
 }
 
+/* ── Fan Cards ── */
+.fan-cards {
+    position: relative;
+    height: 420px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.fan-card {
+    position: absolute;
+    width: 320px;
+    height: 400px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.4s ease;
+    will-change: transform;
+    transform-origin: bottom center;
+    /* Start stacked */
+    left: 50%;
+    top: 0;
+}
+
+.fan-card:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.fan-number {
+    font-family: var(--font-heading);
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.18;
+    margin-bottom: 16px;
+}
+
+.fan-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+}
+
+.fan-desc {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.65;
+    flex-grow: 1;
+}
+
+.fan-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.fan-tags span {
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 5px 12px;
+    background: rgba(41, 151, 255, 0.06);
+    border: 1px solid rgba(41, 151, 255, 0.12);
+    border-radius: 100px;
+    color: var(--color-accent);
+}
+
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    display: none;
 }
 
 .service-card {
@@ -3600,6 +3675,8 @@ img, video {
     .services-container,
     .featured-container,
     .contact-container {
+        position: relative;
+        height: auto;
         padding: 0 var(--spacing-sm);
     }
 
@@ -3608,6 +3685,28 @@ img, video {
     .featured,
     .contact {
         padding: var(--spacing-lg) 0;
+    }
+
+    /* Fan cards stack vertically on mobile */
+    .fan-cards {
+        position: relative;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .fan-card {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+    }
+
+    .fan-number {
+        font-size: 3rem;
     }
 
     .services-grid {

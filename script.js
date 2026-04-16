@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initScrollVideo();
     initHeroLayers();
+    initFanCards();
     initHorizontalScroll();
     initScrollAnimations();
     initParallax();
@@ -586,6 +587,75 @@ if (window.innerWidth > 1024 && !('ontouchstart' in window)) {
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
+}
+
+/* ============================================
+   FAN CARDS - WHAT I DO
+   ============================================ */
+function initFanCards() {
+    const section = document.querySelector('.services');
+    const container = document.getElementById('fanCards');
+    if (!section || !container) return;
+    if (window.innerWidth <= 767) return;
+
+    const cards = container.querySelectorAll('.fan-card');
+    const total = cards.length;
+
+    // Enough scroll room for all cards to animate in
+    section.style.height = (window.innerHeight + total * 300) + 'px';
+
+    // Final resting positions for each card (fanned out, left to right)
+    const gap = 280;
+    const totalWidth = (total - 1) * gap;
+    const containerW = container.offsetWidth;
+    const startX = (containerW - totalWidth) / 2 - 160; // center the fan
+
+    function update() {
+        const rect = section.getBoundingClientRect();
+        const sectionH = section.offsetHeight;
+        const scrolled = -rect.top;
+        const scrollable = sectionH - window.innerHeight;
+        if (scrollable <= 0) return;
+
+        const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+
+        cards.forEach((card, i) => {
+            // Each card has its own timing window — they arrive one by one
+            const cardStart = i / (total + 1);
+            const cardEnd = (i + 2) / (total + 1);
+            const cardProgress = Math.max(0, Math.min(1, (progress - cardStart) / (cardEnd - cardStart)));
+
+            // Ease out expo
+            const ease = cardProgress === 1 ? 1 : 1 - Math.pow(2, -10 * cardProgress);
+
+            // Start: stacked off-screen right, slightly rotated
+            // End: fanned out in position with slight rotation
+            const finalX = startX + i * gap;
+            const startXPos = containerW + 100;  // off-screen right
+            const currentX = startXPos + (finalX - startXPos) * ease;
+
+            const finalRotation = (i - (total - 1) / 2) * 4;
+            const startRotation = 12;
+            const currentRotation = startRotation + (finalRotation - startRotation) * ease;
+
+            const finalY = Math.abs(i - (total - 1) / 2) * 10;
+            const currentY = 40 + (finalY - 40) * ease;
+
+            card.style.transform = `translateX(${currentX}px) translateY(${currentY}px) rotate(${currentRotation}deg)`;
+            card.style.zIndex = i + 1;
+        });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 767) return;
+        section.style.height = (window.innerHeight + total * 300) + 'px';
+        update();
+    });
+
+    window.addEventListener('load', update);
 }
 
 /* ============================================

@@ -249,131 +249,38 @@
                 </h2>
             </div>
 
-            <!-- Services Grid - Bento Style -->
-            <div class="services-bento">
+            <!-- Fan Cards -->
+            <div class="fan-cards" id="fanCards">
 
-                <!-- Service 1 - Web Development (Large) -->
-                <div class="bento-card bento-large" data-animate data-service="web">
-                    <div class="bento-glow"></div>
-                    <div class="bento-content">
-                        <div class="bento-header">
-                            <span class="bento-number">01</span>
-                            <div class="bento-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="bento-title">Web Development</h3>
-                        <p class="bento-desc">Building fast, responsive websites and web applications using modern technologies like React, Laravel, and Node.js.</p>
-                        <div class="bento-tags">
-                            <span>React</span>
-                            <span>Laravel</span>
-                            <span>Node.js</span>
-                            <span>TypeScript</span>
-                        </div>
-                        <div class="bento-visual code-visual">
-                            <div class="code-window">
-                                <div class="code-dots"><span></span><span></span><span></span></div>
-                                <div class="code-lines">
-                                    <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">app</span> = <span class="code-func">createApp</span>();</div>
-                                    <div class="code-line"><span class="code-keyword">await</span> app.<span class="code-func">launch</span>();</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="fan-card" data-fan="0">
+                    <span class="fan-number">01</span>
+                    <h3 class="fan-title">Web Development</h3>
+                    <p class="fan-desc">Building fast, responsive websites and web apps with React, Laravel & Node.js.</p>
+                    <div class="fan-tags"><span>React</span><span>Laravel</span><span>Node.js</span><span>TypeScript</span></div>
                 </div>
 
-                <!-- Service 2 - UI/UX Design -->
-                <div class="bento-card bento-medium" data-animate data-service="design">
-                    <div class="bento-glow"></div>
-                    <div class="bento-content">
-                        <div class="bento-header">
-                            <span class="bento-number">02</span>
-                            <div class="bento-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="bento-title">UI/UX Design</h3>
-                        <p class="bento-desc">Creating intuitive interfaces and seamless user experiences.</p>
-                        <div class="bento-tags">
-                            <span>Figma</span>
-                            <span>Photoshop</span>
-                        </div>
-                        <div class="bento-visual design-visual">
-                            <div class="design-shapes">
-                                <div class="shape shape-1"></div>
-                                <div class="shape shape-2"></div>
-                                <div class="shape shape-3"></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="fan-card" data-fan="1">
+                    <span class="fan-number">02</span>
+                    <h3 class="fan-title">UI/UX Design</h3>
+                    <p class="fan-desc">Creating intuitive interfaces and seamless user experiences that delight.</p>
+                    <div class="fan-tags"><span>Figma</span><span>Photoshop</span><span>Prototyping</span></div>
                 </div>
 
-                <!-- Service 3 - AI Engineering -->
-                <div class="bento-card bento-medium" data-animate data-service="ai">
-                    <div class="bento-glow"></div>
-                    <div class="bento-content">
-                        <div class="bento-header">
-                            <span class="bento-number">03</span>
-                            <div class="bento-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="bento-title">AI Engineering</h3>
-                        <p class="bento-desc">Building intelligent solutions with AI and machine learning.</p>
-                        <div class="bento-tags">
-                            <span>OpenAI</span>
-                            <span>Python</span>
-                        </div>
-                        <div class="bento-visual ai-visual">
-                            <div class="neural-network">
-                                <div class="node node-1"></div>
-                                <div class="node node-2"></div>
-                                <div class="node node-3"></div>
-                                <div class="node node-4"></div>
-                                <div class="connection"></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="fan-card" data-fan="2">
+                    <span class="fan-number">03</span>
+                    <h3 class="fan-title">AI Engineering</h3>
+                    <p class="fan-desc">Building intelligent solutions with AI, automation and machine learning.</p>
+                    <div class="fan-tags"><span>OpenAI</span><span>Python</span><span>Automation</span></div>
                 </div>
 
-                <!-- Service 4 - 3D Modeling -->
-                <div class="bento-card bento-wide" data-animate data-service="3d">
-                    <div class="bento-glow"></div>
-                    <div class="bento-content">
-                        <div class="bento-header">
-                            <span class="bento-number">04</span>
-                            <div class="bento-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                                    <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="bento-title">3D Modeling & Animation</h3>
-                        <p class="bento-desc">Bringing products to life with photorealistic 3D models and animations for marketing and visualization.</p>
-                        <div class="bento-tags">
-                            <span>Blender</span>
-                            <span>3D Design</span>
-                            <span>Animation</span>
-                        </div>
-                        <div class="bento-visual cube-visual">
-                            <div class="cube-3d">
-                                <div class="cube-face front"></div>
-                                <div class="cube-face back"></div>
-                                <div class="cube-face right"></div>
-                                <div class="cube-face left"></div>
-                                <div class="cube-face top"></div>
-                                <div class="cube-face bottom"></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="fan-card" data-fan="3">
+                    <span class="fan-number">04</span>
+                    <h3 class="fan-title">3D Modeling</h3>
+                    <p class="fan-desc">Photorealistic 3D product renders and animations for marketing.</p>
+                    <div class="fan-tags"><span>Blender</span><span>3D Design</span><span>Animation</span></div>
                 </div>
+
+            </div>
 
             </div>
         </div>
