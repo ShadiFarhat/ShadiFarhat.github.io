@@ -4015,79 +4015,94 @@ img, video {
     color: rgba(0, 0, 0, 0.35);
 }
 
-/* Bottom: Info Panel */
+/* Bottom: Info Panel — two columns */
 .modal-info-panel {
-    padding: 24px 32px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    padding: 28px 32px 28px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 12px 32px;
 }
 
+/* Row 1: category + title span full width */
 .modal-header {
+    grid-column: 1 / -1;
     display: flex;
-    align-items: center;
-    gap: 14px;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
 .modal-category {
     display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
+    width: fit-content;
+    font-size: 0.62rem;
+    font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-accent);
-    padding: 6px 14px;
-    background: rgba(41, 151, 255, 0.08);
+    padding: 5px 12px;
+    background: rgba(41, 151, 255, 0.07);
     border-radius: 100px;
-    flex-shrink: 0;
 }
 
 .modal-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     color: #1a1a2e;
 }
 
-.modal-description p {
-    font-size: 0.92rem;
-    line-height: 1.7;
-    color: #666;
+/* Left column: description */
+.modal-description {
+    grid-column: 1;
 }
 
-/* Meta row: role + year side by side */
+.modal-description p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #555;
+}
+
+/* Right column: role, year, tech stacked */
 .modal-meta {
+    grid-column: 2;
+    grid-row: 2 / 4;
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 24px;
+    border-left: 1px solid rgba(0,0,0,0.06);
 }
 
 .modal-meta-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .modal-meta-icon {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #f2f3f5;
-    border-radius: 12px;
+    border-radius: 10px;
     color: var(--color-accent);
+    flex-shrink: 0;
 }
 
 .modal-meta-content {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
 }
 
 .modal-meta-label {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -4095,21 +4110,22 @@ img, video {
 }
 
 .modal-meta-value {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
     color: #1a1a2e;
 }
 
-/* Tech Stack */
+/* Tech Stack — left column */
 .modal-tech {
+    grid-column: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .modal-tech-label {
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 0.62rem;
+    font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #aaa;
@@ -4118,13 +4134,13 @@ img, video {
 .modal-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 }
 
 .modal-tags span {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    padding: 7px 16px;
+    padding: 6px 14px;
     background: #f2f3f5;
     border: 1px solid rgba(0, 0, 0, 0.04);
     border-radius: 100px;
@@ -4134,14 +4150,33 @@ img, video {
 
 .modal-tags span:hover {
     background: rgba(41, 151, 255, 0.08);
-    border-color: rgba(41, 151, 255, 0.25);
+    border-color: rgba(41, 151, 255, 0.2);
     color: var(--color-accent);
 }
 
-/* CTA Button */
+/* CTA — full width */
 .modal-cta {
-    padding-top: 16px;
+    grid-column: 1 / -1;
+    padding-top: 14px;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Mobile: stack to single column */
+@media (max-width: 640px) {
+    .modal-info-panel {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    .modal-meta {
+        grid-column: 1;
+        grid-row: auto;
+        border-left: none;
+        padding-left: 0;
+        padding-top: 12px;
+        border-top: 1px solid rgba(0,0,0,0.06);
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
 
 .modal-btn-primary {
