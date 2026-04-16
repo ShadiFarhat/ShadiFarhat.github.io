@@ -4,7 +4,32 @@
    Apple-style Experience
    ============================================ */
 
+// Global Lenis instance
+let lenis;
+
+function initLenis() {
+    lenis = new Lenis({
+        duration: 1.4,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.5,
+        infinite: false,
+    });
+
+    // Animation loop
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Stop during preloader
+    lenis.stop();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    initLenis();
     initPreloader();
     initNavigation();
     initScrollVideo();
@@ -54,6 +79,9 @@ function initPreloader() {
 
             preloader.classList.add('loaded');
             document.body.classList.remove('loading');
+
+            // Start Lenis smooth scrolling
+            if (lenis) lenis.start();
 
             setTimeout(() => {
                 const firstLayer = document.querySelector('.hero-layer[data-layer="1"]');
@@ -447,7 +475,7 @@ function initHeroLayers() {
 }
 
 /* ============================================
-   SMOOTH SCROLL FOR ANCHOR LINKS
+   SMOOTH SCROLL FOR ANCHOR LINKS (via Lenis)
    ============================================ */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -456,11 +484,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (targetId === '#') return;
 
         const target = document.querySelector(targetId);
-        if (target) {
-            const offsetTop = target.offsetTop - 100;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
+        if (target && lenis) {
+            lenis.scrollTo(target, {
+                offset: -100,
+                duration: 1.8,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             });
         }
     });
@@ -999,17 +1027,19 @@ function initProjectModal() {
                     linkBtn.style.display = 'inline-flex';
                 }
 
-                // Show modal
+                // Show modal & pause Lenis
                 modal.classList.add('active');
                 document.body.classList.add('modal-open');
+                if (lenis) lenis.stop();
             }
         });
     });
 
-    // Close modal
+    // Close modal & resume Lenis
     function closeModal() {
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
+        if (lenis) lenis.start();
     }
 
     modalClose.addEventListener('click', closeModal);
@@ -1093,6 +1123,7 @@ function initProjectModal() {
 
                 modal.classList.add('active');
                 document.body.classList.add('modal-open');
+                if (lenis) lenis.stop();
             }
         });
     });
@@ -1155,6 +1186,7 @@ function initProjectModal() {
 
                 modal.classList.add('active');
                 document.body.classList.add('modal-open');
+                if (lenis) lenis.stop();
             }
         });
     });
