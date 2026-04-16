@@ -600,57 +600,54 @@ function initFanCards() {
 
     const cards = container.querySelectorAll('.fan-card');
     const total = cards.length;
+    const vh = window.innerHeight;
 
-    // Enough scroll room for all cards to animate in
-    section.style.height = (window.innerHeight + total * 300) + 'px';
+    // Give enough scroll height: viewport + room for each card to animate
+    section.style.height = (vh * 2.5) + 'px';
 
     function update() {
         const rect = section.getBoundingClientRect();
-        const sectionH = section.offsetHeight;
         const scrolled = -rect.top;
-        const scrollable = sectionH - window.innerHeight;
+        const scrollable = section.offsetHeight - vh;
         if (scrollable <= 0) return;
-
         const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
         cards.forEach((card, i) => {
-            // Each card has its own timing — they cascade one after another
-            const cardStart = i / (total + 0.5);
-            const cardEnd = (i + 1.5) / (total + 0.5);
-            const cardProgress = Math.max(0, Math.min(1, (progress - cardStart) / (cardEnd - cardStart)));
+            // Stagger: each card animates during its own slice of progress
+            const start = i * 0.18;
+            const end = start + 0.4;
+            const t = Math.max(0, Math.min(1, (progress - start) / (end - start)));
+            // Ease out cubic
+            const ease = 1 - Math.pow(1 - t, 3);
 
-            // Ease out expo
-            const ease = cardProgress === 1 ? 1 : 1 - Math.pow(2, -10 * cardProgress);
+            // Final position: fanned out, each card offset right and slightly down
+            const finalX = i * 120;
+            const finalY = i * 18;
+            const finalRot = (i - 1) * 6;
 
-            // Start: all stacked at top-left (card 01 position)
-            // End: fanned out diagonally — top-left to bottom-right
-            const finalX = i * 200;          // spread right
-            const finalY = i * 30;           // spread down
-            const finalRotation = i * 5;     // increasing rotation
+            // Start position: off-screen right, stacked
+            const startX = window.innerWidth;
+            const startY = 0;
+            const startRot = 15;
 
-            const startX = 0;               // all start at left
-            const startY = -20;              // slightly above
-            const startRotation = 0;
+            const x = startX + (finalX - startX) * ease;
+            const y = startY + (finalY - startY) * ease;
+            const r = startRot + (finalRot - startRot) * ease;
 
-            const currentX = startX + (finalX - startX) * ease;
-            const currentY = startY + (finalY - startY) * ease;
-            const currentRotation = startRotation + (finalRotation - startRotation) * ease;
-
-            card.style.transform = `translateX(${currentX}px) translateY(${currentY}px) rotate(${currentRotation}deg)`;
-            card.style.zIndex = total - i; // first card on top initially, last on top when spread
+            card.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${r}deg)`;
+            card.style.zIndex = total + 1 - i;
         });
     }
 
     window.addEventListener('scroll', update, { passive: true });
     update();
+    window.addEventListener('load', update);
 
     window.addEventListener('resize', () => {
         if (window.innerWidth <= 767) return;
-        section.style.height = (window.innerHeight + total * 300) + 'px';
+        section.style.height = (window.innerHeight * 2.5) + 'px';
         update();
     });
-
-    window.addEventListener('load', update);
 }
 
 /* ============================================
