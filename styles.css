@@ -3839,23 +3839,24 @@ img, video {
 .modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 }
 
 .modal-container {
     position: relative;
-    width: 90%;
-    max-width: 1000px;
-    max-height: 90vh;
+    width: 92%;
+    max-width: 900px;
+    max-height: 88vh;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 24px;
+    border-radius: 20px;
     overflow: hidden;
-    transform: scale(0.9) translateY(30px);
+    transform: scale(0.95) translateY(20px);
     transition: transform 0.5s var(--ease-out-expo);
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
 }
 
 .modal.active .modal-container {
@@ -3864,20 +3865,21 @@ img, video {
 
 .modal-close {
     position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    width: 48px;
-    height: 48px;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.85);
     border: none;
     border-radius: 50%;
     color: #1a1a2e;
     cursor: pointer;
     z-index: 10;
     transition: all 0.3s var(--ease-out-expo);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .modal-close:hover {
@@ -3887,15 +3889,15 @@ img, video {
 }
 
 .modal-content {
-    max-height: 90vh;
+    flex: 1;
     overflow-y: auto;
     overscroll-behavior: contain;
     scrollbar-width: thin;
-    scrollbar-color: rgba(0,0,0,0.12) transparent;
+    scrollbar-color: rgba(0,0,0,0.1) transparent;
 }
 
 .modal-content::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
 }
 
 .modal-content::-webkit-scrollbar-track {
@@ -3903,12 +3905,8 @@ img, video {
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.12);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.25);
 }
 
 /* Modal Layout */
@@ -3920,17 +3918,14 @@ img, video {
 /* Top: Media Section */
 .modal-media {
     position: relative;
-    background: #f2f3f5;
+    background: #f5f5f7;
     overflow: hidden;
-    flex-shrink: 0;
 }
 
 .modal-slideshow {
     position: relative;
     width: 100%;
-    height: 100%;
-    min-height: 350px;
-    max-height: 450px;
+    aspect-ratio: 16/9;
 }
 
 .slideshow-container {
@@ -3944,9 +3939,10 @@ img, video {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background: #f5f5f7;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
 }
 
 .slideshow-container img.active {
@@ -3957,57 +3953,52 @@ img, video {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 50%;
     color: #1a1a2e;
     cursor: pointer;
-    opacity: 1;
     transition: all 0.3s ease;
     z-index: 5;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .slideshow-btn:hover {
     background: var(--color-accent);
+    color: #fff;
     border-color: var(--color-accent);
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.08);
 }
 
-.slideshow-prev {
-    left: 12px;
-}
-
-.slideshow-next {
-    right: 12px;
-}
+.slideshow-prev { left: 14px; }
+.slideshow-next { right: 14px; }
 
 .slideshow-progress {
     position: absolute;
-    bottom: 20px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     z-index: 5;
 }
 
 .slideshow-dots {
     display: flex;
-    gap: 8px;
+    gap: 6px;
 }
 
 .slideshow-dots .dot {
-    width: 8px;
-    height: 8px;
-    background: rgba(0, 0, 0, 0.15);
+    width: 7px;
+    height: 7px;
+    background: rgba(0, 0, 0, 0.12);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -4015,22 +4006,21 @@ img, video {
 
 .slideshow-dots .dot.active {
     background: var(--color-accent);
-    box-shadow: 0 0 10px var(--color-accent);
+    box-shadow: 0 0 8px rgba(41, 151, 255, 0.4);
 }
 
 .slideshow-counter {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.1em;
-    color: rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.35);
 }
 
 /* Bottom: Info Panel */
 .modal-info-panel {
-    padding: 28px 36px 28px;
+    padding: 24px 32px 28px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background: #ffffff;
+    gap: 16px;
 }
 
 .modal-header {
