@@ -1356,6 +1356,23 @@ img, video {
     transform: translateY(-60px) scale(0.98);
 }
 
+/* B-letter zoom target */
+#heroZoomLetter {
+    display: inline-block;
+    position: relative;
+}
+
+/* White flash overlay */
+.hero-white-flash {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    opacity: 0;
+    z-index: 100;
+    pointer-events: none;
+    will-change: opacity;
+}
+
 /* Stagger children animation */
 .hero-layer.active .hero-tag { animation: fadeSlideUp 0.8s var(--ease-out-expo) 0.1s both; }
 .hero-layer.active .hero-title-line-1 { animation: fadeSlideUp 0.8s var(--ease-out-expo) 0.2s both; }
@@ -2100,20 +2117,23 @@ img, video {
 
 .services {
     padding: var(--spacing-xl) 0;
+    padding-top: calc(var(--spacing-xl) + 60px);
     background: var(--color-bg);
     position: relative;
     overflow: hidden;
 }
 
+/* White-to-dark gradient that continues the white flash from hero */
 .services::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 100px;
-    background: linear-gradient(to bottom, transparent, rgba(41, 151, 255, 0.3), transparent);
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, #ffffff, transparent);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .services-container {

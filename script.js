@@ -406,6 +406,8 @@ function initHeroLayers() {
     let currentLayer = 1;
 
     const lastLayer = layers[layers.length - 1];
+    const zoomLetter = document.getElementById('heroZoomLetter');
+    const whiteFlash = document.getElementById('heroWhiteFlash');
 
     function updateLayers() {
         const wrapperRect = heroWrapper.getBoundingClientRect();
@@ -450,18 +452,34 @@ function initHeroLayers() {
             currentLayer = newLayer;
         }
 
-        // Zoom effect on last layer ("Let's Build Together")
-        // Kicks in during the last 15% of hero scroll
-        const zoomStart = 0.85;
-        if (progress > zoomStart && lastLayer) {
-            const zoomProgress = (progress - zoomStart) / (1 - zoomStart); // 0 to 1
-            const scale = 1 + zoomProgress * 4;         // 1x → 5x
-            const opacity = 1 - zoomProgress;            // fade out as it zooms
+        // ── ZOOM INTO "B" TRANSITION ──
+        // Last 18% of hero scroll: zoom into the letter B, then white flash
+        const ZOOM_START = 0.82;
+
+        if (progress > ZOOM_START && lastLayer && zoomLetter) {
+            const zp = (progress - ZOOM_START) / (1 - ZOOM_START); // 0→1
+
+            // Find where "B" is relative to the layer center
+            const letterRect = zoomLetter.getBoundingClientRect();
+            const layerRect = lastLayer.getBoundingClientRect();
+            const originX = ((letterRect.left + letterRect.width / 2) - layerRect.left) / layerRect.width * 100;
+            const originY = ((letterRect.top + letterRect.height / 2) - layerRect.top) / layerRect.height * 100;
+
+            // Exponential scale: starts slow, accelerates fast (feels like diving in)
+            const scale = 1 + Math.pow(zp, 2) * 25;  // 1x → 26x
+
+            lastLayer.style.transformOrigin = `${originX}% ${originY}%`;
             lastLayer.style.transform = `scale(${scale})`;
-            lastLayer.style.opacity = opacity;
+
+            // White flash: starts at 40% into zoom, fully white by 85%
+            if (whiteFlash) {
+                const flashProgress = Math.max(0, (zp - 0.4) / 0.45);
+                whiteFlash.style.opacity = Math.min(1, flashProgress);
+            }
         } else if (lastLayer) {
             lastLayer.style.transform = '';
-            lastLayer.style.opacity = '';
+            lastLayer.style.transformOrigin = '';
+            if (whiteFlash) whiteFlash.style.opacity = 0;
         }
 
         // Hide scroll hint after first section
