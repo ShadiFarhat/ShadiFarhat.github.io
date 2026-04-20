@@ -611,6 +611,13 @@ function initFanCards() {
         if (scrollable <= 0) return;
         const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
+        // Spacing: spread cards to fit the screen width
+        const cardW = 280;
+        const leftPad = 40; // matches CSS `left: 40px`
+        const rightPad = 80;
+        const availableW = window.innerWidth - leftPad - rightPad - cardW;
+        const spacing = Math.max(310, Math.min(availableW / (total - 1), 440));
+
         cards.forEach((card, i) => {
             // Stagger: each card animates during its own slice of progress
             const start = i * 0.18;
@@ -620,7 +627,7 @@ function initFanCards() {
             const ease = 1 - Math.pow(1 - t, 3);
 
             // Final position: spread wide so every card is fully visible
-            const finalX = i * 310;
+            const finalX = i * spacing;
             const finalY = i * 12;
             const finalRot = (i - 1) * 3;
 
@@ -706,6 +713,23 @@ function initHorizontalScroll() {
             }
 
             s.grid.style.transform = `translateX(${tx}px)`;
+
+            // Center-focus scale: card nearest viewport center grows, edges shrink
+            const vpCenter = window.innerWidth / 2;
+            const falloff = window.innerWidth * 0.45;
+            const cards = s.grid.children;
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const cRect = card.getBoundingClientRect();
+                const cCenter = cRect.left + cRect.width / 2;
+                const dist = Math.abs(cCenter - vpCenter);
+                const norm = Math.min(1, dist / falloff);
+                // Ease out: near center = 1.0, edges = 0.0
+                const focus = 1 - Math.pow(norm, 2);
+                // Scale: 0.82 at edge → 1.08 at center
+                const scale = 0.82 + focus * 0.26;
+                card.style.scale = scale.toFixed(3);
+            }
         });
     }
 
