@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadi Farhat | Creative Developer</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/logo.svg" as="image">
+    <link rel="preload" href="assets/frames/freepik_opening-pure-black-screen-with-a-single-spotlight-_veo3_1_1080p_16-9_24fps_36215_000.jpg" as="image">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+
+    <!-- Lenis Smooth Scroll -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.23/dist/lenis.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- DNS prefetch for fonts -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <!-- Gradient Background -->
+        <div class="pre-bg"></div>
+
+        <!-- Center Content -->
+        <div class="pre-center">
+            <!-- Animated Ring -->
+            <div class="pre-ring"></div>
+
+            <!-- Logo -->
+            <div class="pre-logo" id="preLogo">
+                <span class="pre-s">S</span>
+                <span class="pre-f">F</span>
+            </div>
+        </div>
+
+        <!-- Bottom Text -->
+        <div class="pre-bottom">
+            <span class="pre-name">SHADI FARHAT</span>
+            <span class="pre-title">Creative Developer</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">SF</a>
+            <div class="nav-menu">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#3d-work" class="nav-link">3D Art</a>
+                <a href="#design" class="nav-link">Design</a>
+                <a href="#contact" class="nav-link nav-link-cta">Let's Talk</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="#work" class="mobile-link">Work</a>
+            <a href="#3d-work" class="mobile-link">3D Art</a>
+            <a href="#design" class="mobile-link">Design</a>
+            <a href="#contact" class="mobile-link">Let's Talk</a>
+        </div>
+    </div>
+
+    <!-- Hero Section - Scroll Controlled -->
+    <section class="hero-wrapper" id="heroWrapper">
+
+        <!-- Sticky Container -->
+        <div class="hero-sticky">
+            <!-- Canvas for Image Sequence (Apple Style) -->
+            <div class="hero-canvas-container">
+                <canvas id="heroCanvas"></canvas>
+                <div class="hero-video-overlay"></div>
+                <!-- Noise texture overlay -->
+                <div class="hero-noise"></div>
+                <!-- Vignette effect -->
+                <div class="hero-vignette"></div>
+            </div>
+
+            <!-- Loading indicator -->
+            <div class="hero-loading" id="heroLoading">
+                <div class="hero-loading-bar"></div>
+                <span>Loading frames...</span>
+            </div>
+
+            <!-- Progress Indicator - Enhanced -->
+            <div class="scroll-progress">
+                <div class="scroll-progress-track">
+                    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+                </div>
+                <div class="scroll-progress-labels">
+                    <span class="progress-label" data-layer="1">01</span>
+                    <span class="progress-label" data-layer="2">02</span>
+                    <span class="progress-label" data-layer="3">03</span>
+                    <span class="progress-label" data-layer="4">04</span>
+                </div>
+            </div>
+
+            <!-- Floating elements for depth -->
+            <div class="hero-floating-elements">
+                <div class="floating-circle floating-circle-1"></div>
+                <div class="floating-circle floating-circle-2"></div>
+                <div class="floating-line floating-line-1"></div>
+                <div class="floating-line floating-line-2"></div>
+            </div>
+
+            <!-- Text Layers - Each appears at different scroll positions -->
+
+            <!-- Layer 1: Introduction -->
+            <div class="hero-content hero-layer" data-layer="1">
+                <div class="hero-tag">
+                    <span class="hero-tag-dot"></span>
+                    <span class="hero-tag-text">Available for Projects</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-line hero-title-line-1">
+                        <span class="char-wrapper">I</span>
+                        <span class="char-wrapper">Craft</span>
+                    </span>
+                    <span class="hero-title-line hero-title-line-2">
+                        <span class="text-gradient-animated">Digital</span>
+                    </span>
+                    <span class="hero-title-line hero-title-line-3">
+                        <span class="char-wrapper">Experiences</span>
+                    </span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="subtitle-item">Developer</span>
+                    <span class="subtitle-divider"></span>
+                    <span class="subtitle-item">Designer</span>
+                    <span class="subtitle-divider"></span>
+                    <span class="subtitle-item">AI Engineer</span>
+                </p>
+            </div>
+
+            <!-- Layer 2: Who I Am -->
+            <div class="hero-content hero-layer" data-layer="2">
+                <p class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>Meet</span>
+                    <span class="eyebrow-line"></span>
+                </p>
+                <h2 class="hero-title-lg">
+                    <span class="hero-title-line hero-name-first">Shadi</span>
+                    <span class="hero-title-line hero-name-last"><span class="text-gradient-animated">Farhat</span></span>
+                </h2>
+                <p class="hero-desc">
+                    <span class="desc-role">IT Manager at Maliks Lebanon</span>
+                    <span class="desc-tagline">Turning ideas into digital reality</span>
+                </p>
+            </div>
+
+            <!-- Layer 3: Experience -->
+            <div class="hero-content hero-layer" data-layer="3">
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" data-value="8">
+                            <span class="stat-num">8</span>
+                            <span class="stat-plus">+</span>
+                        </span>
+                        <span class="hero-stat-label">Years Design</span>
+                        <div class="stat-bar"></div>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" data-value="3">
+                            <span class="stat-num">3</span>
+                            <span class="stat-plus">+</span>
+                        </span>
+                        <span class="hero-stat-label">Years Development</span>
+                        <div class="stat-bar"></div>
+                    </div>
+                </div>
+                <h2 class="hero-title-md">
+                    <span class="text-gradient-animated">Experience</span> that<br>
+                    <span class="title-emphasis">speaks for itself</span>
+                </h2>
+            </div>
+
+            <!-- Layer 4: Call to Action -->
+            <div class="hero-content hero-layer" data-layer="4">
+                <p class="hero-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>Ready to create?</span>
+                    <span class="eyebrow-line"></span>
+                </p>
+                <h2 class="hero-title-lg">
+                    <span class="hero-title-line">Let's <span id="heroZoomLetter">B</span>uild</span>
+                    <span class="hero-title-line"><span class="text-gradient-animated">Together</span></span>
+                </h2>
+                <a href="#work" class="hero-cta">
+                    <span class="cta-text">View My Work</span>
+                    <span class="cta-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                    <span class="cta-bg"></span>
+                </a>
+            </div>
+
+            <!-- Scroll Hint (first layer only) -->
+            <div class="hero-scroll" id="heroScroll">
+                <div class="hero-scroll-mouse">
+                    <div class="mouse-wheel"></div>
+                </div>
+                <span>Scroll to explore</span>
+                <div class="hero-scroll-arrows">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Corner decorations -->
+            <div class="hero-corner hero-corner-tl"></div>
+            <div class="hero-corner hero-corner-br"></div>
+
+            <!-- White flash overlay for B-zoom transition -->
+            <div class="hero-white-flash" id="heroWhiteFlash"></div>
+
+        </div>
+    </section>
+
+    <!-- What I Do Section -->
+    <section class="services" id="work">
+        <div class="services-container">
+
+            <!-- Section Header -->
+            <div class="section-header" data-animate>
+                <span class="section-label">What I Do</span>
+                <h2 class="section-title">
+                    Crafting digital products<br>
+                    <span class="text-gradient">that make an impact.</span>
+                </h2>
+            </div>
+
+            <!-- Fan Cards -->
+            <div class="fan-cards" id="fanCards">
+
+                <div class="fan-card" data-fan="0">
+                    <span class="fan-number">01</span>
+                    <h3 class="fan-title">Web Development</h3>
+                    <p class="fan-desc">Building fast, responsive websites and web apps with React, Laravel & Node.js.</p>
+                    <div class="fan-tags"><span>React</span><span>Laravel</span><span>Node.js</span><span>TypeScript</span></div>
+                </div>
+
+                <div class="fan-card" data-fan="1">
+                    <span class="fan-number">02</span>
+                    <h3 class="fan-title">UI/UX Design</h3>
+                    <p class="fan-desc">Creating intuitive interfaces and seamless user experiences that delight.</p>
+                    <div class="fan-tags"><span>Figma</span><span>Photoshop</span><span>Prototyping</span></div>
+                </div>
+
+                <div class="fan-card" data-fan="2">
+                    <span class="fan-number">03</span>
+                    <h3 class="fan-title">AI Engineering</h3>
+                    <p class="fan-desc">Building intelligent solutions with AI, automation and machine learning.</p>
+                    <div class="fan-tags"><span>OpenAI</span><span>Python</span><span>Automation</span></div>
+                </div>
+
+                <div class="fan-card" data-fan="3">
+                    <span class="fan-number">04</span>
+                    <h3 class="fan-title">3D Modeling</h3>
+                    <p class="fan-desc">Photorealistic 3D product renders and animations for marketing.</p>
+                    <div class="fan-tags"><span>Blender</span><span>3D Design</span><span>Animation</span></div>
+                </div>
+
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work Section -->
+    <section class="featured" id="featured">
+        <div class="featured-container">
+
+            <div class="section-header" data-animate>
+                <span class="section-label">Selected Work</span>
+                <h2 class="section-title">
+                    Projects that<br>
+                    <span class="text-gradient">speak volumes.</span>
+                </h2>
+            </div>
+
+            <!-- Project Cards -->
+            <div class="projects-grid">
+
+                <!-- Maliks Pulse HR System - FEATURED -->
+                <div class="project-card project-card-large" data-animate data-parallax data-project="pulse-dashboard">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/pulse-dashboard/mockup.webp" alt="Maliks Pulse HR System" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Development</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Pulse - HR System</h3>
+                        <p class="project-desc">Complete HR system with AI-powered reports, KPIs tracking, vacations, and performance management.</p>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Pulse Mobile App -->
+                <div class="project-card" data-animate data-parallax data-project="pulse-mobile">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/pulse-mobile/mockup.webp" alt="Maliks Pulse Mobile" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Mobile App</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Pulse Mobile</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Valentine Game -->
+                <div class="project-card" data-animate data-parallax data-project="ai-system">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/ai-system/mockup.webp" alt="Valentine Game" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">AI Game</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Valentine Game</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Maliks Deliveries Tracking -->
+                <div class="project-card" data-animate data-parallax data-project="tracking">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/tracking/mockup.webp" alt="Maliks Deliveries" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Mobile + Web</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Deliveries Tracking</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Maliks Warehouse System -->
+                <div class="project-card" data-animate data-parallax data-project="warehouse">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/warehouse/mockup.webp" alt="Maliks Warehouse" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Enterprise System</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Warehouse Management</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- As3arna -->
+                <div class="project-card" data-animate data-parallax data-project="as3arna">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/as3arna/mockup.webp" alt="As3arna" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">E-Commerce</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">As3arna - Price Platform</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Filali Engineers -->
+                <div class="project-card" data-animate data-parallax data-project="filali">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/filali/mockup.webp" alt="Filali Engineers" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Filali Engineers</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Hostify -->
+                <div class="project-card" data-animate data-parallax data-project="mediahub">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/mediahub/mockup.webp" alt="Hostify" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Platform</span>
+                        <h3 class="project-title">Hostify</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Codesign -->
+                <div class="project-card" data-animate data-parallax data-project="codesign">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/codesign/mockup.webp" alt="Codesign LB" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Codesign LB</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Wedding Invitation -->
+                <div class="project-card" data-animate data-parallax data-project="bakhoss">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/bakhoss/mockup.webp" alt="Wedding Invitation" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Digital Invitation</span>
+                        <h3 class="project-title">Bakhos & Souzana Wedding</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Golden Coast -->
+                <div class="project-card" data-animate data-parallax data-project="golden-coast">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/golden-coast/mockup.webp" alt="Golden Coast" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Portfolio</span>
+                        <h3 class="project-title">Golden Coast</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Mini Market ERP -->
+                <div class="project-card" data-animate data-parallax data-project="mini-market">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/mini-market/mockup.webp" alt="Mini Market ERP" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">ERP System</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Mini Market ERP</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Pulse Old Version -->
+                <div class="project-card" data-animate data-parallax data-project="pulse-old">
+                    <div class="project-image" data-parallax-img>
+                        <img src="assets/projects/pulse-old/mockup.webp" alt="Pulse Old Version" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Legacy System</span>
+                        <span class="project-badge private">Private</span>
+                        <h3 class="project-title">Maliks Pulse (Legacy)</h3>
+                        <span class="project-link">
+                            View Project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View All Link -->
+            <div class="featured-cta" data-animate>
+                <a href="projects.html" class="btn-outline">
+                    View All Projects
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3D Blender Work Section -->
+    <section class="blender-work" id="3d-work">
+        <div class="blender-container">
+            <div class="section-header" data-animate>
+                <span class="section-label">3D Art</span>
+                <h2 class="section-title">
+                    Bringing ideas to life<br>
+                    <span class="text-gradient">in three dimensions.</span>
+                </h2>
+            </div>
+
+            <div class="blender-grid">
+                <div class="blender-card" data-animate data-parallax data-blender="almaza">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/almaza/final.webp" alt="Almaza" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Almaza</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="black-opuim">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/black-opuim/final.webp" alt="Black Opium" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Black Opium</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="la-vie-est-belle">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/la-vie-est-belle/final.webp" alt="La Vie Est Belle" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">La Vie Est Belle</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="valentino">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/valentino/final.webp" alt="Valentino" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Valentino</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="spice-bomb">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/spice-bomb/final.webp" alt="Spice Bomb" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Spice Bomb</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="la-nuit-de-lhomme">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/la-nuit-de-lhomme/final.webp" alt="La Nuit De L'Homme" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">La Nuit De L'Homme</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="lhomme-prada">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/lhomme-prada/final.webp" alt="L'Homme Prada" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">L'Homme Prada</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="redbull">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/redbull/final.webp" alt="Redbull" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Redbull</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="freeze">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/freeze/final.webp" alt="Freeze" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Freeze</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="kitkat">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/kitkat/final.webp" alt="KitKat" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">KitKat</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="pringles">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/pringles/final.webp" alt="Pringles" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Pringles</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="prill">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/prill/final.webp" alt="Prill" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Prill</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="lysedia-jar">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/lysedia-jar/final.webp" alt="Lysedia Jar" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Lysedia Jar</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="sport-bottle">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/sport-bottle/final.webp" alt="Sport Bottle" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Sport Bottle</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="chess">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/chess/final.webp" alt="Chess" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Chess</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="white-mugs">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/white-mugs/final.webp" alt="White Mugs" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">White Mugs</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="blender-card" data-animate data-parallax data-blender="badges">
+                    <div class="blender-image" data-parallax-img>
+                        <img src="assets/3d-work/badges/final.webp" alt="Badges" loading="lazy">
+                    </div>
+                    <div class="blender-info">
+                        <span class="blender-category">Product</span>
+                        <h3 class="blender-title">Badges</h3>
+                        <span class="blender-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Work Section -->
+    <section class="design-work" id="design">
+        <div class="design-container">
+            <div class="section-header" data-animate>
+                <span class="section-label">Design</span>
+                <h2 class="section-title">
+                    Crafting visual experiences<br>
+                    <span class="text-gradient">that captivate.</span>
+                </h2>
+            </div>
+
+            <div class="design-grid">
+                <div class="design-card" data-animate data-parallax data-design="cleaning-service">
+                    <div class="design-image" data-parallax-img>
+                        <img src="assets/design/cleaning-service/mockup.webp" alt="Cleaning Service" loading="lazy">
+                    </div>
+                    <div class="design-info">
+                        <span class="design-category">Branding</span>
+                        <h3 class="design-title">Cleaning Service</h3>
+                        <span class="design-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="design-card" data-animate data-parallax data-design="farhat-market">
+                    <div class="design-image" data-parallax-img>
+                        <img src="assets/design/farhat-market/mockup.webp" alt="Farhat Market" loading="lazy">
+                    </div>
+                    <div class="design-info">
+                        <span class="design-category">Branding</span>
+                        <h3 class="design-title">Farhat Market</h3>
+                        <span class="design-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="design-card" data-animate data-parallax data-design="posters">
+                    <div class="design-image" data-parallax-img>
+                        <img src="assets/design/posters/mockup.webp" alt="Posters" loading="lazy">
+                    </div>
+                    <div class="design-info">
+                        <span class="design-category">Graphic</span>
+                        <h3 class="design-title">Posters</h3>
+                        <span class="design-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+
+                <div class="design-card" data-animate data-parallax data-design="tous-frais">
+                    <div class="design-image" data-parallax-img>
+                        <img src="assets/design/tous-frais/mockup.webp" alt="Tous Frais" loading="lazy">
+                    </div>
+                    <div class="design-info">
+                        <span class="design-category">Branding</span>
+                        <h3 class="design-title">Tous Frais</h3>
+                        <span class="design-link">View Details <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+
+            <div class="contact-content" data-animate>
+                <span class="section-label">Get in Touch</span>
+                <h2 class="contact-title">
+                    Let's create<br>
+                    <span class="text-gradient">something great.</span>
+                </h2>
+                <p class="contact-desc">
+                    Have a project in mind? Let's talk about how we can work together.
+                </p>
+                <a href="mailto:shadifarhat98@gmail.com" class="contact-email">
+                    shadifarhat98@gmail.com
+                </a>
+
+                <div class="contact-socials">
+                    <a href="https://www.linkedin.com/in/shadi-farhat-61043a204/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/ShadiFarhat" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/96176938653" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Project Modal - Redesigned -->
+    <div class="modal" id="projectModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <!-- Close Button -->
+            <button class="modal-close" id="modalClose">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="modal-content">
+                <!-- Modal Layout: Two Columns -->
+                <div class="modal-grid">
+                    <!-- Left: Image Slideshow -->
+                    <div class="modal-media">
+                        <div class="modal-slideshow" id="modalSlideshow">
+                            <div class="slideshow-container" id="slideshowContainer">
+                            </div>
+                            <button class="slideshow-btn slideshow-prev" id="slideshowPrev">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            <button class="slideshow-btn slideshow-next" id="slideshowNext">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                            <div class="slideshow-progress">
+                                <div class="slideshow-dots" id="slideshowDots"></div>
+                                <div class="slideshow-counter" id="slideshowCounter">1 / 1</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Project Info -->
+                    <div class="modal-info-panel">
+                        <!-- Header -->
+                        <div class="modal-header">
+                            <span class="modal-category" id="modalCategory">Web Development</span>
+                            <h2 class="modal-title" id="modalTitle">Project Title</h2>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="modal-description">
+                            <p id="modalDescription">Project description goes here...</p>
+                        </div>
+
+                        <!-- Meta Info -->
+                        <div class="modal-meta">
+                            <div class="modal-meta-item">
+                                <span class="modal-meta-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </span>
+                                <div class="modal-meta-content">
+                                    <span class="modal-meta-label">Role</span>
+                                    <span class="modal-meta-value" id="modalRole">Full Stack Developer</span>
+                                </div>
+                            </div>
+                            <div class="modal-meta-item">
+                                <span class="modal-meta-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                </span>
+                                <div class="modal-meta-content">
+                                    <span class="modal-meta-label">Year</span>
+                                    <span class="modal-meta-value" id="modalYear">2024</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack -->
+                        <div class="modal-tech">
+                            <span class="modal-tech-label">Tech Stack</span>
+                            <div class="modal-tags" id="modalTags">
+                                <span>React</span>
+                                <span>Laravel</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="modal-cta">
+                            <a href="#" class="modal-btn-primary" id="modalLink" target="_blank">
+                                <span>Visit Live Site</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2024 Shadi Farhat. All rights reserved.</p>
+            <p class="footer-location">Beirut, Lebanon</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
