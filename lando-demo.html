@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lando-Style Demo | Shadi Farhat</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --muted: rgba(255,255,255,0.6);
+            --accent: #C6FF00; /* lime — Lando's color. Change if you want */
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            padding: 1.5rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 800; font-size: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .nav-menu { display: flex; gap: 2rem; }
+        .nav-menu a {
+            font-size: 0.85rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            position: relative;
+        }
+        .nav-menu a::after {
+            content: ''; position: absolute; left: 0; bottom: -4px;
+            width: 0; height: 1px; background: var(--text);
+            transition: width .4s cubic-bezier(.7,0,.3,1);
+        }
+        .nav-menu a:hover::after { width: 100%; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex; align-items: flex-end;
+            padding: 3rem 2.5rem;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background:
+              radial-gradient(circle at 70% 40%, rgba(198,255,0,0.15), transparent 60%),
+              linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            z-index: 0;
+        }
+        /* Big placeholder image circle — replace with real portrait */
+        .hero-portrait {
+            position: absolute;
+            right: 8%; top: 50%;
+            transform: translateY(-50%);
+            width: 42vw; height: 42vw; max-width: 620px; max-height: 620px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2a2a2a, #0a0a0a);
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 20px 80px rgba(198,255,0,0.1);
+        }
+        .hero-portrait::after {
+            content: '📷 your photo here';
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted); font-size: .9rem;
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: .6rem;
+            font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .hero-eyebrow::before {
+            content:''; width: 32px; height: 1px; background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(4rem, 14vw, 14rem);
+            line-height: .85;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+        .hero-title .line { display: block; overflow: hidden; }
+        .hero-title .line span { display: inline-block; }
+        .hero-title .italic {
+            font-style: italic; font-weight: 600;
+            color: var(--accent);
+        }
+
+        .hero-meta {
+            margin-top: 3rem;
+            display: flex; justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap; gap: 2rem;
+        }
+        .hero-tagline {
+            max-width: 360px; font-size: 1rem;
+            color: var(--muted); line-height: 1.5;
+        }
+        .hero-scroll {
+            font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--muted);
+            display: flex; align-items: center; gap: .6rem;
+        }
+        .hero-scroll::after {
+            content:''; width: 40px; height: 1px; background: var(--muted);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        @keyframes scrollLine {
+            0%, 100% { transform: scaleX(1); transform-origin: left; }
+            50% { transform: scaleX(0.2); transform-origin: left; }
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,.1);
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-track {
+            display: inline-flex; gap: 3rem;
+            animation: marquee 30s linear infinite;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2rem, 5vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        .marquee-track span { display: inline-flex; align-items: center; gap: 3rem; }
+        .marquee-track span::after {
+            content: '★'; color: var(--accent); font-size: .6em;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== WORK SECTION ===== */
+        .work {
+            padding: 8rem 2.5rem;
+        }
+        .section-label {
+            display: flex; justify-content: space-between;
+            font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        .section-label .accent { color: var(--accent); }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+        .work-item {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex; align-items: flex-end;
+            padding: 1.5rem;
+            transition: transform .6s cubic-bezier(.7,0,.3,1);
+        }
+        .work-item:nth-child(1) { grid-column: span 7; background: linear-gradient(135deg, #1a3a1a, #0a0a0a); }
+        .work-item:nth-child(2) { grid-column: span 5; background: linear-gradient(135deg, #3a1a1a, #0a0a0a); }
+        .work-item:nth-child(3) { grid-column: span 5; background: linear-gradient(135deg, #1a1a3a, #0a0a0a); }
+        .work-item:nth-child(4) { grid-column: span 7; background: linear-gradient(135deg, #3a3a1a, #0a0a0a); }
+
+        .work-item:hover { transform: translateY(-8px); }
+        .work-item:hover .work-arrow { transform: translate(4px, -4px); background: var(--accent); color: #000; }
+
+        .work-info { position: relative; z-index: 2; width: 100%;
+            display: flex; justify-content: space-between; align-items: flex-end; }
+        .work-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; }
+        .work-cat { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-top: .25rem; }
+        .work-arrow {
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center;
+            transition: all .4s cubic-bezier(.7,0,.3,1);
+            font-size: 1rem;
+        }
+
+        /* ===== ABOUT / BIG TEXT ===== */
+        .big-text {
+            padding: 10rem 2.5rem;
+            border-top: 1px solid rgba(255,255,255,.1);
+        }
+        .big-text h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2rem, 6vw, 6rem);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            max-width: 1400px;
+        }
+        .big-text h2 .dim { color: rgba(255,255,255,.2); }
+        .big-text h2 .accent { color: var(--accent); font-style: italic; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 6rem 2.5rem 2rem;
+            border-top: 1px solid rgba(255,255,255,.1);
+        }
+        .footer-cta {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(3rem, 10vw, 10rem);
+            line-height: .9;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+        .footer-cta .accent { color: var(--accent); font-style: italic; }
+        .footer-bottom {
+            margin-top: 4rem;
+            display: flex; justify-content: space-between;
+            font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.7,0,.3,1), transform 1s cubic-bezier(.7,0,.3,1); }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1rem 1.5rem; }
+            .nav-menu { display: none; }
+            .hero-portrait { width: 90vw; height: 90vw; right: -20%; opacity: .35; }
+            .hero { padding: 2rem 1.5rem; }
+            .work-grid { grid-template-columns: 1fr; }
+            .work-item { grid-column: span 1 !important; }
+            .work, .big-text, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="#" class="nav-logo">SF—</a>
+    <div class="nav-menu">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-portrait"></div>
+
+    <div class="hero-content">
+        <div class="hero-eyebrow reveal">Creative Developer · Lebanon</div>
+        <h1 class="hero-title">
+            <span class="line"><span class="reveal">Shadi</span></span>
+            <span class="line"><span class="reveal italic">Farhat</span></span>
+        </h1>
+        <div class="hero-meta">
+            <p class="hero-tagline reveal">Building immersive digital experiences with motion, 3D & code.</p>
+            <div class="hero-scroll reveal">Scroll to explore</div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Web Design</span><span>3D Art</span><span>Motion</span><span>Branding</span><span>Development</span>
+        <span>Web Design</span><span>3D Art</span><span>Motion</span><span>Branding</span><span>Development</span>
+    </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+    <div class="section-label reveal">
+        <span><span class="accent">●</span> Selected Work</span>
+        <span>2024 — 2026</span>
+    </div>
+    <div class="work-grid">
+        <div class="work-item reveal">
+            <div class="work-info">
+                <div>
+                    <div class="work-title">Project Alpha</div>
+                    <div class="work-cat">3D / WebGL</div>
+                </div>
+                <div class="work-arrow">↗</div>
+            </div>
+        </div>
+        <div class="work-item reveal">
+            <div class="work-info">
+                <div>
+                    <div class="work-title">Brand System</div>
+                    <div class="work-cat">Design</div>
+                </div>
+                <div class="work-arrow">↗</div>
+            </div>
+        </div>
+        <div class="work-item reveal">
+            <div class="work-info">
+                <div>
+                    <div class="work-title">Motion Reel</div>
+                    <div class="work-cat">Animation</div>
+                </div>
+                <div class="work-arrow">↗</div>
+            </div>
+        </div>
+        <div class="work-item reveal">
+            <div class="work-info">
+                <div>
+                    <div class="work-title">E-Commerce</div>
+                    <div class="work-cat">Development</div>
+                </div>
+                <div class="work-arrow">↗</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BIG STATEMENT -->
+<section class="big-text" id="about">
+    <h2 class="reveal">
+        Crafting <span class="accent">bold</span> digital experiences
+        <span class="dim">that move people,</span> built with precision
+        <span class="dim">and</span> <span class="accent">soul.</span>
+    </h2>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+    <div class="footer-cta reveal">
+        Let's <span class="accent">build</span><br>something real.
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Shadi Farhat</span>
+        <span>hello@shadifarhat.com</span>
+    </div>
+</footer>
+
+<script>
+    // Simple intersection reveal — same idea as GSAP ScrollTrigger but no library
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

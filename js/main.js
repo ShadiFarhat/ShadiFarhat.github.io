@@ -697,22 +697,224 @@
     }
 
     // ---------------------------------------------------------
-    // 9. LIGHTBOX — open preview on click for cards without URL
+    // 9. PROJECT MODAL — slideshow + info panel for every card
     // ---------------------------------------------------------
-    (function initLightbox() {
+    (function initProjectModal() {
+        // ---- Data (ported from old portfolio) ----
+        const PROJECTS = {
+            'pulse-dashboard': {
+                category: 'Web Development', title: 'Maliks Pulse — HR System',
+                description: 'Complete HR management system integrated with AI (OpenAI + Claude APIs) to generate professional reports and employee images. Features KPI tracking, vacation management, performance reviews, attendance, and customised dashboards.',
+                role: 'Full-Stack Developer & Project Lead', year: '2024',
+                tags: ['Laravel', 'React', 'MySQL', 'OpenAI', 'Claude', 'WebSockets'],
+                link: null, isPrivate: true,
+                images: ['assets/projects/pulse-dashboard/mockup.webp','assets/projects/pulse-dashboard/1.webp','assets/projects/pulse-dashboard/2.webp','assets/projects/pulse-dashboard/3.webp','assets/projects/pulse-dashboard/4.webp','assets/projects/pulse-dashboard/5.webp','assets/projects/pulse-dashboard/6.webp','assets/projects/pulse-dashboard/7.webp','assets/projects/pulse-dashboard/8.webp'],
+            },
+            'pulse-mobile': {
+                category: 'Mobile App', title: 'Maliks Pulse Mobile',
+                description: 'Cross-platform mobile companion for Maliks Pulse. Managers monitor sales, approve requests, and receive real-time notifications. Built with React Native for iOS + Android.',
+                role: 'Mobile Developer', year: '2024',
+                tags: ['React Native', 'Redux', 'Push Notifications'], link: null, isPrivate: true,
+                images: ['assets/projects/pulse-mobile/mockup.jpg','assets/projects/pulse-mobile/1.png','assets/projects/pulse-mobile/2.png','assets/projects/pulse-mobile/3.png','assets/projects/pulse-mobile/4.png','assets/projects/pulse-mobile/5.png','assets/projects/pulse-mobile/6.png'],
+            },
+            'ai-system': {
+                category: 'AI Game', title: 'Maliks Valentine Game',
+                description: 'Interactive Valentine\'s Day game — customers draw a heart on screen; a perfect heart wins a free AI-generated photo via Nano Banana Pro. Canvas-API drawing detection + AI image gen pipeline.',
+                role: 'Full-Stack Developer & AI Engineer', year: '2024',
+                tags: ['JavaScript', 'Canvas API', 'Nano Banana AI', 'Laravel'], link: null, isPrivate: true,
+                images: ['assets/projects/ai-system/mockup.webp','assets/projects/ai-system/1.webp','assets/projects/ai-system/2.webp','assets/projects/ai-system/3.webp','assets/projects/ai-system/4.webp'],
+            },
+            'tracking': {
+                category: 'Mobile + Web', title: 'Maliks Deliveries Tracking',
+                description: 'Delivery tracking system with a driver mobile app. Real-time GPS, daily/weekly/monthly movement reports, delivery status updates, route history. Managers monitor every driver live on a dashboard.',
+                role: 'Full-Stack Developer', year: '2023',
+                tags: ['Laravel', 'React Native', 'Google Maps API', 'Firebase', 'MySQL'], link: null, isPrivate: true,
+                images: ['assets/projects/tracking/mockup.webp'],
+            },
+            'warehouse': {
+                category: 'Enterprise System', title: 'Maliks Warehouse Management',
+                description: 'Full warehouse management with payroll and attendance. Stock control, inventory, barcode scanning, automated reordering, multi-location sync, and reporting.',
+                role: 'Full-Stack Developer', year: '2023',
+                tags: ['Laravel', 'React', 'Barcode API', 'MySQL', 'Payroll'], link: null, isPrivate: true,
+                images: ['assets/projects/warehouse/mockup.webp'],
+            },
+            'as3arna': {
+                category: 'E-Commerce', title: 'As3arna — Price Platform',
+                description: 'Price-comparison and tracking platform for the Lebanese market. Compare across stores, set price alerts, and find best deals. Web-scraping pipeline + history graphs.',
+                role: 'Founder · Full-Stack Developer', year: '2023',
+                tags: ['Laravel', 'Vue.js', 'Web Scraping', 'MySQL'],
+                link: 'https://as3arna.net', isPrivate: false,
+                images: ['assets/projects/as3arna/mockup.webp'],
+            },
+            'filali': {
+                category: 'Web Development', title: 'Filali Engineers',
+                description: 'Professional website for Filali Engineering. Project showcase, services, and company portfolio with modern design and smooth animations.',
+                role: 'Web Developer & Designer', year: '2023',
+                tags: ['HTML/CSS', 'JavaScript', 'PHP'],
+                link: 'http://filaliengineers.com', isPrivate: false,
+                images: ['assets/projects/filali/mockup.webp'],
+            },
+            'mediahub': {
+                category: 'Web Platform', title: 'Hostify',
+                description: 'Airbnb-style rental platform for Lebanon. List properties, browse rentals, book stays, manage reservations. Auth, payments, reviews, messaging.',
+                role: 'Full-Stack Developer', year: '2023',
+                tags: ['Laravel', 'Vue.js', 'MySQL', 'Stripe', 'Google Maps'],
+                link: 'https://slategray-emu-126412.hostingersite.com', isPrivate: false,
+                images: ['assets/projects/mediahub/mockup.webp'],
+            },
+            'codesign': {
+                category: 'Web Development', title: 'Codesign LB',
+                description: 'Design-agency site — portfolio gallery, team section, service showcase. Clean modern design with smooth scrolling effects.',
+                role: 'Web Developer & Designer', year: '2022',
+                tags: ['HTML/CSS', 'JavaScript', 'GSAP'],
+                link: 'https://codesignlb.com', isPrivate: false,
+                images: ['assets/projects/codesign/mockup.webp'],
+            },
+            'bakhoss': {
+                category: 'Digital Invitation', title: 'Bakhos & Souzana — Wedding',
+                description: 'Elegant digital wedding invitation with RSVP. Animations, event details, location map, photo gallery, guest confirmations.',
+                role: 'Web Developer & Designer', year: '2022',
+                tags: ['HTML/CSS', 'JavaScript', 'GSAP', 'Google Maps'],
+                link: 'http://bakhossouzana.com', isPrivate: false,
+                images: ['assets/projects/bakhoss/mockup.webp'],
+            },
+            'golden-coast': {
+                category: 'Portfolio', title: 'Golden Coast',
+                description: 'Corporate portfolio website for Golden Coast — services, projects, company info. Modern design and smooth UX.',
+                role: 'Web Developer & Designer', year: '2023',
+                tags: ['HTML/CSS', 'JavaScript', 'PHP'],
+                link: 'https://olivedrab-rhinoceros-902407.hostingersite.com', isPrivate: false,
+                images: ['assets/projects/golden-coast/mockup.webp','assets/projects/golden-coast/1.webp','assets/projects/golden-coast/2.webp','assets/projects/golden-coast/3.webp','assets/projects/golden-coast/4.webp','assets/projects/golden-coast/5.webp','assets/projects/golden-coast/6.webp'],
+            },
+            'mini-market': {
+                category: 'ERP System', title: 'Mini Market ERP',
+                description: 'Complete ERP for mini markets and small retail stores. Inventory, POS, sales tracking, and reporting dashboards.',
+                role: 'Full-Stack Developer', year: '2024',
+                tags: ['Laravel', 'Vue.js', 'MySQL', 'POS'],
+                link: 'https://violet-butterfly-367429.hostingersite.com', isPrivate: true,
+                images: ['assets/projects/mini-market/mockup.webp','assets/projects/mini-market/1.webp','assets/projects/mini-market/2.webp','assets/projects/mini-market/3.webp','assets/projects/mini-market/4.webp','assets/projects/mini-market/5.webp','assets/projects/mini-market/6.webp'],
+            },
+            'pulse-old': {
+                category: 'Legacy System', title: 'Maliks Pulse (Legacy)',
+                description: 'Original Maliks Pulse — the foundation that evolved into the current HR and enterprise management platform.',
+                role: 'Full-Stack Developer', year: '2022',
+                tags: ['Laravel', 'jQuery', 'MySQL', 'Bootstrap'],
+                link: 'http://demo.malikspulse.com', isPrivate: true,
+                images: ['assets/projects/pulse-old/mockup.webp','assets/projects/pulse-old/1.webp','assets/projects/pulse-old/2.webp','assets/projects/pulse-old/3.webp','assets/projects/pulse-old/4.webp','assets/projects/pulse-old/5.webp','assets/projects/pulse-old/6.webp','assets/projects/pulse-old/7.webp','assets/projects/pulse-old/8.webp'],
+            },
+        };
+
+        const THREED = {
+            'almaza':           { category: 'Product', title: 'Almaza',            description: '3D product visualisation of Almaza beer bottle. Photoreal render in Blender with studio lighting.' },
+            'black-opuim':      { category: 'Product', title: 'Black Opium',       description: 'YSL Black Opium perfume bottle. High-end product visualisation with dramatic lighting.' },
+            'la-vie-est-belle': { category: 'Product', title: 'La Vie Est Belle',  description: 'Lancôme La Vie Est Belle perfume. Elegant product render with soft lighting.' },
+            'valentino':        { category: 'Product', title: 'Valentino',         description: 'Valentino fragrance bottle. Luxury product visualisation with studio setup.' },
+            'spice-bomb':       { category: 'Product', title: 'Spice Bomb',        description: 'Viktor & Rolf Spice Bomb perfume. Bold product render with explosive theme.' },
+            'la-nuit-de-lhomme':{ category: 'Product', title: "La Nuit de l'Homme", description: "YSL La Nuit de l'Homme fragrance. Sophisticated product visualisation." },
+            'lhomme-prada':     { category: 'Product', title: "L'Homme Prada",     description: 'Prada fragrance bottle. Minimalist luxury product render.' },
+            'redbull':          { category: 'Product', title: 'Red Bull',          description: 'Red Bull energy drink can. Dynamic product visualisation with energetic mood.' },
+            'freeze':           { category: 'Product', title: 'Freeze',            description: 'Cool, refreshing aesthetic. Professional studio render.' },
+            'kitkat':           { category: 'Product', title: 'KitKat',            description: 'KitKat chocolate bar. Appetising product visualisation with realistic textures.' },
+            'pringles':         { category: 'Product', title: 'Pringles',          description: 'Pringles can. Fun and playful product render.' },
+            'prill':            { category: 'Product', title: 'Prill',             description: 'Prill cleaning product. Clean and professional product visualisation.' },
+            'lysedia-jar':      { category: 'Product', title: 'Lysedia Jar',       description: 'Cosmetic jar. Elegant beauty product render with soft lighting.' },
+            'sport-bottle':     { category: 'Product', title: 'Sport Bottle',      description: 'Sports water bottle. Active-lifestyle product visualisation.' },
+            'chess':            { category: 'Product', title: 'Chess',             description: 'Chess pieces. Artistic render with dramatic lighting.' },
+            'white-mugs':       { category: 'Product', title: 'White Mugs',        description: 'Ceramic mugs. Clean minimalist product visualisation.' },
+            'badges':           { category: 'Product', title: 'Badges',            description: 'Promotional badges. Detailed product render with realistic materials.' },
+        };
+
+        // Auto-derive image lists for the 3D pieces from disk layout. Most
+        // have skeleton.webp + final.webp; otherwise final only.
+        const NO_SKELETON = new Set(['la-nuit-de-lhomme']);
+        for (const id in THREED) {
+            THREED[id].role  = '3D Artist · Blender';
+            THREED[id].year  = '2024';
+            THREED[id].tags  = ['Blender', 'Cycles', 'Product Render'];
+            THREED[id].link  = null;
+            THREED[id].images = NO_SKELETON.has(id)
+                ? [`assets/3d-work/${id}/final.webp`]
+                : [`assets/3d-work/${id}/final.webp`, `assets/3d-work/${id}/skeleton.webp`];
+        }
+
         const lightbox = document.getElementById('lightbox');
         if (!lightbox) return;
-        const img      = lightbox.querySelector('.lightbox-img');
-        const closeBtn = lightbox.querySelector('.lightbox-close');
-        const backdrop = lightbox.querySelector('.lightbox-backdrop');
+        const slidesWrap = document.getElementById('lightboxSlides');
+        const counter    = document.getElementById('lightboxCounter');
+        const elCat      = document.getElementById('lightboxCat');
+        const elTitle    = document.getElementById('lightboxTitle');
+        const elDesc     = document.getElementById('lightboxDesc');
+        const elMeta     = document.getElementById('lightboxMeta');
+        const elTech     = document.getElementById('lightboxTech');
+        const elCta      = document.getElementById('lightboxCta');
+        const closeBtn   = lightbox.querySelector('.lightbox-close');
+        const backdrop   = lightbox.querySelector('.lightbox-backdrop');
+        const prevBtn    = lightbox.querySelector('.lightbox-prev');
+        const nextBtn    = lightbox.querySelector('.lightbox-next');
 
-        function open(src, alt) {
-            img.src = src; img.alt = alt || '';
+        let slides = [];
+        let idx    = 0;
+
+        function renderSlides(images) {
+            slidesWrap.innerHTML = '';
+            slides = images.map((src, i) => {
+                const img = document.createElement('img');
+                img.alt = '';
+                // Lazy-load all but the first
+                if (i === 0) img.src = src; else img.dataset.src = src;
+                if (i === 0) img.classList.add('is-active');
+                slidesWrap.appendChild(img);
+                return img;
+            });
+            const hasMany = images.length > 1;
+            prevBtn.hidden = !hasMany;
+            nextBtn.hidden = !hasMany;
+            counter.hidden = !hasMany;
+            idx = 0;
+            updateCounter();
+        }
+        function updateCounter() {
+            counter.textContent = `${idx + 1} / ${slides.length}`;
+        }
+        function go(to) {
+            if (slides.length < 2) return;
+            const next = ((to % slides.length) + slides.length) % slides.length;
+            const el = slides[next];
+            if (el.dataset.src && !el.src) { el.src = el.dataset.src; delete el.dataset.src; }
+            slides[idx].classList.remove('is-active');
+            el.classList.add('is-active');
+            idx = next;
+            updateCounter();
+        }
+
+        function render(data) {
+            renderSlides(data.images);
+            elCat.textContent   = data.category || '';
+            elTitle.textContent = data.title    || '';
+            elDesc.textContent  = data.description || '';
+            elMeta.innerHTML = `
+                <div class="lightbox-meta-item">
+                    <span class="lightbox-meta-label">Role</span>
+                    <span class="lightbox-meta-value">${data.role || '—'}</span>
+                </div>
+                <div class="lightbox-meta-item">
+                    <span class="lightbox-meta-label">Year</span>
+                    <span class="lightbox-meta-value">${data.year || '—'}</span>
+                </div>`;
+            elTech.innerHTML = (data.tags || []).map(t => `<span class="lightbox-tech-tag">${t}</span>`).join('');
+            if (data.link) {
+                elCta.href = data.link;
+                elCta.hidden = false;
+            } else {
+                elCta.removeAttribute('href');
+                elCta.hidden = true;
+            }
+        }
+
+        function open(data) {
+            render(data);
             lightbox.classList.add('is-open');
             lightbox.setAttribute('aria-hidden', 'false');
-            // Stop Lenis (smooth scroller) AND lock body scroll. Both are
-            // needed: Lenis ignores body.overflow:hidden, and overflow:hidden
-            // alone won't block the native scrollbar arrow keys / wheel.
             if (typeof lenis !== 'undefined' && lenis.stop) lenis.stop();
             document.body.style.overflow = 'hidden';
             document.documentElement.style.overflow = 'hidden';
@@ -723,39 +925,52 @@
             if (typeof lenis !== 'undefined' && lenis.start) lenis.start();
             document.body.style.overflow = '';
             document.documentElement.style.overflow = '';
-            // delay clearing src until fade-out finishes
-            setTimeout(() => { if (!lightbox.classList.contains('is-open')) img.src = ''; }, 280);
         }
 
         backdrop.addEventListener('click', close);
         closeBtn.addEventListener('click', close);
+        prevBtn.addEventListener('click', () => go(idx - 1));
+        nextBtn.addEventListener('click', () => go(idx + 1));
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+            if (!lightbox.classList.contains('is-open')) return;
+            if (e.key === 'Escape')     close();
+            if (e.key === 'ArrowLeft')  go(idx - 1);
+            if (e.key === 'ArrowRight') go(idx + 1);
         });
-
-        // Eat any scroll input while the lightbox is open
+        // Block scroll-through
         const blockScroll = e => {
-            if (lightbox.classList.contains('is-open')) e.preventDefault();
+            if (lightbox.classList.contains('is-open') && !e.target.closest('.lightbox-info')) e.preventDefault();
         };
         lightbox.addEventListener('wheel',     blockScroll, { passive: false });
         lightbox.addEventListener('touchmove', blockScroll, { passive: false });
 
-        // Bind to every image inside a work-card or threed-card
-        document.querySelectorAll('.work-card img, .threed-card img').forEach(el => {
-            el.classList.add('lightbox-trigger');
-            el.addEventListener('click', e => {
-                e.preventDefault();
-                open(el.currentSrc || el.src, el.alt);
+        function fallbackFromCard(card, isThreeD) {
+            // Card had no data entry — synthesise a minimal info set
+            const img = card.querySelector('img');
+            const title = card.querySelector('.work-card-title, .threed-card-label');
+            const cat   = card.querySelector('.work-card-meta');
+            return {
+                category: cat ? cat.textContent.trim() : (isThreeD ? '3D · Blender' : 'Project'),
+                title: title ? title.textContent.trim() : (img && img.alt) || 'Untitled',
+                description: '', role: '', year: '', tags: [], link: null,
+                images: img ? [img.currentSrc || img.src] : [],
+            };
+        }
+
+        // Wire clicks: project cards
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.style.cursor = 'zoom-in';
+            card.addEventListener('click', () => {
+                const id = card.dataset.project;
+                open(PROJECTS[id] || fallbackFromCard(card, false));
             });
         });
-
-        // Whole-card click too (so empty card surface also triggers)
-        document.querySelectorAll('.work-card, .threed-card').forEach(card => {
+        // 3D cards
+        document.querySelectorAll('.threed-card').forEach(card => {
             card.style.cursor = 'zoom-in';
-            card.addEventListener('click', e => {
-                if (e.target.closest('img')) return; // image handler already fired
-                const inner = card.querySelector('img');
-                if (inner) open(inner.currentSrc || inner.src, inner.alt);
+            card.addEventListener('click', () => {
+                const id = card.dataset['3d'];
+                open(THREED[id] || fallbackFromCard(card, true));
             });
         });
     })();
