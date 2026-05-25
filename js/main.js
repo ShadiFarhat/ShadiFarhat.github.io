@@ -637,7 +637,7 @@
                     trigger: sec,
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: 2.5,
+                    scrub: 0.8,                  // tighter — was 2.5, felt frozen
                     invalidateOnRefresh: true,
                 },
             });
@@ -651,8 +651,10 @@
                 master.add(openBlinds(blinds));
                 if (texts[i]) {
                     master.add(textIn(texts[i]), '-=0.3');
-                    if (i < blindsSets.length - 1) master.add(textOut(texts[i]), '+=0.8');
-                    else master.to({}, { duration: 0.8 });
+                    // Always queue a textOut — for the last panel too, so
+                    // reverse-scrolling out of the section properly hides
+                    // the text instead of leaving it pinned on screen.
+                    master.add(textOut(texts[i]), '+=0.8');
                 }
             });
         }
