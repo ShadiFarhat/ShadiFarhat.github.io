@@ -624,38 +624,26 @@
                 }
             );
         }
-        // Use fromTo so GSAP records EXACTLY which values to revert to on
-        // reverse scrub. With plain .to() the start state can be wrong when
-        // the timeline reverses from mid-tween, causing the previous panel
-        // text to stay on screen ("stuck on Pulse Mobile") when scrolling
-        // back to Pulse HR.
-        function textIn(el)  {
-            return gsap.fromTo(el,
-                { clipPath: 'inset(100% 0% 0% 0%)', y: 40 },
-                { clipPath: 'inset(0% 0% 0% 0%)',   y: 0,
-                  duration: 0.9, ease: 'power2.out', immediateRender: false });
-        }
-        function textOut(el) {
-            return gsap.fromTo(el,
-                { clipPath: 'inset(0% 0% 0% 0%)',   y: 0 },
-                { clipPath: 'inset(0% 0% 100% 0%)', y: -30,
-                  duration: 0.7, ease: 'power2.in', immediateRender: false });
-        }
+
+        let perPanelTriggers = [];
 
         function buildTimeline() {
             if (master) master.kill();
+            perPanelTriggers.forEach(t => t.kill());
+            perPanelTriggers = [];
+
             const texts = gsap.utils.toArray('#experiments .vc-txt');
             const intro = sec.querySelector('.vc-intro');
 
+            // ---- Master timeline: ONLY drives the SVG blinds + intro fade.
+            // Text panels are handled by their own per-panel ScrollTriggers
+            // below (much more robust on reverse-scroll than a scrubbed
+            // master timeline with clip-path tweens).
             master = gsap.timeline({
                 scrollTrigger: {
                     trigger: sec,
                     start: 'top top',
                     end: 'bottom bottom',
-                    // Scrub: true = follow scroll position exactly. With
-                    // Lenis already smoothing the scroll, an additional
-                    // GSAP scrub-lag was double-smoothing and made the
-                    // previous text panel feel stuck during reverse scroll.
                     scrub: true,
                     invalidateOnRefresh: true,
                 },
@@ -665,16 +653,54 @@
                 master.to({}, { duration: 0.4 });
                 master.to(intro, { opacity: 0, duration: 0.4, ease: 'power2.out' });
             }
+            blindsSets.forEach((blinds) => master.add(openBlinds(blinds)));
 
-            blindsSets.forEach((blinds, i) => {
-                master.add(openBlinds(blinds));
-                if (texts[i]) {
-                    master.add(textIn(texts[i]), '-=0.2');
-                    // Always queue a textOut so the panel clears cleanly
-                    // in BOTH directions. The fromTo above guarantees the
-                    // reverse interpolates correctly.
-                    master.add(textOut(texts[i]), '+=0.5');
-                }
+            // ---- Per-panel text triggers.
+            // Each panel is visible during ITS slice of the section
+            // (e.g. panel 1 = 14%-30%, panel 2 = 30%-46%, etc). We use
+            // the trigger's onUpdate to set opacity + translateY directly.
+            // This always reflects the current scroll position correctly,
+            // so reverse-scroll never leaves a panel pinned on screen.
+            const n = texts.length;
+            const introSpan = 0.10;                 // first 10% is the intro fade
+            const slice = (1 - introSpan) / n;
+            const fadeIn  = 0.25;                   // % of slice spent fading in
+            const fadeOut = 0.25;                   // % spent fading out
+
+            const secStart = sec.offsetTop;
+            const secEnd   = secStart + sec.offsetHeight - window.innerHeight;
+            const secLen   = secEnd - secStart;
+
+            texts.forEach((el, i) => {
+                const startP = introSpan + i * slice;
+                const endP   = startP + slice;
+                const t = ScrollTrigger.create({
+                    trigger: sec,
+                    start: () => secStart + startP * secLen,
+                    end:   () => secStart + endP   * secLen,
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const p = self.progress;     // 0 -> 1 inside this panel's slice
+                        let opacity, y;
+                        if (p < fadeIn) {
+                            // Fade in
+                            const k = p / fadeIn;
+                            opacity = k;
+                            y = 40 * (1 - k);
+                        } else if (p > 1 - fadeOut) {
+                            // Fade out
+                            const k = (p - (1 - fadeOut)) / fadeOut;
+                            opacity = 1 - k;
+                            y = -30 * k;
+                        } else {
+                            opacity = 1;
+                            y = 0;
+                        }
+                        el.style.opacity = opacity;
+                        el.style.transform = `translateY(${y}px)`;
+                    },
+                });
+                perPanelTriggers.push(t);
             });
         }
 

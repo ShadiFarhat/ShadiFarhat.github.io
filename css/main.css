@@ -893,9 +893,9 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     flex-direction: column;
     justify-content: flex-end;
     color: #fff;
-    clip-path: inset(100% 0 0 0);
+    opacity: 0;
     transform: translateY(40px);
-    will-change: clip-path, transform;
+    will-change: opacity, transform;
 }
 .vc-txt-brand {
     font-family: "DM Mono", monospace;
