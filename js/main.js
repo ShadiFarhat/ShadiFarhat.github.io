@@ -8,42 +8,32 @@
     'use strict';
 
     // ---------------------------------------------------------
-    // PRELOADER — dismisses as soon as hero base image is ready
-    // (signalled by window._heroReady from the WebGL init). A
-    // 4 s hard cap guarantees we never block the page.
+    // PRELOADER — fills progress bar, dismisses on full load
     // ---------------------------------------------------------
     (function initSplash() {
         const splash = document.getElementById('splash');
         const bar    = document.getElementById('splashBar');
         if (!splash || !bar) return;
-
-        let pct = 0, done = false;
+        let pct = 0;
         const tick = setInterval(() => {
-            pct = Math.min(pct + (90 - pct) * 0.06, 89);
+            pct = Math.min(pct + (90 - pct) * 0.05, 89);
             bar.style.width = pct + '%';
-        }, 50);
-
-        const startedAt = performance.now();
-        const MIN_SHOW = 600;
-
+        }, 60);
         const dismiss = () => {
-            if (done) return;
-            done = true;
             clearInterval(tick);
             bar.style.width = '100%';
-            const wait = Math.max(0, MIN_SHOW - (performance.now() - startedAt));
             setTimeout(() => {
                 splash.classList.add('is-gone');
-                setTimeout(() => { splash.style.display = 'none'; }, 700);
-            }, wait + 200);
+                setTimeout(() => { splash.style.display = 'none'; }, 800);
+            }, 350);
         };
-
-        // Exposed so the WebGL hero can call it the moment the base
-        // texture has uploaded — much faster than waiting for load.
-        window._dismissSplash = dismiss;
-
-        // Hard cap
-        setTimeout(dismiss, 4000);
+        if (document.readyState === 'complete') {
+            setTimeout(dismiss, 600);
+        } else {
+            window.addEventListener('load', () => setTimeout(dismiss, 400));
+        }
+        // Hard cap — always dismiss within 5s no matter what
+        setTimeout(dismiss, 5000);
     })();
 
     // ---------------------------------------------------------
@@ -121,26 +111,31 @@
     });
 
     // Set EXPLICIT initial states BEFORE timeline so reverse-scrub
-    // returns cleanly when scrolling back up.
+    // returns cleanly to the hero photo when scrolling back up.
+    gsap.set('.hero-face-wrap',     { scale: 1, opacity: 1 });
     gsap.set('.hero-name-overlay',  { opacity: 0 });
     gsap.set('.hero-name .char-anim', { y: '110%' });
     gsap.set('.hero-underline',     { scaleX: 0, transformOrigin: 'left center' });
 
-    // Scroll-linked: name rises in as you leave the hero. We deliberately
-    // do NOT scale or fade the .hero-face-wrap any more — transforming
-    // the wrap also transforms the WebGL canvas inside, which forced the
-    // browser to re-composite a large GPU layer every frame and was the
-    // root cause of the scrolling jank/freeze on the hero.
+    // Initial intro fade-in (page load only — one-shot)
+    gsap.from('.hero-face-color', {
+        scale: 1.06, opacity: 0, duration: 1.6, ease: 'expo.out'
+    });
+
+    // Scroll-linked: as you scroll the 200vh hero, photo fades +
+    // name rises in. Scroll BACK and everything cleanly reverses
+    // because scrub is bi-directional and initial states are set.
     const heroTL = gsap.timeline({
         scrollTrigger: {
             trigger: '#hero',
             start: 'top top',
             end:   'bottom bottom',
-            scrub: 0.3,
+            scrub: 0.3,                  // tight, almost instant both ways
             invalidateOnRefresh: true,
         },
     });
     heroTL
+        .to('.hero-face-wrap',    { scale: 0.88, opacity: 0.15, ease: 'none' }, 0)
         .to('.hero-name-overlay', { opacity: 1, ease: 'none' }, 0.15)
         .to('.hero-name .char-anim', { y: '0%', stagger: 0.02, ease: 'power2.out' }, 0.25)
         .to('.hero-underline',    { scaleX: 1, ease: 'power2.out' }, 0.55);
@@ -168,22 +163,13 @@
         const heroWrap   = document.getElementById('heroFaceWrap');
         if (!heroCanvas || !heroWrap) return;
 
-        // Size BEFORE GL init. canvas.width assignments RESET all WebGL
-        // state, so we set this exactly once at startup and never again
-        // (CSS scales the backing store on resize — slight blur on big
-        // resizes, but zero frozen / black-canvas glitches).
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-        const w0  = heroWrap.clientWidth  || window.innerWidth;
-        const h0  = heroWrap.clientHeight || window.innerHeight;
-        heroCanvas.width  = Math.round(w0 * dpr);
-        heroCanvas.height = Math.round(h0 * dpr);
+        // Size BEFORE GL init (resizing canvas.width later resets state)
+        heroCanvas.width  = heroWrap.clientWidth  || window.innerWidth;
+        heroCanvas.height = heroWrap.clientHeight || window.innerHeight;
 
-        const gl = heroCanvas.getContext('webgl',              { alpha: true, antialias: false, depth: false, preserveDrawingBuffer: false }) ||
-                   heroCanvas.getContext('experimental-webgl', { alpha: true, antialias: false, depth: false, preserveDrawingBuffer: false });
-        if (!gl) {
-            if (window._dismissSplash) window._dismissSplash();
-            return;          // graceful fallback to the <img> beneath
-        }
+        const gl = heroCanvas.getContext('webgl',              { alpha: true, antialias: false, depth: false }) ||
+                   heroCanvas.getContext('experimental-webgl', { alpha: true, antialias: false, depth: false });
+        if (!gl) return;          // graceful fallback to the <img> beneath
 
         const SIM_W = 512, SIM_H = 512;
         const LWIDTH = SIM_W * 0.20;
@@ -243,14 +229,11 @@
             precision highp float;
             varying vec2 v_uv;
             uniform sampler2D u_base;
-            uniform sampler2D u_revealA;
-            uniform sampler2D u_revealB;
+            uniform sampler2D u_reveal;
             uniform sampler2D u_fluid;
             uniform vec2 u_baseSize;
-            uniform vec2 u_revealASize;
-            uniform vec2 u_revealBSize;
+            uniform vec2 u_revealSize;
             uniform vec2 u_canvas;
-            uniform float u_revealMix;
 
             vec2 coverUV(vec2 uv, vec2 img, vec2 cvs){
                 float ia = img.x / img.y;
@@ -260,21 +243,15 @@
                 return (fuv - 0.5) * s + 0.5;
             }
 
-            vec3 bw(vec3 c){
-                float lum = dot(c, vec3(0.299,0.587,0.114));
-                lum = clamp((lum-0.5)*1.1 + 0.5, 0.0, 1.0);
-                return vec3(lum);
-            }
-
             void main(){
-                vec2 bUV  = coverUV(v_uv, u_baseSize,    u_canvas);
-                vec2 rAUV = coverUV(v_uv, u_revealASize, u_canvas);
-                vec2 rBUV = coverUV(v_uv, u_revealBSize, u_canvas);
+                vec2 bUV = coverUV(v_uv, u_baseSize,   u_canvas);
+                vec2 rUV = coverUV(v_uv, u_revealSize, u_canvas);
 
                 vec3 base = texture2D(u_base, bUV).rgb;
-                vec3 revA = bw(texture2D(u_revealA, rAUV).rgb);
-                vec3 revB = bw(texture2D(u_revealB, rBUV).rgb);
-                vec3 rev  = mix(revA, revB, u_revealMix);
+                vec3 rev  = texture2D(u_reveal, rUV).rgb;
+                float lum = dot(rev, vec3(0.299,0.587,0.114));
+                lum = clamp((lum-0.5)*1.1 + 0.5, 0.0, 1.0);
+                rev = vec3(lum);
 
                 float mask = texture2D(u_fluid, v_uv).r;
                 vec3 color = mix(rev, base, mask);
@@ -344,9 +321,7 @@
 
         const trailTex = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, trailTex);
-        // First allocation — subsequent updates use texSubImage2D which
-        // is significantly cheaper (no re-allocation per frame).
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, trailCanvas);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, SIM_W, SIM_H, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -411,131 +386,58 @@
             time:  gl.getUniformLocation(simProg, 'u_time'),
         };
         const compU = {
-            base:         gl.getUniformLocation(compProg, 'u_base'),
-            revealA:      gl.getUniformLocation(compProg, 'u_revealA'),
-            revealB:      gl.getUniformLocation(compProg, 'u_revealB'),
-            fluid:        gl.getUniformLocation(compProg, 'u_fluid'),
-            baseSize:     gl.getUniformLocation(compProg, 'u_baseSize'),
-            revealASize:  gl.getUniformLocation(compProg, 'u_revealASize'),
-            revealBSize:  gl.getUniformLocation(compProg, 'u_revealBSize'),
-            canvas:       gl.getUniformLocation(compProg, 'u_canvas'),
-            revealMix:    gl.getUniformLocation(compProg, 'u_revealMix'),
+            base:       gl.getUniformLocation(compProg, 'u_base'),
+            reveal:     gl.getUniformLocation(compProg, 'u_reveal'),
+            fluid:      gl.getUniformLocation(compProg, 'u_fluid'),
+            baseSize:   gl.getUniformLocation(compProg, 'u_baseSize'),
+            revealSize: gl.getUniformLocation(compProg, 'u_revealSize'),
+            canvas:     gl.getUniformLocation(compProg, 'u_canvas'),
         };
 
-        // ---------- pause / visibility / resize state ----------
-        let isPaused      = false;     // tab-hidden pause
-        let isOffscreen   = false;     // hero not in viewport
-        let trailHotUntil = 0;         // keep rendering for a beat after activity
-
-        // Pause when the tab is hidden (saves GPU + avoids huge dt on return)
-        document.addEventListener('visibilitychange', () => {
-            isPaused = document.hidden;
-            if (!isPaused) trailHotUntil = performance.now() + 200;
+        window.addEventListener('resize', () => {
+            heroCanvas.width  = heroWrap.clientWidth  || window.innerWidth;
+            heroCanvas.height = heroWrap.clientHeight || window.innerHeight;
         });
 
-        // Pause when the hero has scrolled out of view
-        if ('IntersectionObserver' in window) {
-            new IntersectionObserver(entries => {
-                isOffscreen = !entries[0].isIntersecting;
-                if (!isOffscreen) trailHotUntil = performance.now() + 200;
-            }, { rootMargin: '50px' }).observe(heroWrap);
-        }
-
-        // Resize: rebuild the backing store only AFTER significant change
-        // and only when the canvas is offscreen (so the GL-state reset is
-        // invisible). Falls back to CSS scaling for the in-view case.
-        let pendingResize = null;
-        function applyResize() {
-            const w = heroWrap.clientWidth  || window.innerWidth;
-            const h = heroWrap.clientHeight || window.innerHeight;
-            const nw = Math.round(w * dpr);
-            const nh = Math.round(h * dpr);
-            if (Math.abs(nw - heroCanvas.width) < 4 && Math.abs(nh - heroCanvas.height) < 4) return;
-            heroCanvas.width  = nw;
-            heroCanvas.height = nh;
-            // canvas.width/height assignment wiped the GL context state.
-            // Re-upload trail texture allocation; FBOs/programs survive
-            // because they were created with the same context object and
-            // only references were lost on the canvas DOM node, not on
-            // the WebGL context. (Sim FBOs are sim-resolution so they're
-            // unaffected by canvas resize.)
-            gl.bindTexture(gl.TEXTURE_2D, trailTex);
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, trailCanvas);
-        }
-        window.addEventListener('resize', () => {
-            clearTimeout(pendingResize);
-            pendingResize = setTimeout(applyResize, 180);
-        }, { passive: true });
-
-        // ---------- assets ----------
         const seqPaths = [1,2,3,4,5].map(n => `assets/seq/${n}.jpeg`);
         const seqFrames = [];
         seqPaths.forEach(p => loadTex(p).then(t => { if (t) seqFrames.push(t); }));
 
         loadTex('assets/hero-blue.jpg').then(base => {
-            // Base ready → splash can dismiss now
-            if (window._dismissSplash) window._dismissSplash();
-
             if (!base) { console.warn('[fluid-reveal] base failed — fallback img.'); return; }
             if (seqFrames.length === 0) seqFrames.push(base);
 
-            // Cross-fade state. A is the "current" frame, B is the next.
-            // We hold A on screen for SEQ_HOLD, then animate the mix from
-            // 0 → 1 over SEQ_FADE, then promote B to A and pick a new B.
-            let aIdx = 0, bIdx = 1, cycleStart = 0, t0 = null;
-            const SEQ_HOLD = 900;   // ms a frame stays at full opacity
-            const SEQ_FADE = 600;   // ms cross-fade duration
-            const SEQ_TOTAL = SEQ_HOLD + SEQ_FADE;
+            let seqIdx = 0, lastSeqTime = 0, t0 = null;
+            const SEQ_INTERVAL = 300;
 
             function frame(ts){
                 requestAnimationFrame(frame);
-
-                // Skip render when paused or offscreen (but keep a brief
-                // "hot window" after activity so the fluid finishes
-                // dissipating instead of freezing mid-trail).
-                if ((isPaused || isOffscreen) && ts > trailHotUntil) return;
-
-                if (t0 === null)        t0 = ts;
-                if (cycleStart === 0)   cycleStart = ts;
+                if (t0 === null) t0 = ts;
                 const t = (ts - t0) * 0.001;
 
-                // Advance cross-fade
-                const cycT = ts - cycleStart;
-                let mix = 0;
-                if (cycT > SEQ_HOLD) {
-                    mix = Math.min(1, (cycT - SEQ_HOLD) / SEQ_FADE);
-                    if (cycT >= SEQ_TOTAL) {
-                        aIdx = bIdx;
-                        bIdx = (bIdx + 1) % seqFrames.length;
-                        cycleStart = ts;
-                        mix = 0;
-                    }
+                if (ts - lastSeqTime >= SEQ_INTERVAL) {
+                    seqIdx = (seqIdx + 1) % seqFrames.length;
+                    lastSeqTime = ts;
                 }
-                const revA = seqFrames[aIdx] || base;
-                const revB = seqFrames[bIdx] || revA;
+                const revealFrame = seqFrames[seqIdx];
 
-                // 1. Update trail canvas (only when cursor moved recently —
-                //    avoids the expensive CPU paint when idle)
-                const drawingTrail = hasPos || trailX >= 0;
-                if (drawingTrail) {
-                    tc.fillStyle = '#fff';
-                    tc.fillRect(0, 0, SIM_W, SIM_H);
-                    if (hasPos) {
-                        const LERP = 0.14;
-                        if (trailX < 0) { trailX = rawX; trailY = rawY; }
-                        else { trailX += (rawX - trailX) * LERP; trailY += (rawY - trailY) * LERP; }
-                        const sx = trailX * SIM_W, sy = (1.0 - trailY) * SIM_H;
-                        const rx = rawX   * SIM_W, ry = (1.0 - rawY)   * SIM_H;
-                        tc.strokeStyle = '#000'; tc.lineWidth = LWIDTH;
-                        tc.lineCap = 'round';   tc.lineJoin = 'round';
-                        tc.beginPath(); tc.moveTo(sx, sy); tc.lineTo(rx, ry); tc.stroke();
-                        tc.fillStyle = '#000';
-                        tc.beginPath(); tc.arc(rx, ry, LWIDTH * 0.55, 0, Math.PI * 2); tc.fill();
-                    }
-                    // texSubImage2D — same backing texture, no re-alloc.
-                    gl.bindTexture(gl.TEXTURE_2D, trailTex);
-                    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, gl.RGBA, gl.UNSIGNED_BYTE, trailCanvas);
+                // 1. Update trail canvas
+                tc.fillStyle = '#fff';
+                tc.fillRect(0, 0, SIM_W, SIM_H);
+                if (hasPos) {
+                    const LERP = 0.14;
+                    if (trailX < 0) { trailX = rawX; trailY = rawY; }
+                    else { trailX += (rawX - trailX) * LERP; trailY += (rawY - trailY) * LERP; }
+                    const sx = trailX * SIM_W, sy = (1.0 - trailY) * SIM_H;
+                    const rx = rawX   * SIM_W, ry = (1.0 - rawY)   * SIM_H;
+                    tc.strokeStyle = '#000'; tc.lineWidth = LWIDTH;
+                    tc.lineCap = 'round';   tc.lineJoin = 'round';
+                    tc.beginPath(); tc.moveTo(sx, sy); tc.lineTo(rx, ry); tc.stroke();
+                    tc.fillStyle = '#000';
+                    tc.beginPath(); tc.arc(rx, ry, LWIDTH * 0.55, 0, Math.PI * 2); tc.fill();
                 }
+                gl.bindTexture(gl.TEXTURE_2D, trailTex);
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, trailCanvas);
 
                 // 2. Sim step (read fboA, write fboB)
                 gl.useProgram(simProg); bindQuad(simProg);
@@ -554,15 +456,12 @@
                 gl.useProgram(compProg); bindQuad(compProg);
                 gl.viewport(0, 0, heroCanvas.width, heroCanvas.height);
                 gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-                gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, base.tex); gl.uniform1i(compU.base,    0);
-                gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, revA.tex); gl.uniform1i(compU.revealA, 1);
-                gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, revB.tex); gl.uniform1i(compU.revealB, 2);
-                gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, fboA.tex); gl.uniform1i(compU.fluid,   3);
-                gl.uniform2f(compU.baseSize,    base.w, base.h);
-                gl.uniform2f(compU.revealASize, revA.w, revA.h);
-                gl.uniform2f(compU.revealBSize, revB.w, revB.h);
-                gl.uniform2f(compU.canvas,      heroCanvas.width, heroCanvas.height);
-                gl.uniform1f(compU.revealMix,   mix);
+                gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, base.tex);        gl.uniform1i(compU.base, 0);
+                gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, revealFrame.tex); gl.uniform1i(compU.reveal, 1);
+                gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, fboA.tex);        gl.uniform1i(compU.fluid, 2);
+                gl.uniform2f(compU.baseSize,   base.w, base.h);
+                gl.uniform2f(compU.revealSize, revealFrame.w, revealFrame.h);
+                gl.uniform2f(compU.canvas,     heroCanvas.width, heroCanvas.height);
                 gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
             }
             requestAnimationFrame(frame);
