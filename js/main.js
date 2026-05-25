@@ -624,8 +624,23 @@
                 }
             );
         }
-        function textIn(el)  { return gsap.to(el, { clipPath: 'inset(0% 0% 0% 0%)',   y: 0,   duration: 1.5, ease: 'expo.out' }); }
-        function textOut(el) { return gsap.to(el, { clipPath: 'inset(0% 0% 100% 0%)', y: -30, duration: 1.2, ease: 'power2.inOut' }); }
+        // Use fromTo so GSAP records EXACTLY which values to revert to on
+        // reverse scrub. With plain .to() the start state can be wrong when
+        // the timeline reverses from mid-tween, causing the previous panel
+        // text to stay on screen ("stuck on Pulse Mobile") when scrolling
+        // back to Pulse HR.
+        function textIn(el)  {
+            return gsap.fromTo(el,
+                { clipPath: 'inset(100% 0% 0% 0%)', y: 40 },
+                { clipPath: 'inset(0% 0% 0% 0%)',   y: 0,
+                  duration: 0.9, ease: 'power2.out', immediateRender: false });
+        }
+        function textOut(el) {
+            return gsap.fromTo(el,
+                { clipPath: 'inset(0% 0% 0% 0%)',   y: 0 },
+                { clipPath: 'inset(0% 0% 100% 0%)', y: -30,
+                  duration: 0.7, ease: 'power2.in', immediateRender: false });
+        }
 
         function buildTimeline() {
             if (master) master.kill();
@@ -637,24 +652,28 @@
                     trigger: sec,
                     start: 'top top',
                     end: 'bottom bottom',
-                    scrub: 0.8,                  // tighter — was 2.5, felt frozen
+                    // Scrub: true = follow scroll position exactly. With
+                    // Lenis already smoothing the scroll, an additional
+                    // GSAP scrub-lag was double-smoothing and made the
+                    // previous text panel feel stuck during reverse scroll.
+                    scrub: true,
                     invalidateOnRefresh: true,
                 },
             });
 
             if (intro) {
-                master.to({}, { duration: 0.6 });
-                master.to(intro, { opacity: 0, duration: 0.6, ease: 'power2.out' });
+                master.to({}, { duration: 0.4 });
+                master.to(intro, { opacity: 0, duration: 0.4, ease: 'power2.out' });
             }
 
             blindsSets.forEach((blinds, i) => {
                 master.add(openBlinds(blinds));
                 if (texts[i]) {
-                    master.add(textIn(texts[i]), '-=0.3');
-                    // Always queue a textOut — for the last panel too, so
-                    // reverse-scrolling out of the section properly hides
-                    // the text instead of leaving it pinned on screen.
-                    master.add(textOut(texts[i]), '+=0.8');
+                    master.add(textIn(texts[i]), '-=0.2');
+                    // Always queue a textOut so the panel clears cleanly
+                    // in BOTH directions. The fromTo above guarantees the
+                    // reverse interpolates correctly.
+                    master.add(textOut(texts[i]), '+=0.5');
                 }
             });
         }
