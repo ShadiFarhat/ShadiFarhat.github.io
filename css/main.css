@@ -1818,8 +1818,13 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 
 @media (max-width: 768px) {
     /* ---- Body / page ---- */
-    html, body { overflow-x: hidden; }
-    body { cursor: auto; }                          /* native cursor on touch */
+    /* IMPORTANT: don't put overflow:hidden on <body> — it breaks
+       `position: sticky` on iOS Safari (Hero pin + Experiments pin both
+       lose their fix and the page scrolls past leaving black gaps).
+       `overflow-x: clip` is the modern equivalent that doesn't create
+       a new scroll container, so sticky keeps working. */
+    html { overflow-x: clip; }
+    body { overflow-x: clip; cursor: auto; }
     .cursor { display: none; }                      /* hide custom cursor */
 
     /* ---- Splash ---- */
