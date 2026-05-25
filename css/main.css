@@ -1805,3 +1805,206 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     color: rgba(255,255,255,0.2);
     letter-spacing: 0.06em;
 }
+
+/* ============================================================
+   ===================================================  MOBILE
+   Comprehensive responsive overhaul — placed last so it wins
+   the cascade over earlier section-specific media queries.
+   Breakpoints: 768px (tablet / large phone), 480px (phone),
+   360px (tiny phone). Aim: zero horizontal scroll, comfortable
+   tap targets (44px min), readable text, visible mockups, no
+   side-rail collisions, lightbox fills the screen.
+   ============================================================ */
+
+@media (max-width: 768px) {
+    /* ---- Body / page ---- */
+    html, body { overflow-x: hidden; }
+    body { cursor: auto; }                          /* native cursor on touch */
+    .cursor { display: none; }                      /* hide custom cursor */
+
+    /* ---- Splash ---- */
+    .splash-name { font-size: clamp(2rem, 13vw, 3.5rem); }
+    .splash-track { width: min(220px, 70vw); }
+
+    /* ---- Pill nav: keep brand + CTA only, slim padding ---- */
+    .pill-nav {
+        top: 0.6rem;
+        max-width: calc(100vw - 1.2rem);
+        padding: 0.28rem 0.32rem 0.28rem 0.85rem;
+        font-size: 0.72rem;
+        gap: 0.3rem;
+    }
+    .pill-brand { font-size: 0.78rem; }
+    .pill-cta   { font-size: 0.66rem; padding: 0.45rem 0.75rem; letter-spacing: 0.06em; }
+
+    /* ---- Side icons hidden (already covered above) ---- */
+    .side-icons { display: none !important; }
+    .nominee-badge { display: none; }
+
+    /* ---- Hero ---- */
+    #hero { height: 180vh; }                        /* a touch shorter on phones */
+    .hero-name { font-size: clamp(3rem, 16vw, 5.5rem); }
+    .hero-eyebrow { font-size: 0.7rem; margin-bottom: 1rem; }
+    .hero-underline { width: 110px; margin-top: 1.25rem; }
+    .scroll-hint { display: none; }
+
+    /* ---- Intro ---- */
+    .intro-section { padding: 4rem 1.25rem; }
+    .intro-statement { font-size: clamp(1.4rem, 6.5vw, 2.2rem); line-height: 1.25; }
+    .intro-stats     { gap: 1.25rem 2rem; margin-top: 2.75rem; padding-top: 1.75rem; }
+    .intro-stat-num  { font-size: clamp(2rem, 8vw, 2.6rem); }
+    .intro-stat-pipe { display: none; }
+    .intro-stat      { min-width: 28%; }
+
+    /* ---- Expertise ---- */
+    .expertise-section { padding: 3.5rem 1.25rem 0; min-height: auto; }
+    .ns-h2  { font-size: clamp(1.6rem, 7.5vw, 2.2rem); }
+    .ns-num { font-size: clamp(3.5rem, 14vw, 5rem); }
+    .h-list-2col { grid-template-columns: 1fr; gap: 0; }
+    .h-list-2col .h-list-item { padding: 0.85rem 0; }
+    /* hide the heavy cylinder canvas under the list to keep paints cheap */
+    #expCylCanvas { opacity: 0.35; }
+
+    /* ---- About ---- */
+    .about-section { padding: 3.5rem 1.25rem; }
+    .about-grid    { grid-template-columns: 1fr; gap: 2rem; }
+    .about-h2      { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+    .about-photo   { max-width: 320px; margin: 0 auto; }
+    .about-body    { font-size: 0.95rem; }
+
+    /* ---- Career ---- */
+    .career-section { padding: 3.5rem 1.25rem; }
+    .career-h2      { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+    .career-item    { padding: 1.75rem 0; gap: 1rem; grid-template-columns: 1fr; }
+    .career-role    { font-size: 1.15rem; }
+    .career-meta    { align-items: flex-start; text-align: left; }
+    .career-tags    { justify-content: flex-start; }
+    .career-impact-row { font-size: 0.85rem; }
+
+    /* ---- Experiments (Vibe coding masks) ---- */
+    #experiments    { height: 540vh; }
+    .vc-overlay-header { left: 1rem; top: 1rem; }
+    .vc-overlay-counter { right: 1rem; top: 1rem; font-size: 0.7rem; }
+    .vc-progress    { left: 1rem; right: 1rem; bottom: 1rem; gap: 0.4rem; }
+    .vc-scroll-hint { display: none; }
+    .vc-txt         { padding: 8vh 1.25rem 12vh; }
+    .vc-txt-title   { font-size: clamp(2rem, 9vw, 3.5rem); }
+    .vc-txt-desc    { font-size: 0.92rem; }
+    .vc-intro       { padding: 8vh 1.25rem; }
+    .vc-intro-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+    .vc-intro-desc  { font-size: 0.92rem; }
+
+    /* ---- Founder (showcase) — stack and SHOW the mockup on mobile ---- */
+    .ventures-section { padding: 3.5rem 1.25rem; }
+    .ventures-h2      { font-size: clamp(1.7rem, 8vw, 2.4rem); margin-bottom: 2.5rem; }
+    .v-item {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+        padding: 1.75rem 0;
+    }
+    .v-icon { width: 40px; height: 40px; }
+    .v-preview {
+        display: block !important;          /* override earlier `display: none` */
+        order: -1;                          /* mockup on top */
+        align-self: stretch;
+        max-height: 200px;
+    }
+    .v-preview img { aspect-ratio: 16/9; object-fit: cover; }
+    .v-name { font-size: 1.2rem; }
+    .v-body { font-size: 0.9rem; }
+    .v-cta  { font-size: 0.7rem; }
+
+    /* ---- Selected Work ---- */
+    .work-section { padding: 0 1.25rem 3.5rem; }
+    .work-h2  { font-size: clamp(1.7rem, 8vw, 2.4rem); margin-bottom: 2rem; }
+    .work-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .work-card-body { padding: 0.85rem 1rem 1rem; }
+    .work-card-title { font-size: 0.95rem; }
+    .work-card-meta  { font-size: 0.6rem; }
+
+    /* ---- 3D & Motion ---- */
+    .threed-section { padding: 3.5rem 1.25rem; }
+    .threed-h2      { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+    .threed-header  { flex-direction: column; gap: 0.75rem; }
+    .threed-intro   { font-size: 0.88rem; }
+    .threed-grid    { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 2rem; }
+    .threed-card-label { font-size: 0.75rem; padding: 0.5rem 0.7rem; }
+
+    /* ---- Tools ---- */
+    .tools-section { padding: 3rem 1.25rem; }
+    .tools-h3      { font-size: clamp(1.3rem, 7vw, 1.7rem); }
+    .tools-flex    { gap: 0.35rem; }
+    .tool-item     { font-size: 0.75rem; padding: 0.4rem 0.7rem; }
+
+    /* ---- Languages / Education strip ---- */
+    .lang-edu-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+
+    /* ---- Contact ---- */
+    .contact-section { padding: 4rem 1.25rem; }
+    .contact-h2     { font-size: clamp(2.2rem, 11vw, 4rem); }
+    .contact-desc   { font-size: 0.95rem; }
+    .contact-grid   { grid-template-columns: 1fr; gap: 2rem; margin-top: 2.5rem; }
+    .contact-photo-wrap { max-width: 360px; margin: 0 auto; }
+    .c-link { padding: 0.85rem 0; }
+    .c-val  { font-size: 0.78rem; word-break: break-word; }
+
+    /* ---- Footer ---- */
+    .site-footer { padding: 1.25rem; flex-direction: column; align-items: flex-start; }
+
+    /* ---- Lightbox / project modal ---- */
+    .lightbox { padding: 0; }
+    .lightbox-shell {
+        grid-template-columns: 1fr;
+        grid-template-rows: 45vh 1fr;
+        max-height: 100vh;
+        height: 100vh;
+        border-radius: 0;
+        border: 0;
+        width: 100%;
+    }
+    .lightbox-media { min-height: 0; max-height: 45vh; }
+    .lightbox-info  { padding: 1.25rem 1.25rem 2rem; }
+    .lightbox-close { top: 0.6rem; right: 0.6rem; width: 38px; height: 38px; }
+    .lightbox-nav   { width: 36px; height: 36px; }
+    .lightbox-title { font-size: 1.3rem; }
+    .lightbox-desc  { font-size: 0.9rem; }
+    .lightbox-meta-label { font-size: 0.58rem; }
+    .lightbox-meta-value { font-size: 0.82rem; }
+    .lightbox-cta   { width: 100%; }
+}
+
+@media (max-width: 480px) {
+    /* ---- Even tighter for phone portrait ---- */
+    .pill-brand { font-size: 0.72rem; }
+    .pill-cta   { font-size: 0.62rem; padding: 0.4rem 0.6rem; }
+
+    .hero-name { font-size: clamp(2.5rem, 18vw, 4.5rem); line-height: 0.92; }
+
+    .intro-statement { font-size: 1.3rem; line-height: 1.3; }
+    .intro-stats { justify-content: space-around; }
+    .intro-stat { min-width: 40%; }
+
+    .work-grid   { grid-template-columns: 1fr; }
+    .threed-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .career-tags { gap: 0.3rem; }
+    .career-tag  { font-size: 0.65rem; padding: 0.2rem 0.5rem; }
+
+    .lightbox-shell { grid-template-rows: 38vh 1fr; }
+    .lightbox-media { max-height: 38vh; }
+}
+
+@media (max-width: 360px) {
+    /* ---- Tiny phones — last-resort tweaks ---- */
+    .pill-nav   { font-size: 0.68rem; }
+    .pill-brand { display: none; }                  /* keep only dot + CTA */
+    .hero-eyebrow { font-size: 0.65rem; }
+}
+
+/* ---- Touch devices: remove hover-only transforms that feel sticky ---- */
+@media (hover: none) {
+    .work-card:hover,
+    .v-item:hover .v-preview img,
+    .threed-card:hover img { transform: none; }
+    .work-card:hover { box-shadow: none; }
+}
