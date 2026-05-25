@@ -408,7 +408,7 @@
             if (seqFrames.length === 0) seqFrames.push(base);
 
             let seqIdx = 0, lastSeqTime = 0, t0 = null;
-            const SEQ_INTERVAL = 1000;
+            const SEQ_INTERVAL = 800;
 
             function frame(ts){
                 requestAnimationFrame(frame);
@@ -695,6 +695,56 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    // ---------------------------------------------------------
+    // 9. LIGHTBOX — open preview on click for cards without URL
+    // ---------------------------------------------------------
+    (function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox) return;
+        const img      = lightbox.querySelector('.lightbox-img');
+        const closeBtn = lightbox.querySelector('.lightbox-close');
+        const backdrop = lightbox.querySelector('.lightbox-backdrop');
+
+        function open(src, alt) {
+            img.src = src; img.alt = alt || '';
+            lightbox.classList.add('is-open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function close() {
+            lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            // delay clearing src until fade-out finishes
+            setTimeout(() => { if (!lightbox.classList.contains('is-open')) img.src = ''; }, 280);
+        }
+
+        backdrop.addEventListener('click', close);
+        closeBtn.addEventListener('click', close);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+        });
+
+        // Bind to every image inside a work-card or threed-card
+        document.querySelectorAll('.work-card img, .threed-card img').forEach(el => {
+            el.classList.add('lightbox-trigger');
+            el.addEventListener('click', e => {
+                e.preventDefault();
+                open(el.currentSrc || el.src, el.alt);
+            });
+        });
+
+        // Whole-card click too (so empty card surface also triggers)
+        document.querySelectorAll('.work-card, .threed-card').forEach(card => {
+            card.style.cursor = 'zoom-in';
+            card.addEventListener('click', e => {
+                if (e.target.closest('img')) return; // image handler already fired
+                const inner = card.querySelector('img');
+                if (inner) open(inner.currentSrc || inner.src, inner.alt);
+            });
+        });
+    })();
 
     // ---------------------------------------------------------
     // 6. Reduced motion fallback

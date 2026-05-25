@@ -65,6 +65,15 @@
     <div class="cursor cursor-ring" id="cursorRing"></div>
     <div class="cursor cursor-dot" id="cursorDot"></div>
 
+    <!-- Lightbox overlay for project / 3D preview images -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+        <div class="lightbox-backdrop"></div>
+        <img class="lightbox-img" src="" alt="">
+        <button type="button" class="lightbox-close" aria-label="Close preview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+    </div>
+
     <!-- Pill nav (top center) -->
     <nav class="pill-nav" id="pillNav">
         <a href="#hero" class="pill-brand">Shadi Farhat<span class="text-accent">.</span></a>
@@ -74,6 +83,8 @@
             <a href="#career" class="pill-link" data-section="career">Career</a>
             <a href="#experiments" class="pill-link" data-section="experiments">Experiments</a>
             <a href="#founder" class="pill-link" data-section="founder">Founder</a>
+            <a href="#work" class="pill-link" data-section="work">Work</a>
+            <a href="#threed" class="pill-link" data-section="threed">3D</a>
             <a href="#tools" class="pill-link" data-section="tools">Tools</a>
         </div>
         <a href="#contact" class="pill-cta">LET'S TALK</a>
@@ -190,7 +201,7 @@
                     </div>
                     <div class="intro-stat-pipe"></div>
                     <div class="intro-stat">
-                        <div class="intro-stat-num">30<span class="text-accent">+</span></div>
+                        <div class="intro-stat-num" data-count="30" data-sfx="+">30+</div>
                         <div class="intro-stat-label">Projects shipped</div>
                     </div>
                 </div>
@@ -631,6 +642,44 @@
 
                 <div class="v-item">
                     <div class="v-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 21h20"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="11" r="1"/></svg>
+                    </div>
+                    <div>
+                        <span class="v-badge badge-live">Live · 2026</span>
+                        <h3 class="v-name">M&amp;N Ship Chartering LLC</h3>
+                        <p class="v-sub">Corporate site · Maritime · Lebanon</p>
+                        <p class="v-body">Cinematic corporate website for an international ship-chartering company connecting cargo to ports worldwide. Full-bleed video hero, route services, fleet overview, and a refined contact pipeline. Dark, premium maritime aesthetic.</p>
+                        <a href="https://mandnshipchartering.com/" target="_blank" rel="noopener" class="v-cta">
+                            mandnshipchartering.com
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                        </a>
+                    </div>
+                    <div class="v-preview">
+                        <img src="assets/projects/mn-chartering/mockup.png" alt="M&amp;N Ship Chartering" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="v-item">
+                    <div class="v-icon icon-green">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2"><path d="M2 20a4 4 0 0 0 4-4M22 20a4 4 0 0 1-4-4M10 20a4 4 0 0 0 4-4"/><path d="M3 13l9-6 9 6"/><path d="M3 17l9-6 9 6"/></svg>
+                    </div>
+                    <div>
+                        <span class="v-badge badge-live">Live · 2026</span>
+                        <h3 class="v-name">MN Shipping Inc.</h3>
+                        <p class="v-sub">Corporate site · Logistics · Lebanon</p>
+                        <p class="v-body">Full corporate web platform for MN Shipping — international logistics, fleet management, port services, and global shipping operations. Modern hero, service catalogue, fleet showcase, and lead capture. Warm, premium operator brand.</p>
+                        <a href="https://mnshippinginc.com/" target="_blank" rel="noopener" class="v-cta">
+                            mnshippinginc.com
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                        </a>
+                    </div>
+                    <div class="v-preview">
+                        <img src="assets/projects/mn-shipping/mockup.png" alt="MN Shipping Inc." loading="lazy">
+                    </div>
+                </div>
+
+                <div class="v-item">
+                    <div class="v-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
                     </div>
                     <div>
@@ -674,6 +723,139 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- ====================================================== -->
+        <!-- SECTION 7.5 · SELECTED WORK  (grid of project cards)    -->
+        <!-- ====================================================== -->
+        <section id="work" class="work-section">
+            <div class="work-container">
+                <div class="work-header">
+                    <span class="sec-label"><span class="text-accent">//</span> SELECTED WORK</span>
+                </div>
+                <h2 class="work-h2">
+                    Things I've shipped<br>
+                    along the way<span class="text-accent">.</span>
+                </h2>
+
+                <div class="work-grid">
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/pulse-mobile/mockup.webp" alt="Maliks Pulse Mobile" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Mobile App</span>·<span class="work-tag-private">Private</span></div>
+                            <h3 class="work-card-title">Maliks Pulse Mobile</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/tracking/mockup.webp" alt="Maliks Deliveries Tracking" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Mobile + Web</span>·<span class="work-tag-private">Private</span></div>
+                            <h3 class="work-card-title">Maliks Deliveries Tracking</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/ai-system/mockup.webp" alt="Maliks Valentine Game" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>AI Game</span>·<span class="work-tag-private">Private</span></div>
+                            <h3 class="work-card-title">Maliks Valentine Game</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/mini-market/mockup.webp" alt="Mini Market ERP" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>ERP System</span>·<span class="work-tag-private">Private</span></div>
+                            <h3 class="work-card-title">Mini Market ERP</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/pulse-old/mockup.webp" alt="Maliks Pulse Legacy" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Legacy System</span>·<span class="work-tag-private">Private</span></div>
+                            <h3 class="work-card-title">Maliks Pulse (Legacy)</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/filali/mockup.webp" alt="Filali Engineers" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Web Development</span></div>
+                            <h3 class="work-card-title">Filali Engineers</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/mediahub/mockup.webp" alt="Hostify" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Web Platform</span></div>
+                            <h3 class="work-card-title">Hostify</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/codesign/mockup.webp" alt="Codesign LB" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Web Development</span></div>
+                            <h3 class="work-card-title">Codesign LB</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/bakhoss/mockup.webp" alt="Bakhos &amp; Souzana Wedding" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Digital Invitation</span></div>
+                            <h3 class="work-card-title">Bakhos &amp; Souzana</h3>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-card-img"><img src="assets/projects/golden-coast/mockup.webp" alt="Golden Coast" loading="lazy"></div>
+                        <div class="work-card-body">
+                            <div class="work-card-meta"><span>Portfolio</span></div>
+                            <h3 class="work-card-title">Golden Coast</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================== -->
+        <!-- SECTION 7.7 · 3D & MOTION  (dark, dense render grid)    -->
+        <!-- ====================================================== -->
+        <section id="threed" class="threed-section">
+            <div class="threed-container">
+                <div class="threed-header">
+                    <div>
+                        <span class="sec-label"><span class="text-accent">//</span> 3D &amp; MOTION</span>
+                        <h2 class="threed-h2" style="margin-top:1.25rem;">Pixels with weight<br>and a sense of light<span class="text-accent">.</span></h2>
+                    </div>
+                    <p class="threed-intro">Photoreal product renders built in Blender. Commissioned and personal work spanning fragrances, food &amp; bev, accessories, and brand props.</p>
+                </div>
+                <div class="threed-grid">
+                    <div class="threed-card"><img src="assets/3d-work/black-opuim/final.webp" alt="Black Opium" loading="lazy"><div class="threed-card-label">Black Opium</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/la-vie-est-belle/final.webp" alt="La Vie Est Belle" loading="lazy"><div class="threed-card-label">La Vie Est Belle</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/la-nuit-de-lhomme/final.webp" alt="La Nuit De L'Homme" loading="lazy"><div class="threed-card-label">La Nuit De L'Homme</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/spice-bomb/final.webp" alt="Spice Bomb" loading="lazy"><div class="threed-card-label">Spice Bomb</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/lhomme-prada/final.webp" alt="L'Homme Prada" loading="lazy"><div class="threed-card-label">L'Homme Prada</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/valentino/final.webp" alt="Valentino" loading="lazy"><div class="threed-card-label">Valentino</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/redbull/final.webp" alt="Red Bull" loading="lazy"><div class="threed-card-label">Red Bull</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/freeze/final.webp" alt="Freeze" loading="lazy"><div class="threed-card-label">Freeze</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/kitkat/final.webp" alt="KitKat" loading="lazy"><div class="threed-card-label">KitKat</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/pringles/final.webp" alt="Pringles" loading="lazy"><div class="threed-card-label">Pringles</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/almaza/final.webp" alt="Almaza" loading="lazy"><div class="threed-card-label">Almaza</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/prill/final.webp" alt="Prill" loading="lazy"><div class="threed-card-label">Prill</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/lysedia-jar/final.webp" alt="Lysedia Jar" loading="lazy"><div class="threed-card-label">Lysedia Jar</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/sport-bottle/final.webp" alt="Sport Bottle" loading="lazy"><div class="threed-card-label">Sport Bottle</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/chess/final.webp" alt="Chess" loading="lazy"><div class="threed-card-label">Chess</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/white-mugs/final.webp" alt="White Mugs" loading="lazy"><div class="threed-card-label">White Mugs</div></div>
+                    <div class="threed-card"><img src="assets/3d-work/badges/final.webp" alt="Badges" loading="lazy"><div class="threed-card-label">Badges</div></div>
+                </div>
             </div>
         </section>
 
