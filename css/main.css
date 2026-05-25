@@ -316,7 +316,14 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     z-index: 2;
     display: block;
     pointer-events: none;       /* mouse events go to .hero-face-wrap */
+    /* Force its own compositor layer & isolate paint so scroll
+       doesn't re-rasterise it. Big win on the freeze/jank. */
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout paint size;
+    backface-visibility: hidden;
 }
+.hero-face-wrap { contain: layout paint; }
 
 /* Cinematic vignette + bottom dark gradient (helps the nav read) */
 .hero-vignette {
