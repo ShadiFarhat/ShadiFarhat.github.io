@@ -399,11 +399,11 @@
             heroCanvas.height = heroWrap.clientHeight || window.innerHeight;
         });
 
-        const seqPaths = [1,2,3,4,5].map(n => `assets/seq/${n}.jpeg`);
+        const seqPaths = [1,2,3,4,5].map(n => `assets/seq/${n}.webp`);
         const seqFrames = [];
         seqPaths.forEach(p => loadTex(p).then(t => { if (t) seqFrames.push(t); }));
 
-        loadTex('assets/hero-blue.jpg').then(base => {
+        loadTex('assets/hero-blue.webp').then(base => {
             if (!base) { console.warn('[fluid-reveal] base failed — fallback img.'); return; }
             if (seqFrames.length === 0) seqFrames.push(base);
 
