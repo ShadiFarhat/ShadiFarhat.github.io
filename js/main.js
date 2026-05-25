@@ -408,7 +408,7 @@
             if (seqFrames.length === 0) seqFrames.push(base);
 
             let seqIdx = 0, lastSeqTime = 0, t0 = null;
-            const SEQ_INTERVAL = 300;
+            const SEQ_INTERVAL = 1200;
 
             function frame(ts){
                 requestAnimationFrame(frame);
