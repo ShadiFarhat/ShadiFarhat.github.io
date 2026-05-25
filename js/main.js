@@ -710,12 +710,19 @@
             img.src = src; img.alt = alt || '';
             lightbox.classList.add('is-open');
             lightbox.setAttribute('aria-hidden', 'false');
+            // Stop Lenis (smooth scroller) AND lock body scroll. Both are
+            // needed: Lenis ignores body.overflow:hidden, and overflow:hidden
+            // alone won't block the native scrollbar arrow keys / wheel.
+            if (typeof lenis !== 'undefined' && lenis.stop) lenis.stop();
             document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
         }
         function close() {
             lightbox.classList.remove('is-open');
             lightbox.setAttribute('aria-hidden', 'true');
+            if (typeof lenis !== 'undefined' && lenis.start) lenis.start();
             document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
             // delay clearing src until fade-out finishes
             setTimeout(() => { if (!lightbox.classList.contains('is-open')) img.src = ''; }, 280);
         }
@@ -725,6 +732,13 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
         });
+
+        // Eat any scroll input while the lightbox is open
+        const blockScroll = e => {
+            if (lightbox.classList.contains('is-open')) e.preventDefault();
+        };
+        lightbox.addEventListener('wheel',     blockScroll, { passive: false });
+        lightbox.addEventListener('touchmove', blockScroll, { passive: false });
 
         // Bind to every image inside a work-card or threed-card
         document.querySelectorAll('.work-card img, .threed-card img').forEach(el => {
