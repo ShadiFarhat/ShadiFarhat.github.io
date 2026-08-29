@@ -754,6 +754,21 @@
                 description: 'Complete HR management system integrated with AI (OpenAI + Claude APIs) to generate professional reports and employee images. Features KPI tracking, vacation management, performance reviews, attendance, and customised dashboards.',
                 role: 'Full-Stack Developer & Project Lead', year: '2024',
                 tags: ['Laravel', 'React', 'MySQL', 'OpenAI', 'Claude', 'WebSockets'],
+                case: {
+                    problem: "Maliks runs more than 30 branches. Attendance, leave, performance and payroll each lived in a different place, so head office never had one current picture of the workforce, and every management report had to be assembled by hand.",
+                    built: [
+                        "Laravel API and React dashboard covering attendance, leave, KPIs, performance reviews and payroll",
+                        "Role-based views, so a branch manager, an HR officer and a director each see only what they need",
+                        "Live updates over WebSockets: approvals and attendance appear without a refresh",
+                        "AI reporting layer on the OpenAI and Claude APIs that turns raw HR data into written management reports",
+                        "AI-generated employee imagery for profiles and internal communications",
+                    ],
+                    result: [
+                        "Attendance, leave, performance and payroll for 30+ branches and 200+ users run through a single system",
+                        "Reports that were written by hand are generated from live data",
+                        "In daily production use, and still built and maintained by me",
+                    ],
+                },
                 link: null, isPrivate: true,
                 images: ['assets/projects/pulse-dashboard/mockup.webp','assets/projects/pulse-dashboard/1.webp','assets/projects/pulse-dashboard/2.webp','assets/projects/pulse-dashboard/3.webp','assets/projects/pulse-dashboard/4.webp','assets/projects/pulse-dashboard/5.webp','assets/projects/pulse-dashboard/6.webp','assets/projects/pulse-dashboard/7.webp','assets/projects/pulse-dashboard/8.webp'],
             },
@@ -762,6 +777,19 @@
                 description: 'Cross-platform mobile companion for Maliks Pulse. Managers monitor sales, approve requests, and receive real-time notifications. Built with React Native for iOS + Android.',
                 role: 'Mobile Developer', year: '2024',
                 tags: ['React Native', 'Redux', 'Push Notifications'], link: null, isPrivate: true,
+                case: {
+                    problem: "Managers spend their day on the shop floor, not at a desk. Anything needing their approval sat waiting until they were back at a computer, which slowed down every request behind it.",
+                    built: [
+                        "React Native app for iOS and Android running on the same Laravel backend as the Pulse dashboard",
+                        "Sales monitoring, request approvals and real-time push notifications",
+                        "Redux state layer tuned for older Android devices and weak connections",
+                    ],
+                    result: [
+                        "Approvals happen on the floor instead of waiting for desk time",
+                        "Managers are alerted to sales and requests as they happen",
+                        "One backend serves both the web dashboard and the app, so there is no duplicated business logic",
+                    ],
+                },
                 images: ['assets/projects/pulse-mobile/mockup.jpg','assets/projects/pulse-mobile/1.png','assets/projects/pulse-mobile/2.png','assets/projects/pulse-mobile/3.png','assets/projects/pulse-mobile/4.png','assets/projects/pulse-mobile/5.png','assets/projects/pulse-mobile/6.png'],
             },
             'ai-system': {
@@ -776,6 +804,21 @@
                 description: 'Delivery tracking system with a driver mobile app. Real-time GPS, daily/weekly/monthly movement reports, delivery status updates, route history. Managers monitor every driver live on a dashboard.',
                 role: 'Full-Stack Developer', year: '2023',
                 tags: ['Laravel', 'React Native', 'Google Maps API', 'Firebase', 'MySQL'], link: null, isPrivate: true,
+                case: {
+                    problem: "Once a delivery left the branch it was invisible. There was no record of where a driver had been, which route they took, or when a delivery was actually completed, so customer questions and driver disputes could not be settled with evidence.",
+                    built: [
+                        "React Native driver app reporting GPS position in the background",
+                        "Laravel and MySQL backend, with Firebase handling push and live sync",
+                        "Dispatcher dashboard on the Google Maps API showing every active driver live",
+                        "Delivery status updates and full route history per driver",
+                        "Automated daily, weekly and monthly movement reports",
+                    ],
+                    result: [
+                        "Dispatchers see every active driver on one map",
+                        "Every delivery carries a timestamped route history, so questions are answered from data instead of memory",
+                        "Movement reporting is generated automatically rather than compiled by hand",
+                    ],
+                },
                 images: ['assets/projects/tracking/mockup.webp'],
             },
             'warehouse': {
@@ -783,6 +826,22 @@
                 description: 'Full warehouse management with payroll and attendance. Stock control, inventory, barcode scanning, automated reordering, multi-location sync, and reporting.',
                 role: 'Full-Stack Developer', year: '2023',
                 tags: ['Laravel', 'React', 'Barcode API', 'MySQL', 'Payroll'], link: null, isPrivate: true,
+                case: {
+                    problem: "Stock moved constantly between a central warehouse and 30+ branches, tracked by manual entry. There was no single live stock figure that head office and the branches both trusted, and reordering depended on someone remembering.",
+                    built: [
+                        "Laravel and React system for stock control and multi-location inventory",
+                        "Barcode scanning for receiving, transfers and stock counts",
+                        "Inter-branch transfer workflow with approval steps",
+                        "Automated reorder triggers based on live stock levels",
+                        "Attendance and payroll for warehouse staff handled in the same system",
+                        "Reporting across every location",
+                    ],
+                    result: [
+                        "One live stock figure shared by the warehouse and all 30+ branches",
+                        "Counts and transfers are done by scanning instead of typing",
+                        "Reordering is triggered by the system rather than remembered by a person",
+                    ],
+                },
                 images: ['assets/projects/warehouse/mockup.webp'],
             },
             'as3arna': {
@@ -790,6 +849,20 @@
                 description: 'Price-comparison and tracking platform for the Lebanese market. Compare across stores, set price alerts, and find best deals. Web-scraping pipeline + history graphs.',
                 role: 'Founder · Full-Stack Developer', year: '2023',
                 tags: ['Laravel', 'Vue.js', 'Web Scraping', 'MySQL'],
+                case: {
+                    problem: "Prices for the same product vary widely between Lebanese retailers and move fast. Shoppers had no way to compare across stores, and no way to tell whether the price in front of them was actually a good one.",
+                    built: [
+                        "Laravel and Vue platform with a scraping pipeline that normalises the same product across stores that name it differently",
+                        "Price history graphs, so a shopper can see whether today's price is genuinely low",
+                        "Price alerts that fire when a tracked product drops",
+                        "Search and comparison built to stay usable on slow connections",
+                    ],
+                    result: [
+                        "Live at as3arna.net",
+                        "My own product: I built the scraping, the backend, the frontend and the design",
+                        "Solves the hard part of price comparison, which is matching one real product across inconsistent store listings",
+                    ],
+                },
                 link: 'https://as3arna.net', isPrivate: false,
                 images: ['assets/projects/as3arna/mockup.webp'],
             },
@@ -838,6 +911,18 @@
                 description: 'Complete ERP for mini markets and small retail stores. Inventory, POS, sales tracking, and reporting dashboards.',
                 role: 'Full-Stack Developer', year: '2024',
                 tags: ['Laravel', 'Vue.js', 'MySQL', 'POS'],
+                case: {
+                    problem: "Small retail shops need the same inventory and sales control a chain has, but cannot run enterprise software and cannot pay enterprise prices or hire someone to operate it.",
+                    built: [
+                        "Laravel and Vue ERP combining POS, inventory and sales tracking",
+                        "Reporting dashboards for daily takings, stock movement and margins",
+                        "Designed to be set up and run by the shop owner, not an IT department",
+                    ],
+                    result: [
+                        "Inventory, point of sale and reporting in one system a single owner can operate",
+                        "Live demo available to try",
+                    ],
+                },
                 link: 'https://violet-butterfly-367429.hostingersite.com', isPrivate: true,
                 images: ['assets/projects/mini-market/mockup.webp','assets/projects/mini-market/1.webp','assets/projects/mini-market/2.webp','assets/projects/mini-market/3.webp','assets/projects/mini-market/4.webp','assets/projects/mini-market/5.webp','assets/projects/mini-market/6.webp'],
             },
@@ -891,6 +976,7 @@
         const elCat      = document.getElementById('lightboxCat');
         const elTitle    = document.getElementById('lightboxTitle');
         const elDesc     = document.getElementById('lightboxDesc');
+        const elCase     = document.getElementById('lightboxCase');
         const elMeta     = document.getElementById('lightboxMeta');
         const elTech     = document.getElementById('lightboxTech');
         const elCta      = document.getElementById('lightboxCta');
@@ -939,6 +1025,29 @@
             elCat.textContent   = data.category || '';
             elTitle.textContent = data.title    || '';
             elDesc.textContent  = data.description || '';
+            if (elCase) {
+                const cs = data.case;
+                if (cs) {
+                    const items = list => (list || []).map(t => `<li>${t}</li>`).join('');
+                    elCase.innerHTML = `
+                        <div class="lightbox-case-block">
+                            <span class="lightbox-meta-label">The problem</span>
+                            <p class="lightbox-case-text">${cs.problem}</p>
+                        </div>
+                        <div class="lightbox-case-block">
+                            <span class="lightbox-meta-label">What I built</span>
+                            <ul class="lightbox-case-list">${items(cs.built)}</ul>
+                        </div>
+                        <div class="lightbox-case-block">
+                            <span class="lightbox-meta-label">Impact</span>
+                            <ul class="lightbox-case-list">${items(cs.result)}</ul>
+                        </div>`;
+                    elCase.hidden = false;
+                } else {
+                    elCase.innerHTML = '';
+                    elCase.hidden = true;
+                }
+            }
             elMeta.innerHTML = `
                 <div class="lightbox-meta-item">
                     <span class="lightbox-meta-label">Role</span>
@@ -1005,7 +1114,7 @@
         }
 
         // Wire clicks: project cards
-        document.querySelectorAll('.work-card').forEach(card => {
+        document.querySelectorAll('.work-card, .v-item[data-project]').forEach(card => {
             card.style.cursor = 'zoom-in';
             card.addEventListener('click', () => {
                 const id = card.dataset.project;

@@ -2013,3 +2013,53 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     .threed-card:hover img { transform: none; }
     .work-card:hover { box-shadow: none; }
 }
+
+
+/* ---------------------------------------------------------------
+   PROJECT CASE STUDY  ·  problem / build / impact inside lightbox
+   --------------------------------------------------------------- */
+.lightbox-case {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    padding: 0.25rem 0 0.15rem;
+}
+.lightbox-case[hidden] { display: none; }
+
+.lightbox-case-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.lightbox-case-text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.7);
+}
+
+.lightbox-case-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+}
+.lightbox-case-list li::marker { color: rgba(74, 158, 255, 0.75); }
+
+@media (max-width: 640px) {
+    .lightbox-case { gap: 1.05rem; }
+    .lightbox-case-text,
+    .lightbox-case-list { font-size: 0.85rem; }
+}
+
+/* Flagship v-items open the project lightbox — show that they are clickable */
+.v-item[data-project] { cursor: zoom-in; }
+.v-item[data-project]:focus-visible {
+    outline: 2px solid rgba(74, 158, 255, 0.8);
+    outline-offset: 4px;
+}
