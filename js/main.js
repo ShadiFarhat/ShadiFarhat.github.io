@@ -1,5 +1,5 @@
 /* =========================================================
-   Shadi Farhat — Portfolio v2
+   Shadi Farhat - Portfolio v2
    Base + Hero behaviors.
    Sections will be added one-by-one (about, career, etc.).
    ========================================================= */
@@ -8,7 +8,7 @@
     'use strict';
 
     // ---------------------------------------------------------
-    // PRELOADER — fills progress bar, dismisses on full load
+    // PRELOADER - fills progress bar, dismisses on full load
     // ---------------------------------------------------------
     (function initSplash() {
         const splash = document.getElementById('splash');
@@ -32,7 +32,7 @@
         } else {
             window.addEventListener('load', () => setTimeout(dismiss, 400));
         }
-        // Hard cap — always dismiss within 5s no matter what
+        // Hard cap - always dismiss within 5s no matter what
         setTimeout(dismiss, 5000);
     })();
 
@@ -94,7 +94,7 @@
     });
 
     // ---------------------------------------------------------
-    // 3. HERO — scroll-linked reveal
+    // 3. HERO - scroll-linked reveal
     //    State 1: full-bleed face dominates (no text)
     //    State 2: face fades out, name "Shadi Farhat." fades in
     // ---------------------------------------------------------
@@ -117,7 +117,7 @@
     gsap.set('.hero-name .char-anim', { y: '110%' });
     gsap.set('.hero-underline',     { scaleX: 0, transformOrigin: 'left center' });
 
-    // Initial intro fade-in (page load only — one-shot)
+    // Initial intro fade-in (page load only - one-shot)
     gsap.from('.hero-face-color', {
         scale: 1.06, opacity: 0, duration: 1.6, ease: 'expo.out'
     });
@@ -141,7 +141,7 @@
         .to('.hero-underline',    { scaleX: 1, ease: 'power2.out' }, 0.55);
 
     // ---------------------------------------------------------
-    // 4. HERO — WebGL Fluid Reveal (Mohamed Shehata's pipeline)
+    // 4. HERO - WebGL Fluid Reveal (Mohamed Shehata's pipeline)
     //
     //    Architecture (3 layers on ONE WebGL canvas):
     //      1. Trail canvas (2D, 512×512): cursor draws BLACK on WHITE
@@ -155,7 +155,7 @@
     //         it's white the color base shows. Bottom vignette baked in.
     //
     //    Seq frames cycle every 300ms for the "live" feel. The fade
-    //    in/out is purely the shader's natural dissipation — no manual
+    //    in/out is purely the shader's natural dissipation - no manual
     //    timers or alpha tweens needed.
     // ---------------------------------------------------------
     (function initFluidReveal(){
@@ -340,7 +340,7 @@
             return new Promise(resolve => {
                 const tex = gl.createTexture();
 
-                // 1. Prefer a DOM <img> already loaded by the page — this
+                // 1. Prefer a DOM <img> already loaded by the page - this
                 //    sidesteps CORS issues on file:// since the browser
                 //    already has the bytes.
                 const file = src.split('/').pop();
@@ -404,7 +404,7 @@
         seqPaths.forEach(p => loadTex(p).then(t => { if (t) seqFrames.push(t); }));
 
         loadTex('assets/hero-blue.webp').then(base => {
-            if (!base) { console.warn('[fluid-reveal] base failed — fallback img.'); return; }
+            if (!base) { console.warn('[fluid-reveal] base failed - fallback img.'); return; }
             if (seqFrames.length === 0) seqFrames.push(base);
 
             let seqIdx = 0, lastSeqTime = 0, t0 = null;
@@ -469,7 +469,7 @@
     })();
 
     // ---------------------------------------------------------
-    // 5. INTRO statement — 3D line-flip reveal (Mohamed-style)
+    // 5. INTRO statement - 3D line-flip reveal (Mohamed-style)
     //    Each line clip-flips up from rotationX: -90 → 0 with a
     //    yPercent slide. Triggered once when the section scrolls in.
     // ---------------------------------------------------------
@@ -515,7 +515,7 @@
     })();
 
     // ---------------------------------------------------------
-    // 6. PILL NAV — active-section highlight on scroll
+    // 6. PILL NAV - active-section highlight on scroll
     // ---------------------------------------------------------
     const navLinks = document.querySelectorAll('.pill-link');
     function updateActiveNav() {
@@ -544,7 +544,7 @@
     });
 
     // ---------------------------------------------------------
-    // 7. EXPERIMENTS — Tympanus / Hiro-kiii SVG blind reveal
+    // 7. EXPERIMENTS - Tympanus / Hiro-kiii SVG blind reveal
     //    (port of Mohamed Shehata's vibe-coding scroll section)
     // ---------------------------------------------------------
     (function initVibeCoding() {
@@ -734,7 +734,7 @@
     })();
 
     // ---------------------------------------------------------
-    // 8. BACK TO TOP — click photo in contact section
+    // 8. BACK TO TOP - click photo in contact section
     // ---------------------------------------------------------
     const backBtn = document.getElementById('backToTop');
     if (backBtn) {
@@ -744,13 +744,153 @@
     }
 
     // ---------------------------------------------------------
-    // 9. PROJECT MODAL — slideshow + info panel for every card
+    // 9. PROJECT MODAL - slideshow + info panel for every card
     // ---------------------------------------------------------
     (function initProjectModal() {
         // ---- Data (ported from old portfolio) ----
         const PROJECTS = {
+            'maliks-b2b': {
+                category: 'B2B Platform + CRM', title: 'Maliks B2B · Corporate CRM',
+                description: 'B2B commerce platform and full CRM for the Maliks corporate division. Companies browse catalogues, see their own contract pricing and request quotes; the back office runs leads, deals, tasks, email, WhatsApp and ERP sync from the same system. Web admin plus a React Native app for the sales team.',
+                role: 'Full-Stack Developer & System Architect', year: '2025',
+                tags: ['Laravel 11', 'React', 'React Native', 'MySQL', 'Meilisearch', 'Laravel Reverb', 'Sanctum', 'Spatie Permissions'],
+                link: 'https://corporate.malikspulse.com', isPrivate: false,
+                images: ['assets/projects/maliks-b2b/mockup.jpg'],
+                case: {
+                    problem: "The corporate division sold to companies, schools, banks and NGOs through phone calls, spreadsheets and personal inboxes. Quotes, orders and follow-ups sat with whoever happened to handle them, so nothing was visible to the rest of the team and nothing survived a person leaving.",
+                    built: [
+                        "A B2B storefront where companies browse the catalogue, see their own contract pricing and submit quote requests. There is no public checkout, because these accounts buy on terms",
+                        "A full CRM behind it: leads, deals, tasks, activities, client requests, scheduled payments and sales targets",
+                        "An IMAP email client and a WhatsApp inbox built into the CRM, so client conversation lives on the client record instead of in someone's personal mailbox",
+                        "Strict per-company data scoping, so a client user can only ever see their own company's data, enforced server-side rather than hidden in the interface",
+                        "Two-way ERP sync so pricing, stock and sales figures match the accounting system",
+                        "Meilisearch for instant catalogue search, and Laravel Reverb for live updates and chat",
+                        "A React Native app covering ten of the modules, so the sales team works from the road",
+                    ],
+                    result: [
+                        "One system replaces the spreadsheets, the personal inboxes and the phone-call trail",
+                        "Every quote, order and conversation is attached to the company record and survives staff changes",
+                        "Sales work from their phones while the back office sees the same data in real time",
+                        "The largest system I have built, at around 190 database models spanning commerce, CRM, messaging and reporting",
+                    ],
+                },
+            },
+            'asaarna-v2': {
+                category: 'Internal Platform', title: 'As3arna V2 · Branch Terminal',
+                description: 'Rebuild of the Maliks and Doculand price list system as a modular platform: catalogue, pricing, costing, quotes, ordering, stock, transfers and an AI image studio, opened from a terminal in every branch.',
+                role: 'Full-Stack Developer & Architect', year: '2026',
+                tags: ['Laravel 12', 'React 19', 'TypeScript', 'Vite', 'MySQL', 'PWA'],
+                link: null, isPrivate: true,
+                images: ['assets/projects/asaarna-v2/mockup.jpg'],
+                case: {
+                    problem: "The original price list system had grown into one codebase where pricing, costing, quoting and stock were tangled together. Every change risked breaking something unrelated, and branches waited on head office for prices that move every week.",
+                    built: [
+                        "Rebuilt as a Laravel 12 modular monolith of 24 modules (Catalog, Pricing, Costing, Quotes, Ordering, Stock, Transfers, Invoicing, Studio and more), each with its own controllers, models and routes",
+                        "React 19 and TypeScript front end, installable as a PWA so a branch terminal keeps working when the connection drops",
+                        "Branch-account sign-in, so staff open the terminal without head office having to set it up",
+                        "An AI studio built in: background removal, restoration, colourisation, OCR, passport photos, name tags, price tags and barcodes",
+                        "Tests on both sides, so a change to pricing can no longer silently break costing",
+                    ],
+                    result: [
+                        "Branches serve customers without waiting on head office for a price",
+                        "Modules can be changed independently, instead of one codebase where everything touches everything",
+                        "The AI studio replaced work that used to be sent out to a designer",
+                    ],
+                },
+            },
+            'wc-photobooth': {
+                category: 'AI Experience', title: 'World Cup 2026 Photobooth',
+                description: 'In-store AI photobooth for the 2026 World Cup. A customer takes a photo and gets it back wearing their team kit, or standing next to a football star. Face detection runs in the browser, image generation on a Laravel backend, and the result is delivered by QR code.',
+                role: 'Full-Stack Developer & AI Engineer', year: '2026',
+                tags: ['React 19', 'Three.js', 'face-api.js', 'Laravel', 'Replicate API', 'Framer Motion'],
+                link: 'https://ai.malikspulse.com', isPrivate: false,
+                images: ['assets/projects/wc-photobooth/mockup.jpg'],
+                case: {
+                    problem: "Seasonal in-store campaigns are posters people walk past. There was nothing that made a customer stop, take part, and leave with something they would actually show to other people.",
+                    built: [
+                        "A React 19 photobooth that runs on an in-store screen or on the customer's own phone",
+                        "face-api.js does face detection in the browser first, so a bad photo is rejected before it costs an AI generation",
+                        "Laravel backend calling the Replicate API to place the customer in their team kit, or beside a football star",
+                        "QR delivery, so the customer scans and walks away with the image already on their phone",
+                        "Three.js and Framer Motion for the stadium atmosphere, with sound",
+                    ],
+                    result: [
+                        "A campaign customers take part in and share, instead of one they walk past",
+                        "Checking the face before generating keeps the AI cost per customer down",
+                        "The same build runs in-store and on a phone, so the campaign is not limited to branch hardware",
+                    ],
+                },
+            },
+            'tower-rush': {
+                category: 'Game \u00b7 Kiosk', title: 'Maliks Back-to-School Tower',
+                description: 'One-touch stacking game for 32-inch touchscreen kiosks in Maliks branches. Players stack real Maliks products and catch flying items for bonus points. Phaser 3 game with a Laravel leaderboard, offline play and per-branch configuration.',
+                role: 'Game Developer & Full-Stack', year: '2025',
+                tags: ['Phaser 3', 'React', 'TypeScript', 'Laravel', 'MySQL', 'Kiosk'],
+                link: 'https://game.ai.malikspulse.com', isPrivate: false,
+                images: ['assets/projects/tower-rush/mockup.jpg'],
+                case: {
+                    problem: "Back-to-school is the busiest season in the branches, and there was nothing to hold a child's attention while a parent shopped, and no reason for a family to stay longer or to come back.",
+                    built: [
+                        "A Phaser 3 stacking game in React and TypeScript, running full screen on 32-inch touch kiosks",
+                        "Players stack real Maliks products (bags, pencil cases, lunch boxes) photographed for the game",
+                        "Laravel API for branch registration, leaderboard, analytics and per-branch game settings",
+                        "No-password device login: a branch picks itself once and the kiosk stays registered",
+                        "Works offline and syncs scores when the connection returns, because branch wifi is not reliable",
+                        "English and French, switched on the title screen",
+                    ],
+                    result: [
+                        "A reason for families to stay in store during the busiest season of the year",
+                        "Per-branch leaderboards and play analytics head office can actually read",
+                        "Runs unattended on kiosk hardware, so no staff member has to reset it",
+                    ],
+                },
+            },
+            'gta-portfolio': {
+                category: 'Creative Build', title: 'Vice City Portfolio',
+                description: 'My CV rebuilt as a Grand Theft Auto: Vice City pause menu, with a loading screen, neon Beirut skyline, a HUD with health, cash and wanted stars, a minimap, and a loadout wheel. Every section of a CV mapped onto a game menu item.',
+                role: 'Designer & Developer', year: '2026',
+                tags: ['Astro', 'GSAP', 'JavaScript', 'CSS', 'Illustration'],
+                link: 'https://aquamarine-fairy-5ff37e.netlify.app', isPrivate: false,
+                images: ['assets/projects/gta-portfolio/mockup.jpg'],
+                case: {
+                    problem: "A developer CV is a PDF that looks like every other PDF. I wanted a version somebody would actually finish reading, and still remember afterwards.",
+                    built: [
+                        "The whole CV rebuilt as a Vice City pause menu, where About, Skills, Projects, Experience, Achievements, Services and Contact all become menu entries",
+                        "A scripted loading screen, because half the memory of that game is waiting for it to load",
+                        "A full HUD: clock, cash, health bar, wanted stars and a working minimap",
+                        "Keyboard-first navigation with arrows, Enter, Esc, and Tab for the loadout wheel",
+                        "A Beirut rooftop illustration at sunset, drawn for this rather than bought",
+                        "Astro and GSAP, with no framework weight behind it",
+                    ],
+                    result: [
+                        "People finish it, and they remember it afterwards",
+                        "Shows design and front-end craft in one artefact, instead of claiming both on a list of skills",
+                    ],
+                },
+            },
+            'cs-portfolio': {
+                category: 'Creative Build', title: 'Counter-Strike 1.3 Portfolio',
+                description: 'The same CV as a Counter-Strike 1.3 server browser, with a connect screen that precaches sounds, de_italy in the background, a buy menu, match history and awards. A second take on the same content in a completely different visual language.',
+                role: 'Designer & Developer', year: '2026',
+                tags: ['Astro', 'GSAP', 'JavaScript', 'CSS', 'Pixel UI'],
+                link: 'https://warm-crostata-37e268.netlify.app', isPrivate: false,
+                images: ['assets/projects/cs-portfolio/mockup.jpg'],
+                case: {
+                    problem: "Having built the Vice City version, I wanted to prove the idea was not a one-off trick, and that I could take the same content and rebuild it convincingly in a completely different visual language.",
+                    built: [
+                        "A CS 1.3 connect sequence, down to 'precaching sounds' and the map name sitting on the loading bar",
+                        "CV sections mapped onto the game's own menu: Player Info, Loadout, Missions, Match History, Awards, Contract and Radio",
+                        "de_italy rendered as the backdrop, with the orange terminal palette and bitmap type of the original",
+                        "The same Astro and GSAP foundation as the Vice City build, reskinned end to end",
+                    ],
+                    result: [
+                        "Two complete portfolios from one set of content, in two different visual worlds",
+                        "That pairing is the point: the design is deliberate, not something I got lucky with once",
+                    ],
+                },
+            },
             'pulse-dashboard': {
-                category: 'Web Development', title: 'Maliks Pulse — HR System',
+                category: 'Web Development', title: 'Maliks Pulse · HR System',
                 description: 'Complete HR management system integrated with AI (OpenAI + Claude APIs) to generate professional reports and employee images. Features KPI tracking, vacation management, performance reviews, attendance, and customised dashboards.',
                 role: 'Full-Stack Developer & Project Lead', year: '2024',
                 tags: ['Laravel', 'React', 'MySQL', 'OpenAI', 'Claude', 'WebSockets'],
@@ -764,7 +904,7 @@
                         "AI-generated employee imagery for profiles and internal communications",
                     ],
                     result: [
-                        "Attendance, leave, performance and payroll for 30+ branches and 200+ users run through a single system",
+                        "Attendance, leave, performance and payroll for 30+ branches and roughly 550 users run through a single system",
                         "Reports that were written by hand are generated from live data",
                         "In daily production use, and still built and maintained by me",
                     ],
@@ -794,7 +934,7 @@
             },
             'ai-system': {
                 category: 'AI Game', title: 'Maliks Valentine Game',
-                description: 'Interactive Valentine\'s Day game — customers draw a heart on screen; a perfect heart wins a free AI-generated photo via Nano Banana Pro. Canvas-API drawing detection + AI image gen pipeline.',
+                description: 'Interactive Valentine\'s Day game where customers draw a heart on screen; a perfect heart wins a free AI-generated photo via Nano Banana Pro. Canvas-API drawing detection + AI image gen pipeline.',
                 role: 'Full-Stack Developer & AI Engineer', year: '2024',
                 tags: ['JavaScript', 'Canvas API', 'Nano Banana AI', 'Laravel'], link: null, isPrivate: true,
                 images: ['assets/projects/ai-system/mockup.webp','assets/projects/ai-system/1.webp','assets/projects/ai-system/2.webp','assets/projects/ai-system/3.webp','assets/projects/ai-system/4.webp'],
@@ -814,7 +954,7 @@
                         "Automated daily, weekly and monthly movement reports",
                     ],
                     result: [
-                        "Dispatchers see every active driver on one map",
+                        "Dispatchers see every one of the 25 active drivers on a single map",
                         "Every delivery carries a timestamped route history, so questions are answered from data instead of memory",
                         "Movement reporting is generated automatically rather than compiled by hand",
                     ],
@@ -845,7 +985,7 @@
                 images: ['assets/projects/warehouse/mockup.webp'],
             },
             'as3arna': {
-                category: 'E-Commerce', title: 'As3arna — Price Platform',
+                category: 'E-Commerce', title: 'As3arna · Price Platform',
                 description: 'Price-comparison and tracking platform for the Lebanese market. Compare across stores, set price alerts, and find best deals. Web-scraping pipeline + history graphs.',
                 role: 'Founder · Full-Stack Developer', year: '2023',
                 tags: ['Laravel', 'Vue.js', 'Web Scraping', 'MySQL'],
@@ -884,14 +1024,14 @@
             },
             'codesign': {
                 category: 'Web Development', title: 'Codesign LB',
-                description: 'Design-agency site — portfolio gallery, team section, service showcase. Clean modern design with smooth scrolling effects.',
+                description: 'Design-agency site with a portfolio gallery, team section and service showcase. Clean modern design with smooth scrolling effects.',
                 role: 'Web Developer & Designer', year: '2022',
                 tags: ['HTML/CSS', 'JavaScript', 'GSAP'],
                 link: 'https://codesignlb.com', isPrivate: false,
                 images: ['assets/projects/codesign/mockup.webp'],
             },
             'bakhoss': {
-                category: 'Digital Invitation', title: 'Bakhos & Souzana — Wedding',
+                category: 'Digital Invitation', title: 'Bakhos & Souzana · Wedding',
                 description: 'Elegant digital wedding invitation with RSVP. Animations, event details, location map, photo gallery, guest confirmations.',
                 role: 'Web Developer & Designer', year: '2022',
                 tags: ['HTML/CSS', 'JavaScript', 'GSAP', 'Google Maps'],
@@ -900,7 +1040,7 @@
             },
             'golden-coast': {
                 category: 'Portfolio', title: 'Golden Coast',
-                description: 'Corporate portfolio website for Golden Coast — services, projects, company info. Modern design and smooth UX.',
+                description: 'Corporate portfolio website for Golden Coast covering services, projects and company info. Modern design and smooth UX.',
                 role: 'Web Developer & Designer', year: '2023',
                 tags: ['HTML/CSS', 'JavaScript', 'PHP'],
                 link: 'https://olivedrab-rhinoceros-902407.hostingersite.com', isPrivate: false,
@@ -920,7 +1060,7 @@
                     ],
                     result: [
                         "Inventory, point of sale and reporting in one system a single owner can operate",
-                        "Live demo available to try",
+                        "In daily use by a real shop, not a demo",
                     ],
                 },
                 link: 'https://violet-butterfly-367429.hostingersite.com', isPrivate: true,
@@ -928,7 +1068,7 @@
             },
             'pulse-old': {
                 category: 'Legacy System', title: 'Maliks Pulse (Legacy)',
-                description: 'Original Maliks Pulse — the foundation that evolved into the current HR and enterprise management platform.',
+                description: 'Original Maliks Pulse, the foundation that evolved into the current HR and enterprise management platform.',
                 role: 'Full-Stack Developer', year: '2022',
                 tags: ['Laravel', 'jQuery', 'MySQL', 'Bootstrap'],
                 link: 'http://demo.malikspulse.com', isPrivate: true,
@@ -1051,11 +1191,11 @@
             elMeta.innerHTML = `
                 <div class="lightbox-meta-item">
                     <span class="lightbox-meta-label">Role</span>
-                    <span class="lightbox-meta-value">${data.role || '—'}</span>
+                    <span class="lightbox-meta-value">${data.role || '-'}</span>
                 </div>
                 <div class="lightbox-meta-item">
                     <span class="lightbox-meta-label">Year</span>
-                    <span class="lightbox-meta-value">${data.year || '—'}</span>
+                    <span class="lightbox-meta-value">${data.year || '-'}</span>
                 </div>`;
             elTech.innerHTML = (data.tags || []).map(t => `<span class="lightbox-tech-tag">${t}</span>`).join('');
             if (data.link) {
@@ -1101,7 +1241,7 @@
         lightbox.addEventListener('touchmove', blockScroll, { passive: false });
 
         function fallbackFromCard(card, isThreeD) {
-            // Card had no data entry — synthesise a minimal info set
+            // Card had no data entry - synthesise a minimal info set
             const img = card.querySelector('img');
             const title = card.querySelector('.work-card-title, .threed-card-label');
             const cat   = card.querySelector('.work-card-meta');

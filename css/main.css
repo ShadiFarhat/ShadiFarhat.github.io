@@ -1,5 +1,5 @@
 /* =========================================================
-   Shadi Farhat — Portfolio v2
+   Shadi Farhat - Portfolio v2
    Only styles Tailwind can't handle (cursor, custom anims,
    pseudo-elements, three.js canvas wrapper).
    ========================================================= */
@@ -75,7 +75,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 
 
 /* ============================================================
-   CUSTOM CURSOR — blue ring + dot
+   CUSTOM CURSOR - blue ring + dot
    ============================================================ */
 .cursor {
     position: fixed;
@@ -85,7 +85,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     transform: translate(-50%, -50%);
     transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
 }
-/* Custom cursor — soft white ring + tiny dot, blend-difference */
+/* Custom cursor - soft white ring + tiny dot, blend-difference */
 .cursor-ring {
     width: 28px; height: 28px;
     border: 1px solid rgba(255,255,255,0.55);
@@ -114,7 +114,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   PILL NAV (top center) — slim, refined
+   PILL NAV (top center) - slim, refined
    ============================================================ */
 .pill-nav {
     position: fixed;
@@ -257,7 +257,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   HERO SECTION — full-bleed face fills viewport, name on scroll
+   HERO SECTION - full-bleed face fills viewport, name on scroll
    ============================================================ */
 .hero-section {
     position: relative;
@@ -329,7 +329,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
         linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 18%, transparent 78%, rgba(0,0,0,0.55) 100%);
 }
 
-/* Name overlay — hidden initially, scroll-scrub fades it in */
+/* Name overlay - hidden initially, scroll-scrub fades it in */
 .hero-name-overlay {
     position: absolute;
     inset: 0;
@@ -378,7 +378,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     will-change: transform;
 }
 
-/* Section helpers — reusable across sections */
+/* Section helpers - reusable across sections */
 .section-eyebrow,
 .sec-label {
     display: inline-block;
@@ -391,7 +391,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 2 — INTRO (dark, big 3D line-flip statement)
+   SECTION 2 - INTRO (dark, big 3D line-flip statement)
    ============================================================ */
 .intro-section {
     position: relative;
@@ -481,7 +481,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 3 — EXPERTISE (Areas of Specialisation)
+   SECTION 3 - EXPERTISE (Areas of Specialisation)
    - Full-bleed rotating 3D cylinder grid behind (WebGL canvas)
    - 2-column skill list on top
    ============================================================ */
@@ -577,7 +577,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 4 — ABOUT (light bg, photo + bio)
+   SECTION 4 - ABOUT (light bg, photo + bio)
    ============================================================ */
 .about-section {
     background: #f5f3ef;                /* bone / off-white */
@@ -718,7 +718,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 5 — CAREER (dark, numbered job timeline)
+   SECTION 5 - CAREER (dark, numbered job timeline)
    ============================================================ */
 .career-section {
     background: #0a0a0a;
@@ -843,7 +843,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 6 — VIBE CODE EXPERIMENTS  (scroll-pinned reveal)
+   SECTION 6 - VIBE CODE EXPERIMENTS  (scroll-pinned reveal)
    ============================================================ */
 .vc-section {
     position: relative;
@@ -1018,7 +1018,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 7 — FOUNDER PROJECTS (light, product cards)
+   SECTION 7 - FOUNDER PROJECTS (light, product cards)
    ============================================================ */
 .ventures-section {
     background: #f5f3ef;
@@ -1365,7 +1365,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SELECTED WORK — light bg, 3-col grid of project cards
+   SELECTED WORK - light bg, 3-col grid of project cards
    ============================================================ */
 .work-section {
     background: #f5f3ef;
@@ -1453,7 +1453,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   3D & MOTION — dark bg, dense grid of product renders
+   3D & MOTION - dark bg, dense grid of product renders
    ============================================================ */
 .threed-section {
     background: #0a0a0a;
@@ -1537,7 +1537,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 8 — TOOLS (dark, chip cloud + lang + edu)
+   SECTION 8 - TOOLS (dark, chip cloud + lang + edu)
    ============================================================ */
 .tools-section {
     background: #0a0a0a;
@@ -1632,7 +1632,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 /* ============================================================
-   SECTION 9 — CONTACT (dark, big CTA + photo + links)
+   SECTION 9 - CONTACT (dark, big CTA + photo + links)
    ============================================================ */
 .contact-section {
     background: #0a0a0a;
@@ -1808,7 +1808,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 
 /* ============================================================
    ===================================================  MOBILE
-   Comprehensive responsive overhaul — placed last so it wins
+   Comprehensive responsive overhaul - placed last so it wins
    the cascade over earlier section-specific media queries.
    Breakpoints: 768px (tablet / large phone), 480px (phone),
    360px (tiny phone). Aim: zero horizontal scroll, comfortable
@@ -1818,7 +1818,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 
 @media (max-width: 768px) {
     /* ---- Body / page ---- */
-    /* IMPORTANT: don't put overflow:hidden on <body> — it breaks
+    /* IMPORTANT: don't put overflow:hidden on <body> - it breaks
        `position: sticky` on iOS Safari (Hero pin + Experiments pin both
        lose their fix and the page scrolls past leaving black gaps).
        `overflow-x: clip` is the modern equivalent that doesn't create
@@ -1899,7 +1899,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     .vc-intro-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
     .vc-intro-desc  { font-size: 0.92rem; }
 
-    /* ---- Founder (showcase) — stack and SHOW the mockup on mobile ---- */
+    /* ---- Founder (showcase) - stack and SHOW the mockup on mobile ---- */
     .ventures-section { padding: 3.5rem 1.25rem; }
     .ventures-h2      { font-size: clamp(1.7rem, 8vw, 2.4rem); margin-bottom: 2.5rem; }
     .v-item {
@@ -2000,7 +2000,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
 }
 
 @media (max-width: 360px) {
-    /* ---- Tiny phones — last-resort tweaks ---- */
+    /* ---- Tiny phones - last-resort tweaks ---- */
     .pill-nav   { font-size: 0.68rem; }
     .pill-brand { display: none; }                  /* keep only dot + CTA */
     .hero-eyebrow { font-size: 0.65rem; }
@@ -2057,7 +2057,7 @@ body { background: #0a0a0a; color: #fff; cursor: none; }
     .lightbox-case-list { font-size: 0.85rem; }
 }
 
-/* Flagship v-items open the project lightbox — show that they are clickable */
+/* Flagship v-items open the project lightbox - show that they are clickable */
 .v-item[data-project] { cursor: zoom-in; }
 .v-item[data-project]:focus-visible {
     outline: 2px solid rgba(74, 158, 255, 0.8);
